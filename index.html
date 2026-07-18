@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابة التدريب التفاعلية المعتمدة | WE Network Academy</title>
+  <title>WE Network Academy | Interactive Training Portal</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -32,11 +32,11 @@
       }
     }
   </script>
-  <!-- Google Fonts for Arabic -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif;
     }
     .perspective {
       perspective: 1200px;
@@ -58,8 +58,8 @@
       animation: pulse-glow 2s infinite ease-in-out;
     }
     @keyframes signal-flow {
-      0% { stroke-dashoffset: 100; }
-      100% { stroke-dashoffset: 0; }
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
     }
     .signal-line {
       stroke-dasharray: 8, 4;
@@ -120,84 +120,112 @@
       <!-- Logo -->
       <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-4xl shadow-xl mx-auto mb-4 transform hover:rotate-6 transition-all">we</div>
       
-      <h2 class="text-2xl font-black text-wePurple-700 dark:text-wePurple-200 mb-1">تسجيل الدخول للأكاديمية</h2>
-      <p class="text-xs text-gray-400 dark:text-gray-300 mb-6">بوابة التدريب الرقمي المعتمدة لأساسيات الشبكات لشركة WE</p>
+      <h2 class="text-2xl font-black text-wePurple-700 dark:text-wePurple-200 mb-1">Academy Portal Login</h2>
+      <p class="text-xs text-gray-400 dark:text-gray-300 mb-6">Authorized Digital Training Portal for WE Network Fundamentals</p>
 
       <!-- Login Form (Oracle ID Only) -->
-      <form onsubmit="submitPortalLogin(event)" class="space-y-4 text-right">
+      <form onsubmit="submitPortalLogin(event)" class="space-y-4 text-left">
         <div>
-          <label class="text-xs font-bold text-gray-500 dark:text-gray-300 block mb-1">رقم كود الموظف (Oracle ID)</label>
-          <input type="text" id="loginPassword" required placeholder="مثال: 400100" class="w-full px-4 py-3 text-sm border border-gray-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white font-bold text-center" />
+          <label class="text-xs font-bold text-gray-500 dark:text-gray-300 block mb-1">Employee Oracle ID</label>
+          <input type="text" id="loginPassword" required placeholder="400100" class="w-full px-4 py-3 text-sm border border-gray-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white font-bold text-center" />
         </div>
 
-        <!-- Inline Error Msg (No window alert) -->
+        <!-- Inline Error Msg -->
         <div id="loginErrorBox" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold text-center leading-relaxed">
-          ❌ رقم الـ Oracle ID غير مسجل بالمنظومة! برجاء التحقق والمحاولة مجدداً.
+          ❌ Oracle ID is not registered! Please verify and try again.
         </div>
 
         <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-wePurple-700 to-wePurple-600 hover:from-wePurple-800 hover:to-wePurple-700 text-white font-black rounded-2xl shadow-md hover:shadow-lg transition-all text-xs tracking-wider">
-          دخول البوابة التدريبية
+          Access Training Portal
         </button>
       </form>
-
-      <!-- Quick Demo Access / Testing Utility for the Manager (UPDATED TO THE NEW DATASET) -->
-      <div class="mt-6 border-t border-gray-150 pt-4 text-right">
-        <span class="text-[10px] font-black text-wePurple-700 block mb-2">📋 حسابات سريعة للتجربة والتقييم (انقر للتعبئة تلقائياً):</span>
-        <div class="flex flex-wrap gap-1.5 justify-start">
-          <button onclick="fillDemoLogin('400100')" class="text-[9px] bg-slate-100 hover:bg-wePurple-100 text-gray-600 hover:text-wePurple-800 px-2 py-1.5 rounded-lg border border-gray-200 font-bold transition-all">Heba Mohamed (400100)</button>
-          <button onclick="fillDemoLogin('400200')" class="text-[9px] bg-slate-100 hover:bg-wePurple-100 text-gray-600 hover:text-wePurple-800 px-2 py-1.5 rounded-lg border border-gray-200 font-bold transition-all">Yasmeen Yahia (400200)</button>
-          <button onclick="fillDemoLogin('400300')" class="text-[9px] bg-slate-100 hover:bg-wePurple-100 text-gray-600 hover:text-wePurple-800 px-2 py-1.5 rounded-lg border border-gray-200 font-bold transition-all">Rokaya Mohamed (400300)</button>
-          <button onclick="fillDemoLogin('400400')" class="text-[9px] bg-slate-100 hover:bg-wePurple-100 text-gray-600 hover:text-wePurple-800 px-2 py-1.5 rounded-lg border border-gray-200 font-bold transition-all">Shahd Mahmoud (400400)</button>
-        </div>
-      </div>
       
-      <div class="mt-4 text-[10px] text-gray-400 dark:text-gray-500 border-t border-gray-100 dark:border-slate-700 pt-3">
-        بوابة التدريب والدعم الفني والميداني لجمهورية مصر العربية
+      <div class="mt-8 text-[10px] text-gray-400 dark:text-gray-500 border-t border-gray-100 dark:border-slate-700 pt-3">
+        Training and Field Support Portal - Telecom Egypt
       </div>
     </div>
   </div>
 
 
-  <!-- ================= PORTAL MAIN APP CONTENT (HIDDEN BY DEFAULT) ================= -->
+  <!-- ================= DAY SELECTION SCREEN (ROADMAP) ================= -->
+  <div id="daySelectionScreen" class="hidden min-h-screen flex flex-col bg-[#F8F9FC] dark:bg-slate-900 transition-colors duration-300">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm dark:bg-slate-800 dark:border-slate-700" id="headerSelection">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-2xl shadow-lg border border-wePurple-500/20">we</div>
+          <div>
+            <h1 class="text-lg font-black text-wePurple-700 dark:text-wePurple-200">Universal SLP Roadmap</h1>
+            <p class="text-[10px] text-gray-500 dark:text-gray-400">Select your designated training day to proceed</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+          <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-600 text-gray-600 dark:text-gray-200 focus:outline-none transition-all shadow-sm" title="Toggle Theme">
+            <svg id="themeIconSelection" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-white dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-rose-600 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="Log Out">
+            <span>Log Out</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+      <div class="mb-8 text-center sm:text-left">
+        <h2 class="text-3xl font-black text-wePurple-700 dark:text-wePurple-200">Training Roadmap</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Welcome <span id="selectionTraineeNameDisplay" class="font-bold text-weCyan-600 dark:text-weCyan-400"></span>! Please select your active module.</p>
+      </div>
+      
+      <!-- Toast Notification for Locked Days -->
+      <div id="selectionToast" class="hidden mb-6 p-4 rounded-xl text-sm font-bold text-center transition-all shadow-sm border"></div>
+
+      <!-- Days Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4" id="daysGrid">
+        <!-- Grid dynamically populated by JS -->
+      </div>
+    </main>
+  </div>
+
+
+  <!-- ================= PORTAL MAIN APP CONTENT (THE WORKSPACE) ================= -->
   <div id="mainPortalContent" class="hidden flex flex-col min-h-screen">
     
     <!-- Main Portal Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm" id="header">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm" id="headerMain">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-3">
-          <!-- WE Logo Premium simulation -->
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-3xl shadow-lg border border-wePurple-500/20 transform hover:scale-105 transition-all cursor-pointer">we</div>
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-3xl shadow-lg border border-wePurple-500/20 transform hover:scale-105 transition-all cursor-pointer" onclick="returnToRoadmap()">we</div>
           <div>
             <h1 class="text-xl font-black text-wePurple-700 flex items-center gap-2">
-              بوابة التدريب الرقمي لهندسة الشبكات 
-              <span class="text-[10px] bg-wePurple-100 text-wePurple-700 px-2 py-0.5 rounded-md font-bold">إصدار التحديث التدريبي الشامل</span>
+              Network Engineering Digital Training Portal 
+              <span class="text-[10px] bg-wePurple-100 text-wePurple-700 px-2 py-0.5 rounded-md font-bold">D-02 Active</span>
             </h1>
-            <p class="text-xs text-gray-500">منصة المحاكاة والمعامل والتقييمات الميدانية المعتمدة لموظفي الدعم الفني</p>
+            <p class="text-xs text-gray-500">Authorized Simulation, Laboratory and Field Assessment Platform for Support Specialists</p>
           </div>
         </div>
         <!-- Controls -->
         <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-          <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 focus:outline-none transition-all shadow-sm" title="تبديل المظهر">
+          <button onclick="returnToRoadmap()" class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="Back to Roadmap">
+            <span>Roadmap</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+          </button>
+
+          <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 focus:outline-none transition-all shadow-sm" title="Toggle Theme">
             <svg id="themeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           </button>
           
           <!-- LOGOUT BUTTON -->
-          <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="تسجيل الخروج">
-            <span>تسجيل الخروج</span>
+          <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="Log Out">
+            <span>Log Out</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
           </button>
-
-          <div class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-xs font-black border border-emerald-100 flex items-center gap-1.5 shadow-sm">
-            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-            الخوادم متصلة 100%
-          </div>
         </div>
       </div>
     </header>
 
     <!-- Notification Banner inside layout -->
     <div id="topNotification" class="bg-amber-50 border-b border-amber-100 text-amber-900 text-xs py-2 px-4 text-center hidden">
-      <span class="font-bold" id="notificationText">الرجاء إدخال اسمك لحفظ تقدمك الدراسي والحصول على الشهادة!</span>
+      <span class="font-bold" id="notificationText">Please log in with verified credentials to save your progress and obtain your certificate!</span>
     </div>
 
     <!-- Main Layout -->
@@ -211,15 +239,15 @@
           <div class="text-center pb-4 border-b border-gray-100 mb-4">
             <div class="w-16 h-16 rounded-2xl bg-wePurple-50 flex items-center justify-center text-3xl mx-auto mb-2 border border-wePurple-100">👨‍💻</div>
             <!-- Locked Authorized Name (Anti-Tampering) -->
-            <div class="font-black text-sm text-gray-800" id="traineeNameDisplay">اسم الموظف</div>
-            <span class="text-[10px] text-gray-400 mt-1 block">رقم كود الموظف (Oracle ID): <span class="font-mono font-bold text-wePurple-700" id="traineeID">WE-6102</span></span>
+            <div class="font-black text-sm text-gray-800" id="traineeNameDisplay">Trainee Name</div>
+            <span class="text-[10px] text-gray-400 mt-1 block">Oracle ID: <span class="font-mono font-bold text-wePurple-700" id="traineeID">WE-400100</span></span>
           </div>
 
-          <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">مؤشرات الأداء الدراسي</h3>
+          <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">Performance Indicators</h3>
           <div class="space-y-3.5">
             <div>
               <div class="flex justify-between text-xs mb-1">
-                <span class="text-gray-500">الفهم النظري والمفاهيم</span>
+                <span class="text-gray-500">Theory & Fundamentals</span>
                 <span class="font-black text-wePurple-700" id="theoryProgText">0%</span>
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2">
@@ -228,7 +256,7 @@
             </div>
             <div>
               <div class="flex justify-between text-xs mb-1">
-                <span class="text-gray-500">تجارب المعامل والمحاكاة</span>
+                <span class="text-gray-500">Labs & Simulations</span>
                 <span class="font-black text-teal-600" id="labProgText">0%</span>
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2">
@@ -237,8 +265,8 @@
             </div>
             <div>
               <div class="flex justify-between text-xs mb-1">
-                <span class="text-gray-500">الاختبار الميداني المعتمد</span>
-                <span class="font-black text-emerald-600" id="quizProgText">لم يُختبر</span>
+                <span class="text-gray-500">Authorized Field Exam</span>
+                <span class="font-black text-emerald-600" id="quizProgText">Not Tested</span>
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2">
                 <div id="quizProgressBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
@@ -247,49 +275,49 @@
           </div>
 
           <button onclick="resetTrainingProgress()" class="mt-5 w-full py-2 border border-gray-200 text-gray-400 hover:text-rose-600 hover:bg-rose-50 hover:border-rose-100 rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 font-bold">
-            🔄 إعادة تصفير تقدمك بالكامل
+            🔄 Reset Training Progress
           </button>
         </div>
 
         <!-- Navigation Tree -->
         <nav class="bg-white rounded-3xl p-4.5 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300" id="navCard">
-          <span class="text-xs font-black text-gray-400 px-3 uppercase tracking-wider mb-2.5 block">فهرس البوابة التدريبية</span>
+          <span class="text-xs font-black text-gray-400 px-3 uppercase tracking-wider mb-2.5 block">Academy Modules</span>
           
-          <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all">
+          <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all">
             <span class="flex items-center gap-3">
               <span>🏠</span>
-              لوحة الاستكشاف العامة
+              General Dashboard
             </span>
           </button>
 
-          <button onclick="switchTab('theory-course')" id="btn-theory-course" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <button onclick="switchTab('theory-course')" id="btn-theory-course" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>📚</span>
-            مادة الشرح والأساسيات
+            Training Course & Basics
           </button>
 
-          <button onclick="switchTab('physical-lab')" id="btn-physical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <button onclick="switchTab('physical-lab')" id="btn-physical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>🛠️</span>
-            معمل بارامترات الخط الفيزيائي
+            Physical Line Diagnostics Lab
           </button>
 
-          <button onclick="switchTab('logical-lab')" id="btn-logical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <button onclick="switchTab('logical-lab')" id="btn-logical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>⚡</span>
-            محاكي حزم الـ WAN IP للسنترال
+            Central Office WAN IP Simulator
           </button>
 
           <button onclick="switchTab('mindmap')" id="btn-mindmap" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>🗺️</span>
-            الخريطة الذهنية التفاعلية
+            Interactive Mind Map
           </button>
 
-          <button onclick="switchTab('glossary')" id="btn-glossary" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <button onclick="switchTab('glossary')" id="btn-glossary" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>📖</span>
-            دليل المصطلحات والاختصارات
+            Terms & Abbreviations Directory
           </button>
 
-          <button onclick="switchTab('quiz')" id="btn-quiz" class="nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <button onclick="switchTab('quiz')" id="btn-quiz" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
             <span>🏆</span>
-            الاختبار النهائي والشهادة
+            Final Exam & Certificate
           </button>
         </nav>
       </aside>
@@ -305,32 +333,38 @@
             <div class="absolute -right-6 -bottom-6 opacity-10">
               <svg class="w-72 h-72" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
             </div>
-            <span class="bg-white/10 text-white/90 border border-white/20 px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 inline-block">مجموعة المصرية للاتصالات - أكاديمية التطوير</span>
-            <h2 class="text-3xl font-black mb-3">مرحباً بك مهندس <span id="helloName" class="underline decoration-weCyan-500 underline-offset-4">المتدرب</span>! 👋</h2>
+            <span class="bg-white/10 text-white/90 border border-white/20 px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 inline-block">TELECOM EGYPT - DEVELOPMENT ACADEMY</span>
+            <h2 class="text-3xl font-black mb-3">Welcome, Engineer <span id="helloName" class="underline decoration-weCyan-500 underline-offset-4">Trainee</span>! 👋</h2>
             <p class="text-white/80 max-w-2xl text-xs leading-relaxed mb-6">
-              مرحباً بك في نسختك الجديدة بالكامل لبناء وتأكيد أساسيات هندسة الشبكات والربط الفني. تضم هذه المنصة أفضل تتبع تفاعلي للمكالمات وتصميم معملي يعكس بيئة العمل الميدانية بدقة 100%.
+              Welcome to your revamped portal for solidifying network engineering and technical linking fundamentals. This platform delivers advanced interactive wiring simulations and central office routing sequences, mirroring 100% of real-world support workflows.
             </p>
             <div class="flex flex-wrap gap-3">
               <button onclick="switchTab('physical-lab')" class="bg-white text-wePurple-900 hover:bg-wePurple-50 px-6 py-3 rounded-2xl font-black text-xs shadow-md transition-all flex items-center gap-1.5">
-                🚀 ابدأ تشغيل المعمل الفيزيائي
+                🚀 Launch Physical Lab
               </button>
               <button onclick="switchTab('theory-course')" class="bg-wePurple-950/40 hover:bg-wePurple-950/60 border border-white/10 text-white px-6 py-3 rounded-2xl font-black text-xs transition-all">
-                تصفح الأساسيات
+                Browse Basics
               </button>
             </div>
           </div>
 
-          <!-- Dedicated Premium Audio Lesson Hub -->
+          <!-- Dedicated Premium Audio Lesson Hub (Modified Source to aud.mp3) -->
           <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
                 <h3 class="text-base font-black text-wePurple-700 flex items-center gap-2">
-                  <span>🎧</span> ملخص اليوم الصوتي (Audio Summary)
+                  <span>🎧</span> Daily Audio Summary
                 </h3>
-                <p class="text-xs text-gray-500">استمع لشرح صوتي فني لملخص اليوم التدريبي والمفاهيم التي تمت تغطيتها في الدورة</p>
+                <p class="text-xs text-gray-500">Listen to a structured technical review covering the daily core concepts and operations of the course.</p>
               </div>
-              <!-- Custom HTML5 Audio Integration -->
-              <audio id="lessonAudio" src="WhatsApp Audio 2026-07-15 at 2.34.18 PM.mpeg" preload="metadata" ontimeupdate="updateAudioProgress()"></audio>
+              <!-- Custom HTML5 Audio Integration with Fallbacks -->
+              <audio id="lessonAudio" preload="metadata" ontimeupdate="updateAudioProgress()">
+                <source src="aud.mp3" type="audio/mpeg">
+                <source src="aud.mpeg" type="audio/mpeg">
+                <source src="WhatsApp Audio 2026-07-15 at 2.34.18 PM.mpeg" type="video/mpeg">
+                <source src="WhatsApp Audio 2026-07-15 at 2.34.18 PM.mpeg" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
               
               <div id="audioPlayerContainer" class="flex items-center gap-3 bg-gray-50 border border-gray-200/80 rounded-2xl p-3 w-full sm:w-auto">
                 <!-- Play / Pause Button -->
@@ -364,34 +398,34 @@
           </div>
 
           <!-- Quick Access Training Modules -->
-          <h3 class="text-sm font-black text-gray-400 uppercase tracking-wider mb-2">أقسام التدريب والمحاكاة السريعة</h3>
+          <h3 class="text-sm font-black text-gray-400 uppercase tracking-wider mb-2">Simulation & Training Sections</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
               <div>
                 <span class="text-2xl mb-3 block">🛠️</span>
-                <h4 class="font-black text-sm text-gray-800 mb-1">بارامترات جودة الخط (Physical)</h4>
-                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">اختبر تركيب وفصل الـ Splitter ولاحظ الـ SNR Margin وأخطاء الـ CRC وكفاءة التصفح لحظة بلحظة.</p>
+                <h4 class="font-black text-sm text-gray-800 mb-1">Line Diagnostics (Physical)</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">Test splitter attachments, monitor live SNR Margin, evaluate CRC errors, and notice instant effects on router sync.</p>
               </div>
-              <button onclick="switchTab('physical-lab')" class="text-xs font-black text-wePurple-700 hover:underline text-right flex items-center gap-1 mt-2">دخول المعمل الميداني ←</button>
+              <button onclick="switchTab('physical-lab')" class="text-xs font-black text-wePurple-700 hover:underline text-right flex items-center gap-1 mt-2">Enter Field Lab ←</button>
             </div>
 
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
               <div>
                 <span class="text-2xl mb-3 block">⚡</span>
-                <h4 class="font-black text-sm text-gray-800 mb-1">رحلة حزم الـ WAN IP (Logical)</h4>
-                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">شغل المحاكي لمراقبة مسار مطابقة حسابات العميل من خلال RADIUS وتأكيد البورت وسحب عنوان WAN IP.</p>
+                <h4 class="font-black text-sm text-gray-800 mb-1">WAN IP Packet Journey (Logical)</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">Run the central office packet sequence validator to observe credentials verification over RADIUS and sychronization.</p>
               </div>
-              <button onclick="switchTab('logical-lab')" class="text-xs font-black text-teal-700 hover:underline text-right flex items-center gap-1 mt-2">دخول محاكي الربط ←</button>
+              <button onclick="switchTab('logical-lab')" class="text-xs font-black text-teal-700 hover:underline text-right flex items-center gap-1 mt-2">Enter Logic Simulator ←</button>
             </div>
 
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
               <div>
                 <span class="text-2xl mb-3 block">📖</span>
-                <h4 class="font-black text-sm text-gray-800 mb-1">قاموس المصطلحات والاختصارات</h4>
-                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">دليل ذكي فوري يضم جميع الاختصارات الفنية الخاصة بشركة WE لسهولة الرجوع والتعلم السريع.</p>
+                <h4 class="font-black text-sm text-gray-800 mb-1">WE Technical Dictionary</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">A complete lookup directory explaining all call-center, operational and network abbreviations of the WE system.</p>
               </div>
-              <button onclick="switchTab('glossary')" class="text-xs font-black text-weCyan-600 hover:underline text-right flex items-center gap-1 mt-2">افتح القاموس الفني ←</button>
+              <button onclick="switchTab('glossary')" class="text-xs font-black text-weCyan-600 hover:underline text-right flex items-center gap-1 mt-2">Open Technical Dictionary ←</button>
             </div>
 
           </div>
@@ -401,69 +435,69 @@
         <!-- ================= TAB: THEORY COURSE ================= -->
         <div id="tab-theory-course" class="tab-content hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-black text-gray-800">مادة الشرح والأساسيات التقنية</h2>
-            <p class="text-xs text-gray-500">تم تجميع هذا الشرح الفني من المنهج التدريبي المعتمد لشركة المصرية للاتصالات</p>
+            <h2 class="text-2xl font-black text-gray-800">Technical Explanations & Theory Course</h2>
+            <p class="text-xs text-gray-500">This technical training courseware is compiled directly from the authorized Telecom Egypt syllabus.</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Physical Section -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
-              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🛠️ البنية الفيزيائية ومسار التوصيل (Physical Structure)</h3>
+              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🛠️ Physical Structure & Connections</h3>
               <div class="space-y-4 text-xs text-gray-600 leading-relaxed">
                 <p>
-                  <strong>مسار التوصيل الفيزيائي للخط الأرضي:</strong> تبدأ رحلة إشارة الحرارة بالسنترال بخطة مسبقة لدمج البيانات والصوت عبر الخطوات التنازلية التالية:
+                  <strong>Physical Line Routing Sequence:</strong> The analog telephone signal is routed from the central office (CO) through the following downline segments:
                 </p>
                 <ul class="space-y-2 pl-4 list-decimal list-inside">
-                  <li><strong class="text-gray-800">Zero Room:</strong> منبع ومولد إشارة الحرارة التناظرية في السنترال.</li>
-                  <li><strong class="text-gray-800">MSAN Cabin:</strong> كابينة ألياف الفايبر الذكية التي تدمج خدمة الإنترنت فائق السرعة مع خط الصوت.</li>
-                  <li><strong class="text-gray-800">Cabins (الكابينات):</strong> كبائن نحاسية فرعية لتوزيع وإتاحة وتوصيل الأسلاك بالشوارع.</li>
-                  <li><strong class="text-gray-800">Box (البوكس):</strong> نقطة التوزيع المعلقة بواجهات المباني والمنشآت.</li>
-                  <li><strong class="text-gray-800">CPE (الراوتر):</strong> المعدات والمنفذ الأخير المستلم للإشارة بمنزل المشترك.</li>
+                  <li><strong class="text-gray-800">Zero Room:</strong> The origin and power generator of the analog telephone voice signal inside the central exchange.</li>
+                  <li><strong class="text-gray-800">MSAN Cabin:</strong> The Multi-Service Access Node fiber cabinet that injects high-speed broadband internet into the voice line.</li>
+                  <li><strong class="text-gray-800">Cabins:</strong> Secondary copper junction cabinets distributing cables over sectors and streets.</li>
+                  <li><strong class="text-gray-800">Box:</strong> The final street-level junction distribution box mounted on building facades.</li>
+                  <li><strong class="text-gray-800">CPE (Router):</strong> Customer Premises Equipment receiving the unified signal inside the household.</li>
                 </ul>
                 <p class="mt-2">
-                  <strong>التوصيلات عند العميل:</strong>
+                  <strong>Customer Premises Wiring Tools:</strong>
                 </p>
                 <ul class="space-y-1.5 list-disc list-inside">
-                  <li><strong>Splitter:</strong> جهاز بيفصل الإنترنت عن الحرارة، يضم 3 فتحات: Line (السلك الرئيسي من الشارع)، Modem (إلى الراوتر)، Phone (بالتليفون الأرضي).</li>
-                  <li><strong>Built-in Splitter:</strong> مدمج داخل فيشة الحائط ولا يُنصح بالاعتماد عليه.</li>
-                  <li><strong>Blank Splitter:</strong> خالي من الكتابة، ويُنصح باستبداله تجنباً للأخطاء.</li>
-                  <li><strong>Rosetta:</strong> أداة لحل مشكلات اللحام والقطع لتقليل المقاومة والتشويش وبها مخرج RJ11.</li>
-                  <li><strong>DSL Filter:</strong> أداة تعزل إشارة الإنترنت لتنقية خط الهاتف الأرضي من التشويش.</li>
-                  <li><strong>PBX:</strong> سنترال داخلي للحرارة للشركات، ويلزم توصيله بعد الـ Splitter.</li>
+                  <li><strong>Splitter:</strong> Device separating broadband internet from voice signals, containing three ports: Line (main outdoor cable), Modem (routed to router DSL port), and Phone (to landline phone).</li>
+                  <li><strong>Built-in Splitter:</strong> Integrated wall outlet ports; not recommended for primary troubleshooting.</li>
+                  <li><strong>Blank Splitter:</strong> Unmarked splitters; recommended to be replaced to avoid incorrect customer installations.</li>
+                  <li><strong>Rosetta:</strong> A terminal blocks adapter fixing cable joints to reduce resistance, termination noise, and attenuation, outputting an RJ11 port.</li>
+                  <li><strong>DSL Filter:</strong> Removes internet frequency noise before telephone units in parallel wall configurations.</li>
+                  <li><strong>PBX:</strong> Corporate private telephone branch exchange; must always be connected downline of the primary Splitter.</li>
                 </ul>
                 <div class="p-3.5 bg-amber-50 rounded-2xl border border-amber-100 text-amber-900 text-[11px]">
-                  📌 <strong>ملاحظة فنية:</strong> لحام الأسلاك الرديء أو استخدام الـ RJ11 Joint بكثرة يزيد من الـ <strong>Attenuation</strong> ويولد أخطاء <strong>CRC</strong> تقطع الخدمة تماماً.
+                  📌 <strong>Technical Warning:</strong> Oxidized copper, loose splices, or overusing RJ11 Joints dramatically elevates <strong>Attenuation</strong>, leading to massive <strong>CRC</strong> errors and intermittent drops.
                 </div>
               </div>
             </div>
 
             <!-- Logical Section -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
-              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ البنية المنطقية وإصدار العناوين (Logical Structure)</h3>
+              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ Logical Structure & IP Addressing</h3>
               <div class="space-y-4 text-xs text-gray-600 leading-relaxed">
                 <p>
-                  <strong>سحب الـ WAN IP للراوتر:</strong> لا تقتصر العملية الفنية على وجود حرارة بالخط، بل تتطلب دورة مصادقة ديناميكية (Logical Flow) للتحقق من هوية المشترك:
+                  <strong>Acquiring a WAN IP on CPE:</strong> For internet services to activate, physical synchronism is insufficient. The router must complete a logical authentication sequence:
                 </p>
                 <ul class="space-y-2 list-disc list-inside">
-                  <li><strong class="text-gray-800">Gateway IP:</strong> بوابة الدخول لصفحة الراوتر (غالباً 192.168.1.1).</li>
-                  <li><strong class="text-gray-800">Private IP / LAN IP:</strong> عنوان محلي للأجهزة داخل الشبكة المغلقة.</li>
-                  <li><strong class="text-gray-800">Public IP / WAN IP:</strong> العنوان العام الممنوح من الـ ISP لتصفح الإنترنت الخارجي.</li>
-                  <li><strong class="text-gray-800">DNS (Domain Name System):</strong> يقوم بترجمة عناوين المواقع النصية لـ IPs تفهمها الشبكة.</li>
-                  <li><strong class="text-gray-800">DHCP:</strong> المسؤول عن توزيع الـ Private IP تلقائياً للأجهزة.</li>
-                  <li><strong class="text-gray-800">NAT (Network Address Translation):</strong> المسؤول عن تخرج الأجهزة من الشبكة الداخلية (Private) للشبكة الخارجية (Public).</li>
-                  <li><strong class="text-gray-800">APIPA (Automatic Private IP Addressing):</strong> نطاق IP طارئ (169.254.0.1 إلى 169.254.255.254) يأخذه الجهاز تلقائياً عند فشل الحصول على عنوان من الـ DHCP، وحله عمل Reset & configuration للراوتر.</li>
+                  <li><strong class="text-gray-800">Gateway IP:</strong> The local interface IP to enter settings page (commonly 192.168.1.1).</li>
+                  <li><strong class="text-gray-800">Private IP / LAN IP:</strong> Local address allocated to intranet nodes within the customer's household.</li>
+                  <li><strong class="text-gray-800">Public IP / WAN IP:</strong> Public internet address granted by the ISP, enabling global routing.</li>
+                  <li><strong class="text-gray-800">DNS (Domain Name System):</strong> Resolves readable domain names (e.g., google.com) into machine IP addresses.</li>
+                  <li><strong class="text-gray-800">DHCP:</strong> Automates allocation of local IP ranges inside LAN.</li>
+                  <li><strong class="text-gray-800">NAT (Network Address Translation):</strong> Translates local Private IPs into a single external Public IP for routing over WAN.</li>
+                  <li><strong class="text-gray-800">APIPA (Automatic Private IP Addressing):</strong> Emergency fallback range (169.254.0.1 to 169.254.255.254) when DHCP lease fails. Requires a CPE reset/configuration.</li>
                 </ul>
                 <p class="mt-2">
-                  <strong>معاملات التهيئة (CPE Configuration):</strong>
+                  <strong>Configuration Parameters (CPE):</strong>
                 </p>
                 <ul class="space-y-1 list-none">
                   <li>🔹 <strong>ADSL Parameters:</strong> VPI/VCI: 0/35 | Mode: Routing | Encapsulation: PPPOE | Multiplex: LLC</li>
                   <li>🔹 <strong>VDSL Parameters:</strong> XDSL Transfer Mode: PTM | Link Type: PPP | PPP Transfer Type: PPPOE</li>
-                  <li>🔹 <strong>MTU (الحجم الأقصى لوحدة النقل):</strong> القيمة الافتراضية 1492، وقيم بديلة: 1460 - 1420 في حالات التشويش.</li>
-                  <li>🔹 <strong>Proxy:</strong> سيرفر أو تطبيق وسيط بين شبكة الـ LAN وشبكة الـ WAN لتخطي مشكلات تصفح المواقع.</li>
+                  <li>🔹 <strong>MTU (Maximum Transmission Unit):</strong> Default is 1492 for PPPoE. Fallbacks of 1460 or 1420 are applied under poor lines sync.</li>
+                  <li>🔹 <strong>Proxy:</strong> An intermediary server operating between LAN and WAN interfaces to bypass routing/restrictions.</li>
                 </ul>
                 <div class="p-3.5 bg-teal-50 rounded-2xl border border-teal-100 text-teal-900 text-[11px]">
-                  🔑 <strong>مرحلة الربط النهائي:</strong> يقوم الـ <strong>BRAS</strong> بإصدار الـ WAN IP للعميل بعد التحقق من الـ <strong>RADIUS & NAS port ID</strong> ومطابقة البورت الفعلي (Card & Port)، وتطبيق الـ <strong>Profile</strong> المعتمد عبر قاعدة الـ <strong>Broad-Hop</strong>.
+                  🔑 <strong>Verification & Linking:</strong> The <strong>BRAS</strong> issues the WAN IP to the customer's router after the <strong>RADIUS</strong> server validates credentials, matches the physical port coordinates (Card & Port on the DSLAM via <strong>NAS port ID</strong>), and assigns the designated speed <strong>Profile</strong> managed on the <strong>Broad-Hop</strong> database.
                 </div>
               </div>
             </div>
@@ -473,70 +507,70 @@
         <!-- ================= TAB: PHYSICAL LAB ================= -->
         <div id="tab-physical-lab" class="tab-content hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-black text-gray-800">معمل بارامترات وجودة الخط الفيزيائي</h2>
-            <p class="text-xs text-gray-500">اختر نوع التوصيل لتشاهد فوراً الأثر المباشر على جودة الخط، ومعدل أخطاء CRC، واستجابة لمبات الراوتر بالثانية</p>
+            <h2 class="text-2xl font-black text-gray-800">Physical Line Parameters Lab</h2>
+            <p class="text-xs text-gray-500">Select a physical wiring layout scenario to observe the immediate effect on margins, CRC error rates, and CPE synchronization indicators.</p>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             <!-- Connections Controllers -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
-              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">لوحة تحكم كابلات المشترك</h3>
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-150 space-y-4">
+              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">Customer Premises Cabling Panel</h3>
               
               <div class="space-y-2">
-                <button onclick="changeLabWiring('ideal')" id="wireBtn-ideal" class="w-full p-4 rounded-2xl text-right text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all">
-                  🟢 توصيل مثالي (Splitter Connected)
-                  <span class="block font-normal text-[10px] text-gray-500 mt-1">توجيه الصوت للتليفون والإنترنت للراوتر بدقة</span>
+                <button onclick="changeLabWiring('ideal')" id="wireBtn-ideal" class="w-full p-4 rounded-2xl text-left text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all">
+                  🟢 Ideal Setup (Splitter Connected)
+                  <span class="block font-normal text-[10px] text-gray-500 mt-1">Routes high frequencies to the router, low frequencies to voice.</span>
                 </button>
                 
-                <button onclick="changeLabWiring('nosplitter')" id="wireBtn-nosplitter" class="w-full p-4 rounded-2xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
-                  🟡 بدون سبليتر (No Splitter Line)
-                  <span class="block font-normal text-[10px] text-gray-500 mt-1">لحام مباشر يدمج الهاتف والراوتر معاً بالسلك الرئيسي</span>
+                <button onclick="changeLabWiring('nosplitter')" id="wireBtn-nosplitter" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🟡 No Splitter Joint (Parallel splice)
+                  <span class="block font-normal text-[10px] text-gray-500 mt-1">Directly splits lines without isolation, creating severe SNR drop.</span>
                 </button>
 
-                <button onclick="changeLabWiring('direct')" id="wireBtn-direct" class="w-full p-4 rounded-2xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
-                  🔵 توصيل مباشر للراوتر (CPE Direct)
-                  <span class="block font-normal text-[10px] text-gray-500 mt-1">إلغاء تفعيل عدة الهاتف وتوصيل الراوتر مباشرة بالبوكس</span>
+                <button onclick="changeLabWiring('direct')" id="wireBtn-direct" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🔵 Direct CPE Connection (No Phone)
+                  <span class="block font-normal text-[10px] text-gray-500 mt-1">Line connects directly to router. Best sync; phone disabled.</span>
                 </button>
 
-                <button onclick="changeLabWiring('reversed')" id="wireBtn-reversed" class="w-full p-4 rounded-2xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
-                  🔴 عكس مخارج السبليتر (Reversed Cables)
-                  <span class="block font-normal text-[10px] text-gray-500 mt-1">توصيل منفذ الـ Modem بالهاتف ومنفذ الـ Phone بالراوتر</span>
+                <button onclick="changeLabWiring('reversed')" id="wireBtn-reversed" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🔴 Reversed Splitter Ports
+                  <span class="block font-normal text-[10px] text-gray-500 mt-1">Phone cable in Modem port, and Modem cable in Phone port.</span>
                 </button>
               </div>
             </div>
 
             <!-- Dynamic Metrics Displays -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 lg:col-span-2 space-y-6">
-              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">شاشة القراءة الفنية المباشرة للخط (DSL Diagnostics)</h3>
+              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">DSL Diagnostics & Live Telemetry</h3>
               
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <!-- Metric 1: Line Attenuation -->
                 <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <span class="text-[10px] text-gray-400 block mb-1">خفت الإشارة (Attenuation)</span>
+                  <span class="text-[10px] text-gray-400 block mb-1">Line Attenuation</span>
                   <span id="metricAtt" class="text-xl font-black text-emerald-600">12 dB</span>
-                  <span id="metricAttLabel" class="text-[9px] text-gray-400 block mt-1">ممتاز (قريب من الكابينة)</span>
+                  <span id="metricAttLabel" class="text-[9px] text-gray-400 block mt-1">Excellent (Near Cabinet)</span>
                 </div>
 
                 <!-- Metric 2: SNR Margin -->
                 <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <span class="text-[10px] text-gray-400 block mb-1">هامش التشويش (SNR Margin)</span>
+                  <span class="text-[10px] text-gray-400 block mb-1">SNR Margin</span>
                   <span id="metricSnr" class="text-xl font-black text-emerald-600">28 dB</span>
-                  <span id="metricSnrLabel" class="text-[9px] text-gray-400 block mt-1">مستقر جداً</span>
+                  <span id="metricSnrLabel" class="text-[9px] text-gray-400 block mt-1">Extremely Stable</span>
                 </div>
 
                 <!-- Metric 3: CRC Errors -->
                 <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <span class="text-[10px] text-gray-400 block mb-1">أخطاء البيانات (CRC Errors)</span>
+                  <span class="text-[10px] text-gray-400 block mb-1">CRC Errors</span>
                   <span id="metricCrc" class="text-xl font-black text-emerald-600">0 / Sec</span>
-                  <span id="metricCrcLabel" class="text-[9px] text-gray-400 block mt-1">لا توجد حزم تالفة</span>
+                  <span id="metricCrcLabel" class="text-[9px] text-gray-400 block mt-1">Clean Transmission</span>
                 </div>
 
                 <!-- Metric 4: Max Rate -->
                 <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <span class="text-[10px] text-gray-400 block mb-1">السرعة الحالية المتاحة</span>
+                  <span class="text-[10px] text-gray-400 block mb-1">Sync Bit Rate</span>
                   <span id="metricRate" class="text-xl font-black text-emerald-600">30 Mbps</span>
-                  <span id="metricRateLabel" class="text-[9px] text-gray-400 block mt-1">سرعة كاملة ومستقرة</span>
+                  <span id="metricRateLabel" class="text-[9px] text-gray-400 block mt-1">Full Speed Profile</span>
                 </div>
               </div>
 
@@ -544,7 +578,7 @@
               <div class="bg-slate-900 rounded-2xl p-6 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 min-h-[180px]">
                 <div class="text-center z-10">
                   <div class="w-14 h-14 bg-purple-950 border border-purple-500 rounded-xl flex items-center justify-center text-white text-[11px] font-black mx-auto">Box</div>
-                  <span class="text-[9px] text-gray-400 mt-1 block">بوكس الشارع</span>
+                  <span class="text-[9px] text-gray-400 mt-1 block">Street Junction</span>
                 </div>
 
                 <!-- Animated SVG Line -->
@@ -557,20 +591,34 @@
                 <div class="text-center z-10">
                   <!-- CPE Simulator -->
                   <div class="w-24 h-16 rounded-xl bg-slate-800 border border-gray-700 p-2 mx-auto flex flex-col justify-between">
-                    <span class="text-[8px] text-gray-400 font-bold">راوتر CPE</span>
+                    <span class="text-[8px] text-gray-400 font-bold">CPE Router</span>
                     <div class="flex justify-center gap-1.5">
                       <span id="ledPwr" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
                       <span id="ledDsl" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
                       <span id="ledInt" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
                     </div>
                   </div>
-                  <span class="text-[9px] text-gray-400 mt-1 block">لمبات الحالة (PWR | DSL | INT)</span>
+                  <span class="text-[9px] text-gray-400 mt-1 block">Status LEDs (PWR | DSL | INT)</span>
+                </div>
+              </div>
+
+              <!-- Audio Diagnostics Wave -->
+              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200">
+                <h4 class="text-xs font-bold text-gray-600 mb-2">Voice Frequency Attenuation (Noise Audit):</h4>
+                <div class="flex items-center gap-3">
+                  <div id="audioWave" class="flex gap-1 items-end h-6 w-12">
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                  </div>
+                  <span id="voiceStatusText" class="text-xs font-extrabold text-emerald-600">Excellent sync and clear voice</span>
                 </div>
               </div>
 
               <!-- Diagnostic Explainer Box -->
               <div id="wiringDiagText" class="p-4 bg-wePurple-50 rounded-2xl border border-wePurple-100 text-xs text-wePurple-950 leading-relaxed">
-                <strong>توصيل مثالي (Splitter Connected):</strong> يمر السلك الرئيسي أولاً بالسبليتر لتصفية الموجات. إشارة الـ Voice النقية تذهب لعدة التليفون الأرضي بشكل معزول، مما يمنع انقطاع خدمة الـ DSL والـ Internet ويحافظ على استمرارية الإنترنت تماماً.
+                <strong>Ideal Setup (Splitter Connected):</strong> routes high-frequency data signals to the modem and low-frequency analog voice signals to the phone isolatedly. This eliminates crosstalk and prevents the DSL link from dropping during calls.
               </div>
 
             </div>
@@ -581,50 +629,50 @@
         <!-- ================= TAB: LOGICAL LAB ================= -->
         <div id="tab-logical-lab" class="tab-content hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-black text-gray-800">محاكي حزم الـ WAN IP للسنترال</h2>
-            <p class="text-xs text-gray-500">تابع حركة البيانات من راوتر العميل عبر خوادم السنترال للحصول على الـ WAN IP وتفعيل الإنترنت</p>
+            <h2 class="text-2xl font-black text-gray-800">Central Office WAN IP Simulator</h2>
+            <p class="text-xs text-gray-500">Observe dynamic DHCP/PPPoE verification packets transmitting across central office elements to acquire WAN IP leases.</p>
           </div>
 
           <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
             <div class="flex justify-between items-center">
               <button onclick="runLogicalSequence()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow flex items-center gap-1.5">
-                🚀 بدء تتبع حزم البيانات
+                🚀 Initiate Packet Trace
               </button>
-              <span id="logSimStatus" class="text-xs font-black text-gray-400">جاهز لبدء المحاكاة...</span>
+              <span id="logSimStatus" class="text-xs font-black text-gray-400">Ready to simulate...</span>
             </div>
 
             <!-- Stepper Nodes Graph -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
               <div id="nodeStep1" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
-                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">1. طلب الخدمة</span>
-                <h4 class="font-extrabold text-xs text-gray-800">الراوتر (CPE)</h4>
-                <p class="text-[10px] text-gray-400 mt-1">إرسال بيانات PPPoE (اسم مستخدم وباسورد الخدمة) إلى كابينة السنترال.</p>
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">1. CPE Configuration</span>
+                <h4 class="font-extrabold text-xs text-gray-800">CPE Router</h4>
+                <p class="text-[10px] text-gray-400 mt-1">Modem broadcasts PPPoE login requests (VPI/VCI: 0/35) to the network node.</p>
               </div>
 
               <div id="nodeStep2" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
-                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">2. التحقق والمصادقة</span>
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">2. Authentication</span>
                 <h4 class="font-extrabold text-xs text-gray-800">RADIUS & NAS Port</h4>
-                <p class="text-[10px] text-gray-400 mt-1">مراجعة الحساب والتأكد من مطابقة المنفذ والـ Card الفيزيائي الخاص بالعميل.</p>
+                <p class="text-[10px] text-gray-400 mt-1">RADIUS validates DSL credentials and maps the physical DSLAM card/port location coordinates.</p>
               </div>
 
               <div id="nodeStep3" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
-                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">3. تطبيق السياسة</span>
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">3. Policy Management</span>
                 <h4 class="font-extrabold text-xs text-gray-800">Broad-Hop</h4>
-                <p class="text-[10px] text-gray-400 mt-1">تحديد الـ Profile المناسب للعميل وحقن السرعة المحددة لخطه.</p>
+                <p class="text-[10px] text-gray-400 mt-1">Assigns the authorized speed profile and traffic limits on the account database.</p>
               </div>
 
               <div id="nodeStep4" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
-                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">4. منح الـ IP</span>
-                <h4 class="font-extrabold text-xs text-gray-800">خادم BRAS</h4>
-                <p class="text-[10px] text-gray-400 mt-1">تسليم الراوتر عنوان الـ WAN IP الخارجي المخصص لتفعيل التصفح بنجاح.</p>
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">4. Lease Release</span>
+                <h4 class="font-extrabold text-xs text-gray-800">BRAS Server</h4>
+                <p class="text-[10px] text-gray-400 mt-1">Releases a valid Public WAN IP to the CPE, making the internet indicator light green.</p>
               </div>
             </div>
 
             <!-- Console Terminal Output -->
             <div class="bg-slate-900 rounded-2xl p-5 text-teal-400 font-mono text-xs space-y-1 border border-slate-800">
               <div class="text-white font-bold border-b border-slate-800 pb-1 mb-2">&gt;_ CONSOLE OUTPUT DIAGNOSTICS:</div>
-              <div id="consoleLine1">&gt; الراوتر جاهز لاستلام طلبات الربط المنطقي للشبكة...</div>
-              <div id="consoleLine2" class="opacity-40">&gt; اضغط على 'بدء تتبع حزم البيانات' لمراقبة الاتصال المباشر...</div>
+              <div id="consoleLine1">&gt; CPE interface initialized. Standing by for logical packet sequence trigger...</div>
+              <div id="consoleLine2" class="opacity-40">&gt; Click 'Initiate Packet Trace' above to trace real-time packet transmissions...</div>
             </div>
           </div>
         </div>
@@ -632,8 +680,8 @@
         <!-- ================= TAB: MINDMAP ================= -->
         <div id="tab-mindmap" class="tab-content hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-black text-gray-800">الخريطة الذهنية التفاعلية لأساسيات الشبكة</h2>
-            <p class="text-xs text-gray-500">انقر على الأقسام الرئيسية لتمديدها واستكشاف فروع المنهج الدراسي بالكامل</p>
+            <h2 class="text-2xl font-black text-gray-800">Interactive Network Mind Map</h2>
+            <p class="text-xs text-gray-500">Expand and collapse structural nodes to explore the complete framework topology.</p>
           </div>
 
           <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
@@ -642,7 +690,7 @@
               
               <!-- Root node -->
               <div class="bg-wePurple-700 text-white px-6 py-3.5 rounded-2xl font-extrabold text-sm shadow-md mb-8 relative">
-                أساسيات الشبكات (Network Fundamentals)
+                Network Fundamentals
                 <!-- Vertical line down -->
                 <div class="absolute bottom-[-32px] right-1/2 translate-x-1/2 w-0.5 h-8 bg-wePurple-200"></div>
               </div>
@@ -658,29 +706,29 @@
                 <!-- Sub-root 1: Physical Structure -->
                 <div class="flex flex-col items-center">
                   <button onclick="toggleMindNode('physicalNode')" class="bg-wePurple-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow hover:bg-wePurple-600 transition-all flex items-center gap-1.5">
-                    📁 البنية الفيزيائية (Physical)
+                    📁 Physical Structure
                   </button>
                   <div id="physicalNode" class="mt-4 flex flex-col items-center space-y-2 transition-all duration-300">
                     <div class="w-0.5 h-4 bg-wePurple-200"></div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">مسار الحرارة (Zero -> MSAN -> Cabin -> Box)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">السبليتر والفلتر (Splitter & DSL Filter)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">الروزيتا وكابلات التوصيل (RJ11 vs RJ45)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">سنترال الشركات الداخلي (PBX) بعد السبليتر</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Path (Zero Room -> MSAN -> Cabin -> Box -> CPE)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Isolator Assemblies (Splitter & DSL Filter)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Terminal Junctions (Rosetta, RJ11, RJ45)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Business PBX Integrations downline of Splitter</div>
                   </div>
                 </div>
 
                 <!-- Sub-root 2: Logical Structure -->
                 <div class="flex flex-col items-center">
                   <button onclick="toggleMindNode('logicalNode')" class="bg-teal-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow hover:bg-teal-600 transition-all flex items-center gap-1.5">
-                    📁 البنية المنطقية (Logical)
+                    📁 Logical Structure
                   </button>
                   <div id="logicalNode" class="mt-4 flex flex-col items-center space-y-2 transition-all duration-300">
                     <div class="w-0.5 h-4 bg-teal-200"></div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">أنواع الـ IP والـ Gateway (192.168.1.1)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">تحويل العناوين (NAT) وتوزيعها (DHCP)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">بروتوكول APIPA ومشاكله (169.254.X.X)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">إعدادات التهيئة للراوتر (VPI/VCI: 0/35)</div>
-                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">الربط والتحقق (BRAS & RADIUS & Broadhop)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">IP Classes & Default Gateway (192.168.1.1)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Subnetting Maps (LAN IP vs WAN IP / NAT / DHCP)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">APIPA Address Ranges & Loop Errors (169.254.X.X)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">CPE Parameters (VPI/VCI: 0/35, PTM, MTU)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Authentications (BRAS, RADIUS, Broad-Hop)</div>
                   </div>
                 </div>
 
@@ -693,30 +741,31 @@
         <!-- ================= TAB: GLOSSARY ================= -->
         <div id="tab-glossary" class="tab-content hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-black text-gray-800">دليل المصطلحات والاختصارات التقنية لشركة WE</h2>
-            <p class="text-xs text-gray-500">محرك بحث مدمج يعرض جميع الرموز والاختصارات الفنية الخاصة بعمليات الشبكة ودعم العملاء</p>
+            <h2 class="text-2xl font-black text-gray-800">WE Terms & Abbreviations Technical Directory</h2>
+            <p class="text-xs text-gray-500">Live search engine matching all 17 operational, networking, and call-center abbreviations precisely mapped to database sheets.</p>
           </div>
 
           <!-- Dedicated Abbreviations Interactive Search & Directory Section -->
           <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-3">
               <div>
-                <h3 class="text-lg font-black text-wePurple-700">📖 القاموس المعتمد للاتصالات (WE Brand Technical Dictionary)</h3>
-                <p class="text-[11px] text-gray-400">ابحث بمرونة تامة عن أي اختصار مستخدم ببيئة عمل الاتصالات ومراكز الاتصال</p>
+                <h3 class="text-lg font-black text-wePurple-700">📖 WE Technical Abbreviations Directory</h3>
+                <p class="text-[11px] text-gray-400">Troubleshoot, find definitions, and read full functional explanations of telecom metrics instantly.</p>
               </div>
               <!-- Abbreviation Specific Search -->
               <div class="w-full sm:w-80">
-                <input type="text" id="abbrevSearchInput" onkeyup="searchAbbreviation()" placeholder="🔍 ابحث بالاختصار أو الكلمة..." class="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50" />
+                <input type="text" id="abbrevSearchInput" onkeyup="searchAbbreviation()" placeholder="🔍 Search abbreviation, e.g., CRC, VLAN..." class="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50" />
               </div>
             </div>
 
-            <!-- Abbreviation Cards Grid (ALIGNED 100% WITH EXCEL SHEET) -->
+            <!-- Abbreviation Cards Grid (ALIGNED 100% WITH UPLOADED SHEET) -->
             <div id="abbrevCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[480px] overflow-y-auto pr-2">
+              
               <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="acw after call work">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ACW</span>
                   <span class="text-[10px] text-gray-400 font-mono block">After Call Work</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">الوقت المستغرق بعد إنهاء المكالمة لتسجيل الملاحظات، فتح التذاكر، وتحديث السيستم.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The time spent by an agent executing wrap-up tasks like ticket creation, remarks entry, and system updates immediately after terminating a call.</p>
                 </div>
               </div>
 
@@ -724,7 +773,7 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ADSL</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Asymmetric Digital Subscriber Line</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">خط المشترك الرقمي غير المتماثل: التكنولوجيا النحاسية الكلاسيكية التي تقدم سرعة تحميل أعلى من سرعة الرفع.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Classic copper broadband technology delivering asymmetric bandwidth where download rates significantly exceed upload speeds.</p>
                 </div>
               </div>
 
@@ -732,7 +781,7 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">AHT</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Average Handling Time</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">متوسط وقت مناولة المكالمة: الوقت الإجمالي المستغرق لمعالجة الشكوى (شامل التحدث والانتظار والتوثيق).</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The average duration spent handling a client transaction, calculated as total talk time plus hold time plus wrap-up work time.</p>
                 </div>
               </div>
 
@@ -740,7 +789,7 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ATT</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Average Talk Time</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">متوسط وقت التحدث الفعلي والمباشر مع المشترك أثناء المكالمة.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The average time an agent spends talking directly to clients, excluding hold time and after-call work (ACW).</p>
                 </div>
               </div>
 
@@ -748,87 +797,87 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ATT / LAT</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Line Attenuation / Attenuation</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">وهن أو خفات الخط: يمثل مقدار الفقد الحادث في الإشارة الكهربائية نتيجة طول السلك والبعد عن الكابينة، كلما قل الرقم زادت الكفاءة والسرعة.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The physical degradation of power strength in copper cable segments. Primarily caused by distance from the MSAN cabinet and poor cable splices.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="bss business support system">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="bss business support system">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">BSS</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Business Support System</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">نظام دعم الأعمال: الأنظمة والبرامج المخصصة لإدارة العمليات التجارية والمالية واشتراكات العملاء.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Core business software suites managing customer orders, billings, and commercial client relationships.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="cca customer care agent call center agent">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="cca customer care agent call center agent">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CCA</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Customer Care Agent / Call Center Agent</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">موظف خدمة العملاء / مركز الاتصال: المسؤول عن استقبال مكالمات ودعم المشتركين.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Technical support representative or helpdesk specialist resolving user complaints over call-center channels.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="cpe customer premises equipment">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="cpe customer premises equipment">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CPE</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Customer Premises Equipment</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">معدات مواقع العملاء: أي جهاز طرفي يمتلكه المشترك بالمنزل لاستقبال وتمرير الخدمة مثل الراوتر أو المودم.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Terminal networking hardware (such as routers and modems) deployed on the subscriber side to process signals.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="crc cyclic redundancy check errors">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="crc cyclic redundancy check errors">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CRC</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Cyclic Redundancy Check Errors</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">أخطاء فحص التكرار الدوري: عدد حزم البيانات التالفة بالكامل بسبب التشويش أو اللحامات الرديئة والرطوبة بالسلك، وتسبب تقطيعاً مباشراً بالخدمة.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">A measurement of completely damaged data packets. Generated by line noise, moisture, or poor insulation, directly causing packet loss and drops.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="vci virtual channel identifier">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vci virtual channel identifier">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VCI</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Virtual Channel Identifier</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">معرف القناة الافتراضية: القيمة الرقمية المكملة للـ VPI لضمان وصول مسار خدمة الإنترنت بالراوتر فنيًا (القيمة الثابتة والمعتمدة بمصر هي 35).</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">In ADSL, the numeric path value paired with VPI to route sessions (the standard value in Egypt is 35).</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="vdsl very high speed digital subscriber line">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vdsl very high speed digital subscriber line">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VDSL</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Very High Speed Digital Subscriber Line</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">خط المشترك الرقمي عالي السرعة جداً: التقنية الحديثة المعتمدة عبر كبائن الـ MSAN لتقديم سرعات إنترنت عالية تصل إلى 100 ميجا.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The modern high-speed copper broadband standard. Connected via MSAN fiber nodes to deliver speeds reaching 100 Mbps.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="vlan id virtual local area network identifier">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vlan id virtual local area network identifier">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VLAN ID</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Virtual Local Area Network Identifier</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">معرف الشبكة المحلية الافتراضية: قيمة رقمية مخصصة لفصل وعزل خدمات الاتصالات المختلفة (إنترنت، خط صوتي، IPTV) لعملاء الـ VDSL وشبكات الفايبر.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">A virtual channel number segregating various service traffic classes (e.g., IPTV, Voice VoIP, internet) for VDSL/FTTH links.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="voip voice over internet protocol">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="voip voice over internet protocol">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VOIP</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Voice over Internet Protocol</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">نقل الصوت عبر بروتوكول الإنترنت: تشغيل وإدارة خدمات الهاتف الأرضي والاتصالات الصوتية رقمياً عبر الراوتر والشبكة مباشرة بدلاً من السنترال التقليدي القديم.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Digital telephone signal transmission over active IP routers and WAN networks, replacing traditional analog CO landline circuits.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="vpi virtual path identifier">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vpi virtual path identifier">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VPI</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Virtual Path Identifier</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">معرف المسار الافتراضي: القيمة الرقمية البرمجية المستخدمة لتوجيه حزم البيانات لشبكات الـ ADSL (القيمة الثابتة والمعتمدة بمصر هي 0).</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">ADSL routing path parameter. The standard value utilized in Egypt is 0.</p>
                 </div>
               </div>
 
-              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="vpn virtual private network">
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vpn virtual private network">
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VPN</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Virtual Private Network</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">الشبكة الافتراضية الخاصة: توفير نفق افتراضي مشفر وآمن بالكامل لتصفح الويب وتغيير الموقع الجغرافي وحفظ خصوصية البيانات الفردية.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Creates an encrypted, secure virtual tunnel across public networks, changing the node IP and securing communication data.</p>
                 </div>
               </div>
 
@@ -836,7 +885,7 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">WAN</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Wide Area Network</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">الشبكة الواسعة الخرجية: منفذ الراوتر الخارجي المسؤول عن استقبال وضخ شبكة الإنترنت العامة القادمة من مزود الخدمة الرئيسي للراوتر.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The external interface of the CPE, designated to pull a valid IP address lease and route the local intranet to global nodes.</p>
                 </div>
               </div>
 
@@ -844,7 +893,7 @@
                 <div>
                   <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">WLAN</span>
                   <span class="text-[10px] text-gray-400 font-mono block">Wireless Local Area Network</span>
-                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">الشبكة المحلية اللاسلكية: تقنية الربط اللاسلكي (Wi-Fi) التي تسمح للأجهزة المحمولة بالاتصال بالشبكة المحلية بالراوتر بدون أسلاك.</p>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The local area wireless interface (Wi-Fi), facilitating wireless client node linkage with the local CPE.</p>
                 </div>
               </div>
 
@@ -855,58 +904,58 @@
             
             <!-- Section 1: Protocols -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
-              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🌐 البروتوكولات والعناوين (Network Protocols)</h3>
+              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🌐 Protocols & Addressing</h3>
               
               <div class="space-y-4">
                 <div class="p-3 bg-gray-50 rounded-xl">
-                  <span class="font-extrabold text-xs text-gray-800 block">Gateway IP (بوابة العبور):</span>
-                  <p class="text-[11px] text-gray-500 mt-1">هو الـ IP الخاص بالدخول لصفحة إعدادات الراوتر، ويكتب في ملصق ضهر الراوتر ويأتي بقيمة افتراضية (غالباً 192.168.1.1).</p>
+                  <span class="font-extrabold text-xs text-gray-800 block">Gateway IP:</span>
+                  <p class="text-[11px] text-gray-500 mt-1">The local interface IP to enter settings page, printed on the CPE label (commonly 192.168.1.1).</p>
                 </div>
 
                 <div class="p-3 bg-gray-50 rounded-xl">
-                  <span class="font-extrabold text-xs text-gray-800 block">APIPA (نطاق الطوارئ):</span>
-                  <p class="text-[11px] text-gray-500 mt-1">عنوان (يبدأ من 169.254.0.1 لـ 169.254.255.254) يحصل عليه الحاسوب تلقائياً في حالة تعطل أو فقدان الاتصال بخادم DHCP بالراوتر.</p>
+                  <span class="font-extrabold text-xs text-gray-800 block">APIPA (Fallback Range):</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Auto-assigned IP range (169.254.0.1 to 169.254.255.254) obtained when client nodes fail to grab a local DHCP lease from the CPE.</p>
                 </div>
 
                 <div class="p-3 bg-gray-50 rounded-xl">
-                  <span class="font-extrabold text-xs text-gray-800 block">NAT (ترجمة العناوين):</span>
-                  <p class="text-[11px] text-gray-500 mt-1">المسؤول عن تحويل الـ Private IPs للأجهزة المحلية إلى عنوان Public IP خارجي لتتمكن من التصفح بشكل آمن.</p>
+                  <span class="font-extrabold text-xs text-gray-800 block">NAT (Network Address Translation):</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Translates local Private LAN IPs to a single Public WAN IP to route client frames securely over the internet.</p>
                 </div>
 
                 <div class="p-3 bg-gray-50 rounded-xl">
                   <span class="font-extrabold text-xs text-gray-800 block">DHCP & DNS:</span>
-                  <p class="text-[11px] text-gray-500 mt-1"><strong>DHCP:</strong> يوزع IPs داخلية للأجهزة بشكل تلقائي. <br><strong>DNS:</strong> المترجم الذكي الذي يحول الكلمات النصية (مثل google.com) لـ IP يفهمه السنترال.</p>
+                  <p class="text-[11px] text-gray-500 mt-1"><strong>DHCP:</strong> Automates allocation of local IP ranges inside LAN. <br><strong>DNS:</strong> Translates readable URL texts (e.g., google.com) into routing IP addresses.</p>
                 </div>
               </div>
             </div>
 
             <!-- Section 2: Configuration Values -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
-              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ قيم ومعاملات تهيئة الراوتر (CPE Parameters)</h3>
+              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ CPE Configuration Parameters</h3>
               
               <div class="space-y-4">
                 <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
-                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">إعدادات الـ ADSL الأساسية:</h4>
+                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">Primary ADSL values (Egypt):</h4>
                   <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
-                    <li><strong>VPI/VCI:</strong> بقيم <span class="font-bold text-teal-700">0/35</span> المعتمدة بمصر.</li>
-                    <li><strong>Mode:</strong> Routing (نظام التوجيه التلقائي).</li>
-                    <li><strong>Encapsulation:</strong> PPPOE.</li>
+                    <li><strong>VPI/VCI:</strong> Set to <span class="font-bold text-teal-700">0/35</span>.</li>
+                    <li><strong>Mode:</strong> Routing.</li>
+                    <li><strong>Encapsulation:</strong> PPPoE.</li>
                     <li><strong>Multiplex:</strong> LLC.</li>
                   </ul>
                 </div>
 
                 <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
-                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">إعدادات الـ VDSL فائقة السرعة:</h4>
+                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">Primary VDSL values (Egypt):</h4>
                   <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
                     <li><strong>XDSL Transfer Mode:</strong> PTM.</li>
                     <li><strong>Link Type:</strong> PPP.</li>
-                    <li><strong>PPP Transfer Type:</strong> PPPOE.</li>
+                    <li><strong>PPP Transfer Type:</strong> PPPoE.</li>
                   </ul>
                 </div>
 
                 <div class="p-3 bg-gray-50 rounded-xl">
-                  <span class="font-extrabold text-xs text-gray-800 block">الـ MTU وقيم التحكم في حجم البيانات:</span>
-                  <p class="text-[11px] text-gray-500 mt-1">يمثل الحجم الأقصى لنقل حزمة البيانات، وقيمته الافتراضية بمصر هي <strong class="text-wePurple-700">1492</strong>، ويمكن خفضها لـ <code class="bg-white border px-1 rounded text-gray-800">1460</code> أو <code class="bg-white border px-1 rounded text-gray-800">1420</code> في حالات البطء وتشويش الخطوط.</p>
+                  <span class="font-extrabold text-xs text-gray-800 block">MTU Size:</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Maximum packet size. Standard value is <strong class="text-wePurple-700">1492</strong>. Fallback sizes are <code class="bg-white border px-1 rounded text-gray-800">1460</code> or <code class="bg-white border px-1 rounded text-gray-800">1420</code> to fix sync loss or latency issues.</p>
                 </div>
               </div>
             </div>
@@ -921,13 +970,13 @@
             <!-- Intro Screen -->
             <div id="quiz-intro" class="text-center py-8 space-y-4">
               <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
-              <h2 class="text-2xl font-black text-gray-800">الاختبار المعتمد ومولد الشهادات</h2>
+              <h2 class="text-2xl font-black text-gray-800">Authorized Field Exam</h2>
               <p class="text-xs text-gray-500 max-w-lg mx-auto">
-                تجاوز هذا الاختبار الفني الشامل بمعدل **80% أو أكثر**، وسيقوم النظام تلقائياً بإنشاء وطباعة شهادتك المعتمدة باسمك فوراً!
+                Pass this comprehensive assessment with a score of **80% or higher** to dynamically generate and print your official training completion certificate.
               </p>
               <div class="max-w-xs mx-auto space-y-3">
                 <button onclick="checkAndStartQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black w-full py-3.5 rounded-2xl shadow-md transition-all block text-sm">
-                  ابدأ الاختبار الميداني الآن
+                  Start Field Exam
                 </button>
               </div>
             </div>
@@ -936,14 +985,14 @@
             <div id="quiz-active" class="hidden space-y-6">
               <div class="flex justify-between items-center border-b pb-4">
                 <div>
-                  <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">السؤال الحالي</span>
-                  <h3 class="text-lg font-black text-gray-800" id="quizQuestionNum">1 من 10</h3>
+                  <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Current Question</span>
+                  <h3 class="text-lg font-black text-gray-800" id="quizQuestionNum">1 of 10</h3>
                 </div>
-                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-100" id="quizLivePoints">النقاط: 0</span>
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-100" id="quizLivePoints">Score: 0</span>
               </div>
 
               <div class="space-y-4">
-                <h4 class="text-base font-extrabold text-gray-800 leading-relaxed" id="quizQuestionText">جاري تحميل السؤال...</h4>
+                <h4 class="text-base font-extrabold text-gray-800 leading-relaxed" id="quizQuestionText">Loading question...</h4>
                 <div class="grid grid-cols-1 gap-3" id="quizOptionsContainer">
                   <!-- populate buttons dynamically -->
                 </div>
@@ -951,10 +1000,10 @@
 
               <div class="flex justify-between items-center border-t pt-4">
                 <button onclick="revealQuizHint()" class="text-xs font-bold text-wePurple-700 hover:underline flex items-center gap-1.5" id="btn-quizHint">
-                  💡 عرض تلميحة مساعدة للسؤال
+                  💡 Reveal Hint
                 </button>
                 <button onclick="nextQuizQuestion()" id="btn-quizNext" class="hidden bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow">
-                  السؤال التالي ←
+                  Next Question →
                 </button>
               </div>
 
@@ -965,22 +1014,22 @@
             <div id="quiz-results" class="hidden text-center py-8 space-y-6">
               <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl font-bold shadow-sm" id="resultIcon">🏆</div>
               <div>
-                <h3 class="text-2xl font-black text-gray-800" id="quizResultTitle">عمل رائع ومتميز!</h3>
-                <p class="text-sm text-gray-500 mt-1">لقد أتممت الاختبار التقييمي لأساسيات الشبكات بنجاح</p>
+                <h3 class="text-2xl font-black text-gray-800" id="quizResultTitle">Outstanding Performance!</h3>
+                <p class="text-sm text-gray-500 mt-1">You have successfully completed the Network Fundamentals Exam.</p>
               </div>
 
               <div class="bg-gray-50 p-6 rounded-2xl max-w-xs mx-auto border border-gray-100">
-                <span class="text-xs font-bold text-gray-400 block mb-1">النتيجة النهائية</span>
+                <span class="text-xs font-bold text-gray-400 block mb-1">Final Score</span>
                 <span class="text-4xl font-black text-wePurple-700" id="quizFinalScore">0%</span>
-                <p class="text-xs text-gray-500 mt-2" id="quizResultSummary">أجبت بشكل صحيح على 0 من 10 أسئلة.</p>
+                <p class="text-xs text-gray-500 mt-2" id="quizResultSummary">You answered 0 out of 10 questions correctly.</p>
               </div>
 
               <div class="flex flex-wrap gap-3 justify-center">
                 <button onclick="startQuizDirect()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
-                  إعادة المحاولة
+                  Retake Exam
                 </button>
                 <button onclick="printCertificate()" id="btnPrintCertificate" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
-                  🖨️ طباعة شهادة الإتمام الرسمية
+                  🖨️ Print Completion Certificate
                 </button>
               </div>
             </div>
@@ -994,20 +1043,20 @@
                 <span class="text-xs text-gray-400 font-mono">ID: WE-NET-2026</span>
               </div>
               
-              <h2 class="text-2xl font-black text-wePurple-700 mb-2">شهادة إتمام دورة تدريبية معتمدة</h2>
-              <p class="text-xs text-gray-400">تمنح إدارة التطوير والتأهيل الفني هذه الشهادة لـ</p>
+              <h2 class="text-2xl font-black text-wePurple-700 mb-2">Certificate of Training Completion</h2>
+              <p class="text-xs text-gray-400">This is to certify that</p>
               
-              <h3 class="text-3xl font-black text-gray-900 my-4 decoration-wePurple-500 underline" id="certName">اسم المتدرب</h3>
+              <h3 class="text-3xl font-black text-gray-900 my-4 decoration-wePurple-500 underline" id="certName">Trainee Name</h3>
               
               <p class="text-xs text-gray-600 max-w-md mx-auto leading-relaxed">
-                تقديراً لاجتيازه بنجاح الدورة المكثفة والعملية في **أساسيات الشبكات وهندسة السنترالات والربط الفني**، واجتياز الاختبار التقييمي بنجاح بمعدل:
+                has successfully passed the technical examination and completed the professional coursework in **Network Fundamentals, Central Office Operations & Support Engineering** with a final score of:
               </p>
               
               <div class="my-4 text-2xl font-black text-emerald-600" id="certScore">0%</div>
 
               <div class="border-t border-gray-100 pt-6 mt-6 flex justify-between text-[10px] text-gray-400">
-                <div>تاريخ الإصدار: 18 يوليو 2026</div>
-                <div>إدارة التدريب والدعم الفني والميداني</div>
+                <div>Issue Date: July 18, 2026</div>
+                <div>Technical Training & Talent Management - WE</div>
               </div>
             </div>
 
@@ -1021,8 +1070,8 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 py-6 transition-colors duration-300" id="footer">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400 space-y-2">
-        <p>تم تطوير هذه المنصة الإلكترونية كبوابة ويب وموقع تدريبي تفاعلي لتسهيل الفهم والمحاكاة الفنية الميدانية.</p>
-        <p class="font-bold text-wePurple-700">مجموعة تيليكوم مصر © 2026 - جميع الحقوق محفوظة</p>
+        <p>This web portal is designed for training and educational simulations.</p>
+        <p class="font-bold text-wePurple-700">Telecom Egypt Group © 2026 - All Rights Reserved</p>
       </div>
     </footer>
 
@@ -1042,12 +1091,34 @@
       quizMaxScore: 0
     };
 
-    // Scanned Authorized Users Database from database.xlsx - Sheet1.csv
+    // Scanned Authorized Users Database from database.xlsx
     const authorizedUsers = [
       { name: "Heba Mohamed Gamea Soliman", oracleId: "400100" },
       { name: "Yasmeen Yahia Thabet", oracleId: "400200" },
       { name: "Rokaya Mohamed Hassan Ahmed", oracleId: "400300" },
       { name: "Shahd Mahmoud Mohammed Morshed", oracleId: "400400" }
+    ];
+
+    // Array of the 18 Training Days parsed from the file names
+    const trainingDaysList = [
+      { num: 1, title: "Induction", status: "completed" },
+      { num: 2, title: "Network Fundamentals", status: "active" },
+      { num: 3, title: "Fixed Voice 1", status: "locked" },
+      { num: 4, title: "Fixed Voice 2", status: "locked" },
+      { num: 5, title: "New Subscription & Follow Up", status: "locked" },
+      { num: 6, title: "Voice Cases", status: "locked" },
+      { num: 7, title: "Data Down & WACP Cases", status: "locked" },
+      { num: 8, title: "Physical Instability", status: "locked" },
+      { num: 9, title: "BLQ", status: "locked" },
+      { num: 10, title: "Customer Request", status: "locked" },
+      { num: 11, title: "Unable to obtain IP", status: "locked" },
+      { num: 12, title: "Browsing", status: "locked" },
+      { num: 13, title: "Logical Inst & Slowness", status: "locked" },
+      { num: 14, title: "FTTH", status: "locked" },
+      { num: 15, title: "Tech-Concession", status: "locked" },
+      { num: 16, title: "Non-Tech-Concession", status: "locked" },
+      { num: 17, title: "FCC", status: "locked" },
+      { num: 18, title: "Final Day", status: "locked" }
     ];
 
     // Portal Access Control by Oracle ID Only
@@ -1069,7 +1140,7 @@
         traineeOracleId = foundUser.oracleId;
         
         errBox.classList.add('hidden');
-        showMainPortal();
+        showDaySelection();
       } else {
         errBox.classList.remove('hidden');
       }
@@ -1090,8 +1161,97 @@
       showLoginPortal();
     }
 
+    function showDaySelection() {
+      // Hide other screens
+      document.getElementById('loginPortalScreen').classList.add('hidden');
+      document.getElementById('mainPortalContent').classList.add('hidden');
+      
+      // Load user session
+      traineeName = localStorage.getItem('we_trainee_name') || "";
+      document.getElementById('selectionTraineeNameDisplay').innerText = traineeName;
+      
+      renderDaysGrid();
+      
+      // Reveal selection screen
+      document.getElementById('daySelectionScreen').classList.remove('hidden');
+    }
+
+    function renderDaysGrid() {
+      const grid = document.getElementById('daysGrid');
+      grid.innerHTML = '';
+      
+      trainingDaysList.forEach(day => {
+        let statusStyles = '';
+        let icon = '';
+        let clickHandler = `onclick="selectDay(${day.num})"`;
+        let highlightDot = '';
+        
+        if (day.status === 'completed') {
+          statusStyles = 'bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-900/30 dark:border-emerald-800 dark:text-emerald-300 opacity-80 hover:opacity-100 cursor-pointer';
+          icon = '✅';
+        } else if (day.status === 'active') {
+          statusStyles = 'bg-white border-wePurple-500 shadow-lg shadow-wePurple-500/20 text-wePurple-900 dark:bg-slate-800 dark:border-wePurple-500 dark:text-wePurple-100 transform hover:-translate-y-1 ring-2 ring-wePurple-500 ring-offset-2 ring-offset-[#F8F9FC] dark:ring-offset-slate-900 cursor-pointer';
+          icon = '🚀';
+          highlightDot = '<span class="absolute -top-3 -right-3 flex h-6 w-6"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-wePurple-400 opacity-75"></span><span class="relative inline-flex rounded-full h-6 w-6 bg-wePurple-500 items-center justify-center text-white text-[10px]">📍</span></span>';
+        } else {
+          statusStyles = 'bg-gray-50 border-gray-200 text-gray-400 dark:bg-slate-800/50 dark:border-slate-700 dark:text-gray-500 opacity-60 cursor-not-allowed hover:bg-gray-100 dark:hover:bg-slate-800';
+          icon = '🔒';
+          clickHandler = `onclick="showSelectionToast('Day ${day.num} is currently locked. It will be available on its scheduled date.', 'locked')"`;
+        }
+
+        const cardHTML = `
+          <div ${clickHandler} class="relative flex flex-col items-center justify-center text-center p-5 rounded-2xl border-2 transition-all duration-300 min-h-[140px] ${statusStyles}">
+            <span class="text-2xl mb-2">${icon}</span>
+            <span class="text-[10px] font-black uppercase tracking-wider mb-1 opacity-70">Day ${day.num}</span>
+            <h4 class="text-xs font-bold leading-tight">${day.title}</h4>
+            ${highlightDot}
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    function selectDay(num) {
+      if (num === 2) {
+        document.getElementById('daySelectionScreen').classList.add('hidden');
+        showMainPortal();
+      } else if (num === 1) {
+        showSelectionToast("Day 1 (Induction) is already completed. Please proceed to your active module (Day 2).", "completed");
+      }
+    }
+
+    function showSelectionToast(message, type) {
+      const toast = document.getElementById('selectionToast');
+      toast.innerText = message;
+      toast.classList.remove('hidden', 'bg-rose-50', 'text-rose-600', 'border-rose-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'dark:bg-rose-900/30', 'dark:border-rose-800', 'dark:bg-emerald-900/30', 'dark:border-emerald-800');
+      
+      if (type === 'locked') {
+        toast.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-600', 'dark:bg-rose-900/30', 'dark:border-rose-800', 'dark:text-rose-300');
+      } else {
+        toast.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-700', 'dark:bg-emerald-900/30', 'dark:border-emerald-800', 'dark:text-emerald-300');
+      }
+      
+      // Auto hide after 4 seconds
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function returnToRoadmap() {
+      // Stop audio playback if active when leaving the workspace
+      const audio = document.getElementById('lessonAudio');
+      if (audio && !audio.paused) {
+        audio.pause();
+        document.getElementById('playIcon').classList.remove('hidden');
+        document.getElementById('pauseIcon').classList.add('hidden');
+        document.getElementById('soundWave').classList.remove('playing');
+      }
+      showDaySelection();
+    }
+
     function showMainPortal() {
       document.getElementById('loginPortalScreen').classList.add('hidden');
+      document.getElementById('daySelectionScreen').classList.add('hidden');
       document.getElementById('mainPortalContent').classList.remove('hidden');
       
       // Load from storage or session state
@@ -1112,8 +1272,9 @@
     }
 
     function showLoginPortal() {
-      document.getElementById('loginPortalScreen').classList.remove('hidden');
+      document.getElementById('daySelectionScreen').classList.add('hidden');
       document.getElementById('mainPortalContent').classList.add('hidden');
+      document.getElementById('loginPortalScreen').classList.remove('hidden');
       
       // Clear inputs
       document.getElementById('loginPassword').value = "";
@@ -1151,6 +1312,7 @@
       }
     }
 
+    // Progress updates
     function updateAudioProgress() {
       const audio = document.getElementById('lessonAudio');
       const progressBar = document.getElementById('audioProgressBar');
@@ -1178,6 +1340,7 @@
       }
     }
 
+    // Format utility
     function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
       const secs = Math.floor(seconds % 60);
@@ -1186,41 +1349,41 @@
 
     // Wiring Simulator Scenarios
     const wiringScenarios = {
-      idle: {
+      ideal: {
         leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
         lineColor: '#10B981', // green
-        voice: "حرارة ممتازة وصوت نقي",
+        voice: "Excellent sync and clear voice",
         voiceColor: "text-emerald-600",
         metrics: { att: '12 dB', snr: '28 dB', crc: '0 / Sec', rate: '30 Mbps' },
-        labels: { att: 'ممتاز (قريب من الكابينة)', snr: 'مستقر جداً', crc: 'لا توجد حزم تالفة', rate: 'سرعة كاملة ومستقرة' },
-        desc: "<strong>توصيل مثالي (Splitter Connected):</strong> يمر السلك الرئيسي أولاً بالسبليتر لتصفية الموجات. إشارة الـ Voice النقية تذهب لعدة التليفون الأرضي بشكل معزول، مما يمنع انقطاع خدمة الـ DSL والـ Internet ويحافظ على استمرارية الإنترنت تماماً."
+        labels: { att: 'Excellent (Near Cabinet)', snr: 'Extremely Stable', crc: 'Clean Transmission', rate: 'Full Speed Profile' },
+        desc: "<strong>Ideal Setup (Splitter Connected):</strong> routes high-frequency data signals to the modem and low-frequency analog voice signals to the phone isolatedly. This eliminates crosstalk and prevents the DSL link from dropping during telephone call activity."
       },
       nosplitter: {
         leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-red-500 shadow-red-500 animate-pulse', int: 'bg-gray-400 shadow-none' },
         lineColor: '#F59E0B', // amber
-        voice: "صوت تشويش شديد (Noise)",
+        voice: "High noise and interference (Noise)",
         voiceColor: "text-amber-600",
         metrics: { att: '22 dB', snr: '8 dB', crc: '4500 / Sec', rate: '12 Mbps' },
-        labels: { att: 'ارتفاع في الوهن والمقاومة', snr: 'تشويش مرتفع وسيء', crc: 'تلف مستمر بالبيانات', rate: 'تصفح غير مستقر بالمرة' },
-        desc: "<strong>بدون سبليتر (No Splitter Line):</strong> يتم ربط خط الهاتف مباشرة بالراوتر، مما يتسبب في تداخل ترددات الصوت مع ترددات الإنترنت عالية السرعة. بمجرد رفع سماعة التليفون تنهار خدمة الإنترنت فوراً وتطفأ لمبة الـ Internet."
+        labels: { att: 'Increased Loop Resistance', snr: 'Severely High Crosstalk', crc: 'Data Packet Degradation', rate: 'Highly Unstable Sync' },
+        desc: "<strong>No Splitter Joint (Parallel splice):</strong> Telephone and modem lines are shared directly over a single pair without isolation. High-frequency ADSL carriers bleed into the voice spectrum, dropping the line sync as soon as the phone receiver is picked up."
       },
       direct: {
         leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
         lineColor: '#3B82F6', // blue
-        voice: "لا توجد حرارة (هاتف معطل)",
+        voice: "No tone (Telephone offline)",
         voiceColor: "text-red-500",
         metrics: { att: '11 dB', snr: '30 dB', crc: '0 / Sec', rate: '30 Mbps' },
-        labels: { att: 'ممتاز ومثالي', snr: 'أعلى معدل استقرار', crc: 'نظيف تماماً', rate: 'سرعة كاملة مستقرة' },
-        desc: "<strong>توصيل مباشر للراوتر:</strong> السلك الرئيسي متصل مباشرة بجهاز الراوتر (CPE) دون المرور بالسبليتر لتغذية التليفون. الإنترنت يعمل بشكل ممتاز جداً وبدون تشويش، ولكن التليفون معطل تماماً ولا توجد به أي حرارة."
+        labels: { att: 'Optimal Attenuation', snr: 'Maximum Stability Margin', crc: 'Zero Fault Packets', rate: 'Solid Bitrate Sync' },
+        desc: "<strong>Direct CPE Connection (No Phone):</strong> The incoming street line hooks straight into the CPE DSL port without a splitter. Internet sync achieves optimal values, but the phone receiver is completely dead with no dial tone."
       },
       reversed: {
         leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-gray-400 shadow-none', int: 'bg-gray-400 shadow-none' },
         lineColor: '#EF4444', // red
-        voice: "حرارة ضعيفة مع تداخل تشويش",
+        voice: "Faint tone with heavy noise",
         voiceColor: "text-red-500",
         metrics: { att: '-- dB', snr: '0 dB', crc: '0 / Sec', rate: '0 Mbps' },
-        labels: { att: 'فشل فحص التزامن', snr: 'خط ميت هندسياً', crc: 'لا توجد حزم مرسلة', rate: 'فشل التوجيه' },
-        desc: "<strong>عكس مخارج السبليتر:</strong> قمت بربط مخرج التليفون بفتحة الراوتر والعكس. السبليتر يمنع مرور إشارات التردد العالي للإنترنت لفتحة التليفون، وبالتالي لن تتمكن لمبة الـ DSL من الوميض أو الثبات أبداً (No Synchronism)."
+        labels: { att: 'Synchronization Failure', snr: 'No Carrier Sync', crc: 'Inactive Session', rate: 'Routing Blocked' },
+        desc: "<strong>Reversed Splitter Ports:</strong> The phone cable is mistakenly plugged into the Splitter's Modem port, and the modem is plugged into the Phone port. High-frequency ADSL carriers are filtered out from the router, resulting in total sync loss."
       }
     };
 
@@ -1235,11 +1398,11 @@
 
       // Update active nav button
       document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all";
+        btn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all";
       });
       const activeBtn = document.getElementById('btn-' + tabId);
       if (activeBtn) {
-        activeBtn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-right flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all";
+        activeBtn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all";
       }
 
       // Track progress
@@ -1312,9 +1475,9 @@
 
       // Highlight selected wiring button
       document.querySelectorAll('[id^="wireBtn-"]').forEach(btn => {
-        btn.className = "w-full p-4 rounded-2xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all";
+        btn.className = "w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all";
       });
-      document.getElementById('wireBtn-' + key).className = "w-full p-4 rounded-2xl text-right text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all";
+      document.getElementById('wireBtn-' + key).className = "w-full p-4 rounded-2xl text-left text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all";
     }
 
     // Packet Tracer / Logical Simulator Sequence
@@ -1324,7 +1487,7 @@
       const consoleLine1 = document.getElementById('consoleLine1');
       const consoleLine2 = document.getElementById('consoleLine2');
 
-      statusText.innerText = "جاري إرسال حزم المصادقة...";
+      statusText.innerText = "Transmitting authentication packets...";
       statusText.className = "text-xs font-black text-amber-500 animate-pulse";
 
       // Reset styles
@@ -1335,10 +1498,10 @@
       const interval = setInterval(() => {
         if (step > 4) {
           clearInterval(interval);
-          statusText.innerText = "اكتمل الاتصال بنجاح! الـ WAN IP نشط";
+          statusText.innerText = "Connection Active! WAN IP Leased";
           statusText.className = "text-xs font-black text-emerald-600";
-          consoleLine1.innerText = "> [SUCCESS] Dynamic IP Lease assigned: 197.38.12.24";
-          consoleLine2.innerText = "> تم ربط البورت ومطابقة البيانات 100%. الإنترنت جاهز للخدمة.";
+          consoleLine1.innerText = "> [SUCCESS] Dynamic IP lease obtained: 197.38.12.24";
+          consoleLine2.innerText = "> Physical port mapped, authentication 100% completed. Internet online.";
           consoleLine2.style.opacity = "1";
           return;
         }
@@ -1348,20 +1511,20 @@
 
         switch(step) {
           case 1:
-            consoleLine1.innerText = "> [CPE] Sending PPPoE PADI Discovery Packets...";
-            consoleLine2.innerText = "> [DSLAM] Receiving frame requests on NAS port...";
+            consoleLine1.innerText = "> [CPE] Sending PPPoE Discovery Packets (PADI)...";
+            consoleLine2.innerText = "> [DSLAM] Forwarding frame request on active NAS port ID...";
             break;
           case 2:
-            consoleLine1.innerText = "> [RADIUS] Verifying customer DSL credentials...";
-            consoleLine2.innerText = "> [NAS ID] Confirming geographical Card/Port values match.";
+            consoleLine1.innerText = "> [RADIUS] Validating DSL service credentials...";
+            consoleLine2.innerText = "> [NAS ID] Confirming geographical exchange coordinates (Card/Port)...";
             break;
           case 3:
-            consoleLine1.innerText = "> [Broad-Hop] Fetching database profile tier...";
-            consoleLine2.innerText = "> Profile confirmed: 30Mbps VDSL High-Speed tier.";
+            consoleLine1.innerText = "> [Broad-Hop] Querying billing account profiles database...";
+            consoleLine2.innerText = "> Profile resolved: 30Mbps VDSL high-speed tier confirmed.";
             break;
           case 4:
-            consoleLine1.innerText = "> [BRAS] Leasing IP address configuration parameters...";
-            consoleLine2.innerText = "> [INT LED] Static Green IP acknowledged on CPE.";
+            consoleLine1.innerText = "> [BRAS] Packaging DHCP gateway and WAN IP lease sequence...";
+            consoleLine2.innerText = "> [CPE] Solid Green Internet LED active.";
             break;
         }
         step++;
@@ -1393,7 +1556,7 @@
     function checkAndStartQuiz() {
       if (!traineeName) {
         document.getElementById('topNotification').classList.remove('hidden');
-        document.getElementById('notificationText').innerText = "الرجاء تسجيل الدخول ببيانات معتمدة لبدء الاختبار!";
+        document.getElementById('notificationText').innerText = "Please log in with valid credentials to begin the exam!";
         return;
       }
       startQuizDirect();
@@ -1403,7 +1566,7 @@
     window.onload = function() {
       const isLoggedIn = sessionStorage.getItem('we_logged_in');
       if (isLoggedIn === 'true') {
-        showMainPortal();
+        showDaySelection();
       } else {
         showLoginPortal();
       }
@@ -1424,7 +1587,7 @@
     // Quiz Questions Database
     const quizQuestions = [
       {
-        question: "ما هو الترتيب التنازلي الصحيح والمنظم للمسار الفيزيائي لخط التليفون الأرضي من السنترال حتى بيت العميل؟",
+        question: "Which of the following describes the correct descending order of the telephone line's physical path from the central exchange to the customer premises?",
         options: [
           "Zero Room -> MSAN Cabin -> Cabins -> Box -> CPE",
           "MSAN Cabin -> Zero Room -> Cabins -> Box -> CPE",
@@ -1432,59 +1595,59 @@
           "Zero Room -> Cabins -> Box -> MSAN Cabin -> CPE"
         ],
         correctIndex: 0,
-        hint: "الحرارة تبدأ أولاً في غرفة الصفر (Zero Room) ثم تدمج مع إنترنت كابينة الفايبر MSAN.",
-        rationale: "المسار يبدأ من المنبع الرئيسي للصوت (Zero room)، ثم يدخل كابينة الفايبر للإنترنت (MSAN Cabin)، ثم الكابينات الفرعية، فالـ Box المعلق بالشارع، وصولاً للراوتر (CPE)."
+        hint: "The voice signal originates in the Zero Room, and is later joined by internet at the MSAN cabinet.",
+        rationale: "The physical path begins at the Zero Room, routes through the Multi-Service Access Node (MSAN), splits via street copper cabinets, terminates at building facade boxes, and is received by the customer's CPE."
       },
       {
-        question: "ما هو الفارق الجوهري الفني والفيزيائي بين كابلات الـ RJ11 والـ RJ45؟",
+        question: "What is the physical and technical distinction between RJ11 and RJ45 cable standards?",
         options: [
-          "RJ11 مخصص للتليفون الأرضي والسبليتر، بينما RJ45 مخصص لتوصيل الكمبيوتر بالراوتر (إيثرنت).",
-          "RJ45 مخصص للتليفون الأرضي، بينما RJ11 مخصص للتوصيلات فائقة السرعة للكمبيوتر.",
-          "كلاهما متطابق تماماً ويمكن استخدامهما في نفس المنافذ دون أي تعديل فني.",
-          "RJ11 يستخدم لنقل الكهرباء فقط، بينما RJ45 يستخدم لنقل الصوت فقط."
+          "RJ11 is designed for analog telephone lines/splitters, while RJ45 is designed for Ethernet LAN connections.",
+          "RJ45 is designed for analog telephone lines, while RJ11 is designed for high-speed Ethernet LAN connections.",
+          "Both interfaces are identical and can be plugged interchangeably into the same ports.",
+          "RJ11 only transfers electricity, whereas RJ45 only carries voice signals."
         ],
         correctIndex: 0,
-        hint: "كابل التليفون يضم دبابيس أقل (عادة 4 دبابيس)، بينما كابل الإيثرنت أعرض ويضم 8 دبابيس.",
-        rationale: "RJ11 هو الواجهة القياسية لتوصيلات التليفون النحاسية، بينما RJ45 هو المقبس المعتمد لشبكات الإيثرنت السلكية لربط الأجهزة بالراوتر."
+        hint: "A telephone connector is narrower (normally 4 pins) while an Ethernet connector is wider (8 pins).",
+        rationale: "RJ11 is the standard standard for analog telephone connections, whereas RJ45 is the standard registered jack for Ethernet network links."
       },
       {
-        question: "إذا كان لدى العميل أكثر من عدة تليفون في المنزل ويشتكي من انقطاع الإنترنت عند إجراء مكالمات، ما هو الحل الأمثل؟",
+        question: "If a subscriber has multiple telephone sets in a household and complains that the internet sync drops whenever a call is initiated or received, what is the best remedy?",
         options: [
-          "توصيل DSL Filter قبل كل جهاز تليفون مستخدم بالمنزل.",
-          "إلغاء التوصيل المباشر وإلغاء تفعيل الـ DHCP بالراوتر.",
-          "تغيير كابل الـ RJ11 بكابل RJ45 للحاسوب.",
-          "زيادة حجم الـ MTU في صفحة إعدادات الراوتر لقيمة أعلى."
+          "Install a DSL Filter directly inline before every telephone set in the house.",
+          "Bypass the Splitter assembly and turn off the CPE's DHCP service.",
+          "Replace the RJ11 cable with an RJ45 computer patch cable.",
+          "Adjust the MTU size parameter inside the CPE settings to a higher value."
         ],
         correctIndex: 0,
-        hint: "نحتاج لأداة تعزل إشارة الترددات العالية للإنترنت عن الترددات المنخفضة للتليفون لتنقية الصوت.",
-        rationale: "الـ DSL Filter يعزل الترددات العالية لإشارة الإنترنت عن الصوت، فيمنع حدوث تشويش أو انقطاع للإنترنت عند استخدام التليفون الأرضي."
+        hint: "We must isolate high-frequency internet carriers from the low-frequency analog voice range.",
+        rationale: "A DSL Filter suppresses high-frequency ADSL noise on telephone receivers, preventing telephone voltage changes from knocking down the internet synchronism."
       },
       {
-        question: "أين يجب ربط سنترال الشركات الداخلي (PBX) هندسياً لضمان عدم حدوث تداخل أو تلف للخدمة؟",
+        question: "Where should a corporate Private Branch Exchange (PBX) be connected inline to prevent interference with DSL internet?",
         options: [
-          "يجب توصيله دائماً بعد الـ Splitter.",
-          "يوصل مباشرة قبل الـ Splitter على السلك الرئيسي.",
-          "يجب تركيبه بشكل متوازي مع كابل الـ RJ45 الأساسي.",
-          "يوصل بمدخل الـ Line بالسبليتر مباشرة."
+          "It must always be connected downline of the primary Splitter.",
+          "It must be wired directly inline before the Splitter on the main drop line.",
+          "It must be wired in parallel directly with the main RJ45 computer patch cable.",
+          "It must be connected straight to the Line port of the Splitter."
         ],
         correctIndex: 0,
-        hint: "الـ PBX يجب أن يحصل على خط صوتي نقي ومعزول عن موجات تصفح الإنترنت لضمان الاستقرار.",
-        rationale: "الـ PBX يمثل جهاز توزيع خطوط صوتية داخلية، ولضمان جودة الإرسال وعدم قطع الإنترنت، يجب أن يوصل على مخرج الصوت بالسبليتر (بعد عملية الفصل)."
+        hint: "A corporate PBX routes internal telephone lines, needing a clean, isolated voice line feed.",
+        rationale: "A PBX routes voice channels. To safeguard against packet corruption or DSL drops, it must receive its analog feed from the isolated Phone port downline of the Splitter."
       },
       {
-        question: "إذا لاحظت أن جهاز الكمبيوتر لدى العميل سحب IP يبدأ بـ 169.254.X.X, فما هو التوصيف الفني المناسب للمشكلة والحل؟",
+        question: "If a customer's computer receives an IP address starting with 169.254.X.X, what does this indicate technically, and what is the fix?",
         options: [
-          "المشكلة هي تفعيل بروتوكول APIPA لخلل بالـ DHCP، وحله عمل Reset و Configuration للراوتر.",
-          "المشكلة هي نجاح الـ BRAS في التحقق، وحله هو زيادة الـ MTU لـ 1492.",
-          "هذا يعني أن العميل حصل على Public IP ممتاز وجاهز للتصفح فوراً بدون مشاكل.",
-          "المشكلة تعود للـ DNS الخارجي، وحلها تركيب Rosetta جديدة بالسلك."
+          "This indicates an APIPA address due to a local DHCP failure. Fix by resetting and reconfiguring the CPE.",
+          "This indicates RADIUS authentication succeeded. Fix by adjusting MTU to 1492.",
+          "This indicates the client obtained a clean Public WAN IP and is ready to browse.",
+          "This is caused by external DNS corruption. Fix by splicing a new Rosetta block."
         ],
         correctIndex: 0,
-        hint: "هذا النطاق يسمى Automatic Private IP Addressing ويظهر كدفاع تلقائي من الويندوز عند فقدان الاتصال بالراوتر.",
-        rationale: "الـ APIPA ينشأ تلقائياً عند غياب الاستجابة من الراوتر لتوزيع الـ Private IP، وحل المشكلة يتطلب تفريغ الإعدادات المجمّدة وإعادة تهيئة الراوتر."
+        hint: "APIPA (Automatic Private IP Addressing) is a local fallback assigned by the OS when the CPE fails to respond to lease requests.",
+        rationale: "An APIPA address indicates the client node cannot reach a local DHCP pool. Reconfiguring the CPE or correcting local connections resolves the lease block."
       },
       {
-        question: "ما هي القيمة الافتراضية الصحيحة هندسياً لـ MTU عند إعداد راوتر يعمل ببروتوكول PPPoE؟",
+        question: "What is the standard Maximum Transmission Unit (MTU) size for a PPPoE broadband connection in Egypt?",
         options: [
           "1492",
           "1500",
@@ -1492,56 +1655,56 @@
           "1460"
         ],
         correctIndex: 0,
-        hint: "القيمة الافتراضية تترك بعض البايتات الإضافية لتضمين معلومات التغليف والتحقق لخدمة الـ PPPoE.",
-        rationale: "القيمة القياسية لـ MTU في اتصال الـ PPPoE هي 1492 لمنع تجزئة الحزم وتفادي حدوث بطء تصفح لبعض المواقع."
+        hint: "The PPPoE framing format introduces an overhead, leaving less room than standard 1500-byte frames.",
+        rationale: "The standard MTU for PPPoE connections is 1492 bytes. This accommodates the protocol's 8-byte packaging overhead within the standard 1500-byte frame limit."
       },
       {
-        question: "من هو الخادم (Server) المسؤول بالسنترال عن إصدار وإرسال الـ WAN IP لأجهزة الراوتر وتسهيل خروجها للإنترنت؟",
+        question: "Which central office server is dedicated to assigning and leasing dynamic WAN IP addresses to CPEs?",
         options: [
-          "خادم BRAS",
-          "خادم RADIUS",
-          "بوابة الـ DNS",
-          "قاعدة Broad-Hop"
+          "BRAS Server",
+          "RADIUS Server",
+          "DNS Gateway",
+          "Broad-Hop database"
         ],
         correctIndex: 0,
-        hint: "الاسم اختصار لـ Broadband Remote Access Server.",
-        rationale: "الـ BRAS هو بوابة العبور ومنظم توزيع العناوين الديناميكية (WAN IP) لجميع المشتركين بعد تخطي خطوة مراجعة الحساب."
+        hint: "This stands for Broadband Remote Access Server.",
+        rationale: "The BRAS acts as the primary access gateway, managing user routing sessions and leasing dynamic Public IPs (WAN IP) upon validation."
       },
       {
-        question: "ما هو دور بروتوكول RADIUS الفعلي في المسار المنطقي للشبكة؟",
+        question: "What is the technical function of the RADIUS server during the logical session startup?",
         options: [
-          "مراجعة اسم المستخدم وباسورد الخدمة والتحقق من المنفذ والـ Card الفيزيائي (NAS port ID).",
-          "ترجمة الـ Private IP إلى Public IP للعملاء.",
-          "توزيع سرعات الخطوط والـ Profiles المختلفة تلقائياً للراوتر.",
-          "حل مشاكل تشويش كوابل التليفون الأرضي والنحاس."
+          "To validate PPPoE service credentials and correlate the physical NAS Port ID (Card/Port).",
+          "To translate local Private IP ranges to Public IP addresses.",
+          "To enforce maximum rate limiting and database profile speeds.",
+          "To resolve line attenuation noise on copper junctions."
         ],
         correctIndex: 0,
-        hint: "أداة المصادقة الأساسية (Authentication) التي تراجع بيانات الدخول التي كتبها المشترك بالـ Configuration.",
-        rationale: "RADIUS هو خادم المصادقة والأمان الذي يطابق صحة بيانات دخول الخدمة الموثقة بالراوتر مع البيانات الجغرافية والفيزيائية للخط."
+        hint: "It manages Authentication, Authorization, and Accounting (AAA).",
+        rationale: "The RADIUS server validates the DSL username and password configured on the CPE, ensuring it correlates with the physical port (NAS port ID) on the DSLAM."
       },
       {
-        question: "ما هي المعاملات والبيانات الصحيحة هندسياً لربط الراوتر بالإنترنت باستخدام خدمة الـ ADSL؟",
+        question: "What are the correct parameters required to establish an ADSL connection in Egypt?",
         options: [
-          "VPI/VCI: 0/35 و Encapsulation: PPPOE و Mode: Routing",
-          "VPI/VCI: 8/35 و Encapsulation: Bridging و Mode: PTM",
-          "PTM: Mode و Encapsulation: LLC و Link: PPP",
-          "VPI/VCI: 0/35 و Mode: PTM و PPP Transfer Type: LLC"
+          "VPI/VCI: 0/35 | Mode: Routing | Encapsulation: PPPOE | Multiplex: LLC",
+          "VPI/VCI: 8/35 | Mode: PTM | Encapsulation: Bridging | Multiplex: LLC",
+          "PTM: Mode | Link Type: PPP | PPP Transfer Type: PPPOE",
+          "VPI/VCI: 0/35 | Mode: PTM | PPP Transfer Type: LLC"
         ],
         correctIndex: 0,
-        hint: "الـ VPI/VCI الافتراضي بمصر هو صفر و 35 والبروتوكول السلكي المعتمد هو Point-to-Point Protocol over Ethernet.",
-        rationale: "معاملات الـ ADSL الأساسية لتشغيل الخدمة في مصر تتطلب إدخال القيمة 0/35 لمسار البيانات والترخيص بنظام التوجيه التلقائي (Routing)."
+        hint: "The standard path IDs are VPI 0 and VCI 35, operating over PPPoE routing mode.",
+        rationale: "ADSL links in Egypt require VPI/VCI values of 0/35, utilizing LLC encapsulation under PPPoE routing mode to negotiate sessions."
       },
       {
-        question: "ما هي الوظيفة والهدف الأساسي من بروتوكول NAT (Network Address Translation) بالراوتر？",
+        question: "What is the primary technical purpose of NAT (Network Address Translation) inside a home CPE?",
         options: [
-          "تحويل وتخريج الأجهزة من الشبكة الداخلية (Private IP) إلى الشبكة الخارجية (Public IP).",
-          "توزيع الـ Private IPs ديناميكياً للأجهزة المتصلة لاسلكياً.",
-          "تخفيض حجم الحزم (Packet Size) لزيادة سرعة التحميل.",
-          "إخفاء شبكة الواي فاي وحمايتها من القرصنة."
+          "Translating local Private IP addresses into a single Public WAN IP for routing.",
+          "Managing dynamic IP leases to local Wi-Fi client nodes.",
+          "Squeezing MTU sizes to increase download speeds.",
+          "Masking SSID broadcasts to secure wireless channels."
         ],
         correctIndex: 0,
-        hint: "يسمح لجميع أجهزة المنزل بتصفح الإنترنت باستعمال عنوان اشتراك عام واحد فقط صادر من مزود الخدمة.",
-        rationale: "الـ NAT يقوم بدور الوسيط والمترجم الذي يتيح لعدة أجهزة محلية تشارك واستخدام عنوان WAN IP خارجي موحد وآمن."
+        hint: "It allows multiple home devices to browse the global web using a single paid subscription address.",
+        rationale: "NAT acts as a translator, mapping multiple private LAN addresses behind a single Public WAN IP assigned by the ISP, conserving the IP space."
       }
     ];
 
@@ -1549,12 +1712,12 @@
       const q = quizQuestions[currentQuestionIndex];
       selectedAnswerIndex = null;
 
-      document.getElementById('quizQuestionNum').innerText = `سؤال ${currentQuestionIndex + 1} من ${quizQuestions.length}`;
+      document.getElementById('quizQuestionNum').innerText = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
       document.getElementById('quizQuestionText').innerText = q.question;
-      document.getElementById('quizLivePoints').innerText = `النقاط: ${quizScore}`;
+      document.getElementById('quizLivePoints').innerText = `Score: ${quizScore}`;
       document.getElementById('btn-quizNext').classList.add('hidden');
       document.getElementById('quizFeedbackBox').className = "hidden p-4 rounded-xl text-xs leading-relaxed transition-all";
-      document.getElementById('btn-quizHint').innerText = "💡 عرض تلميحة مساعدة للسؤال";
+      document.getElementById('btn-quizHint').innerText = "💡 Reveal Hint";
       document.getElementById('btn-quizHint').disabled = false;
 
       // Populate options
@@ -1563,7 +1726,7 @@
 
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
-        btn.className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border border-gray-200 bg-white text-right text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-between";
+        btn.className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border border-gray-200 bg-white text-left text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-between";
         btn.innerHTML = `
           <span>${opt}</span>
           <span class="w-5 h-5 rounded-full border border-gray-300 flex-shrink-0"></span>
@@ -1585,33 +1748,33 @@
 
       if (index === q.correctIndex) {
         quizScore += 10;
-        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-right text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
         buttons[index].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
         buttons[index].querySelector('span:last-child').innerHTML = "✓";
         
         feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-emerald-50 border border-emerald-100 text-emerald-800 block mt-4";
-        feedbackBox.innerHTML = `<strong>إجابة صحيحة!</strong> ${q.rationale}`;
+        feedbackBox.innerHTML = `<strong>Correct!</strong> ${q.rationale}`;
       } else {
-        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-right text-xs font-bold text-rose-800 transition-all flex items-center justify-between";
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-left text-xs font-bold text-rose-800 transition-all flex items-center justify-between";
         buttons[index].querySelector('span:last-child').className = "w-2 h-5 rounded-full bg-rose-500 flex items-center justify-center text-white text-[10px] font-bold";
         buttons[index].querySelector('span:last-child').innerHTML = "✕";
 
-        buttons[q.correctIndex].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-right text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[q.correctIndex].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
         buttons[q.correctIndex].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
         buttons[q.correctIndex].querySelector('span:last-child').innerHTML = "✓";
 
         feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-rose-50 border border-rose-100 text-rose-800 block mt-4";
-        feedbackBox.innerHTML = `<strong>إجابة غير دقيقة.</strong> الإجابة الصحيحة هي: "${q.options[q.correctIndex]}". <br><br><strong>السبب العلمي:</strong> ${q.rationale}`;
+        feedbackBox.innerHTML = `<strong>Incorrect.</strong> Correct answer is: "${q.options[q.correctIndex]}". <br><br><strong>Technical Reason:</strong> ${q.rationale}`;
       }
 
-      document.getElementById('quizLivePoints').innerText = `النقاط: ${quizScore}`;
+      document.getElementById('quizLivePoints').innerText = `Score: ${quizScore}`;
       document.getElementById('btn-quizNext').classList.remove('hidden');
       document.getElementById('btn-quizHint').disabled = true;
     }
 
     function revealQuizHint() {
       const q = quizQuestions[currentQuestionIndex];
-      document.getElementById('btn-quizHint').innerText = "💡 تلميحة: " + q.hint;
+      document.getElementById('btn-quizHint').innerText = "💡 Hint: " + q.hint;
     }
 
     // Load next question
@@ -1622,6 +1785,46 @@
       } else {
         finishQuiz();
       }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quiz-active').classList.add('hidden');
+      document.getElementById('quiz-results').classList.remove('hidden');
+
+      const percent = (quizScore / (quizQuestions.length * 10)) * 100;
+      document.getElementById('quizFinalScore').innerText = `${percent}%`;
+      document.getElementById('quizResultSummary').innerText = `You answered ${quizScore / 10} out of ${quizQuestions.length} questions correctly.`;
+
+      const icon = document.getElementById('resultIcon');
+      const title = document.getElementById('quizResultTitle');
+      const btnPrint = document.getElementById('btnPrintCertificate');
+
+      if (percent >= 80) {
+        icon.innerText = "🏆";
+        title.innerText = "Congratulations! Excellent Performance! 🎉";
+        btnPrint.classList.remove('hidden');
+        
+        // Prepare Certificate Details
+        document.getElementById('certName').innerText = traineeName;
+        document.getElementById('certScore').innerText = `${percent}%`;
+      } else {
+        icon.innerText = "📚";
+        title.innerText = "Nice attempt. Review the material and try again!";
+        btnPrint.classList.add('hidden');
+      }
+
+      if (percent > progress.quizMaxScore) {
+        progress.quizMaxScore = percent;
+      }
+      saveProgress();
+      updateProgressUI();
+    }
+
+    // Print certificate handler
+    function printCertificate() {
+      const printArea = document.getElementById('printArea');
+      printArea.classList.remove('hidden');
+      window.print();
     }
 
     // Storage utility
@@ -1635,6 +1838,7 @@
       localStorage.setItem('we_network_fundamentals_progress', JSON.stringify(payload));
     }
 
+    // Load local storage progress
     function loadProgress() {
       const dataStr = localStorage.getItem('we_network_fundamentals_progress');
       if (dataStr) {
@@ -1681,7 +1885,7 @@
         document.getElementById('quizProgText').innerText = progress.quizMaxScore + "%";
         document.getElementById('quizProgressBar').style.width = progress.quizMaxScore + "%";
       } else {
-        document.getElementById('quizProgText').innerText = "لم يُختبر";
+        document.getElementById('quizProgText').innerText = "Not Tested";
         document.getElementById('quizProgressBar').style.width = "0%";
       }
     }
@@ -1693,19 +1897,25 @@
         isDarkMode = false;
         document.getElementById('body').className = "bg-[#F8F9FC] text-gray-800 min-h-screen flex flex-col transition-colors duration-300";
         document.getElementById('header').className = "bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        document.getElementById('headerSelection').className = "bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
         document.getElementById('footer').className = "bg-white border-t border-gray-200 py-6 transition-colors duration-300";
         document.getElementById('profileCard').className = "bg-white rounded-3xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md text-gray-800";
         document.getElementById('navCard').className = "bg-white rounded-3xl p-4.5 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300";
+        
         document.getElementById('themeIcon').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+        document.getElementById('themeIconSelection').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
       } else {
         // Toggle to Dark
         isDarkMode = true;
         document.getElementById('body').className = "bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-colors duration-300";
         document.getElementById('header').className = "bg-slate-800 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        document.getElementById('headerSelection').className = "bg-slate-800 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
         document.getElementById('footer').className = "bg-slate-800 border-t border-slate-700 py-6 transition-colors duration-300";
         document.getElementById('profileCard').className = "bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-700 transition-all duration-300 hover:shadow-md text-slate-100";
         document.getElementById('navCard').className = "bg-slate-800 rounded-2xl p-4.5 shadow-sm border border-slate-700 flex flex-col gap-1.5 transition-colors duration-300";
+        
         document.getElementById('themeIcon').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
+        document.getElementById('themeIconSelection').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
       }
     }
   </script>
