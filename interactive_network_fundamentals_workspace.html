@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة التدريب التفاعلية لأساسيات الشبكات | WE Network Fundamentals Academy</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind Config to match WE brand Purple -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wePurple: {
+              50: '#f5f0fa',
+              100: '#ebdbf5',
+              200: '#d7b7eb',
+              500: '#9b51e0',
+              600: '#8c3cc2',
+              700: '#5F259F', // Main WE Brand Purple
+              800: '#4c1d80',
+              900: '#3a1661',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts for Arabic (Tajawal) -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+    }
+    /* 3D Card Flip Styles */
+    .perspective {
+      perspective: 1000px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    /* Wave animation for audio simulation */
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar {
+      animation: wave 1.2s infinite ease-in-out;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.6s; }
+    
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col transition-colors duration-300" id="body">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm" id="header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <!-- WE Logo Simulation -->
+        <div class="w-12 h-12 rounded-full bg-wePurple-700 flex items-center justify-center text-white font-black text-2xl shadow-md transition-transform hover:rotate-12 cursor-pointer">we</div>
+        <div>
+          <h1 class="text-xl font-black text-wePurple-700">بوابة أساسيات الشبكات والتدريب الميداني</h1>
+          <p class="text-xs text-gray-500">منصة المحاكاة والاختبارات التفاعلية المعتمدة لموظفي الدعم الفني</p>
+        </div>
+      </div>
+      <!-- Mode Toggle and Controls -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 focus:outline-none transition-all shadow-sm" title="تبديل الوضع الليلي">
+          <svg id="themeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+        <div class="bg-wePurple-50 text-wePurple-700 px-4 py-2 rounded-xl text-xs font-bold border border-wePurple-100 flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+          المحاكاة نشطة
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+    
+    <!-- Sidebar Navigation / Progress Hub -->
+    <aside class="w-full lg:w-72 flex-shrink-0 flex flex-col gap-6">
+      
+      <!-- User/Progress Card -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md" id="progressCard">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2 text-gray-800" id="progressTitle">
+          <svg class="w-5 h-5 text-wePurple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          مؤشر التقدم الدراسي
+        </h3>
+        <!-- Progress Bars -->
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-gray-500">دراسة المنهج والمصطلحات</span>
+              <span class="font-bold text-wePurple-700" id="explProgressText">0%</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-2">
+              <div id="explProgressBar" class="bg-wePurple-700 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-gray-500">تجارب معامل المحاكاة</span>
+              <span class="font-bold text-teal-600" id="visualProgressText">0%</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-2">
+              <div id="visualProgressBar" class="bg-teal-50 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-gray-500">تقييم الاختبار النهائي</span>
+              <span class="font-bold text-emerald-600" id="quizScoreText">لم يُختبر</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-2">
+              <div id="quizProgressBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        <button onclick="resetProgress()" class="mt-5 w-full py-2 border border-gray-200 text-gray-500 hover:text-red-600 hover:bg-red-50 hover:border-red-100 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          إعادة تعيين نقاط التقدم
+        </button>
+      </div>
+
+      <!-- Main Sidebar Navigation -->
+      <nav class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300" id="navCard">
+        <span class="text-xs font-bold text-gray-400 px-3 uppercase tracking-wider mb-2 block">الخرائط التدريبية والمحاكاة</span>
+        
+        <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all">
+          <span class="flex items-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+            لوحة الاستكشاف والمناهج
+          </span>
+        </button>
+
+        <button onclick="switchTab('physical-lab')" id="btn-physical-lab" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+          معمل المحاكاة الفيزيائية (السبليتر)
+        </button>
+
+        <button onclick="switchTab('logical-lab')" id="btn-logical-lab" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          مخطط رحلة الـ WAN IP المتحرك
+        </button>
+
+        <button onclick="switchTab('glossary')" id="btn-glossary" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          دليل المصطلحات والبروتوكولات
+        </button>
+
+        <button onclick="switchTab('quiz')" id="btn-quiz" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+          الاختبار ومولد الشهادات الذكية
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <section class="flex-grow flex flex-col gap-6">
+
+      <!-- ================= TAB: DASHBOARD ================= -->
+      <div id="tab-dashboard" class="tab-content block space-y-6">
+        <div class="bg-gradient-to-r from-wePurple-800 to-wePurple-600 rounded-3xl p-8 text-white shadow-lg relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 opacity-15">
+            <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <span class="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold mb-3 inline-block">أكاديمية الدعم الفني لشركة WE</span>
+          <h2 class="text-3xl font-black mb-3">مرحباً بك في معمل هندسة الشبكات والاتصالات! 🚀</h2>
+          <p class="text-white/80 max-w-2xl text-sm leading-relaxed mb-6">
+            ستكتشف هنا رحلة إشارة التليفون الأرضي (الصوت والحرارة) ومسارات الإنترنت بالكامل، مدعومة بمعامل فيزيائية ومنطقية تفاعلية لتأهيلك للعمل والتميز الميداني الفوري.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="switchTab('physical-lab')" class="bg-white text-wePurple-800 px-6 py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-wePurple-50 transition-all flex items-center gap-2">
+              دخول معمل التوصيلات الفيزيائية
+              <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+            <button onclick="switchTab('quiz')" class="bg-wePurple-900/30 border border-white/20 hover:bg-wePurple-900/50 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all">
+              بدء الاختبار والشهادة الرسمية
+            </button>
+          </div>
+        </div>
+
+        <!-- Topics Quick Access Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md flex flex-col justify-between" id="cardQuick1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-wePurple-100 flex items-center justify-center text-wePurple-700 mb-4 font-bold">
+                🛠️
+              </div>
+              <h3 class="text-lg font-bold mb-2">التوصيل الفيزيائي (Physical)</h3>
+              <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                تدرّب على تركيب وإصلاح تمديدات الـ Splitter والـ Rosetta ومقابس الـ RJ11 وكوابل الـ RJ45 بمحاكاة بصرية فائقة الدقة.
+              </p>
+            </div>
+            <button onclick="switchTab('physical-lab')" class="text-xs font-bold text-wePurple-700 hover:underline flex items-center gap-1 mt-2">افتح المعمل الآن ←</button>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md flex flex-col justify-between" id="cardQuick2">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-700 mb-4 font-bold">
+                ⚙️
+              </div>
+              <h3 class="text-lg font-bold mb-2">رحلة البيانات المنطقية (Logical)</h3>
+              <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                تتبع مسار طلب PPPoE من راوتر العميل عبر DSLAM لطلب التحقق من RADIUS و Broad-Hop للحصول على الـ WAN IP من BRAS.
+              </p>
+            </div>
+            <button onclick="switchTab('logical-lab')" class="text-xs font-bold text-teal-700 hover:underline flex items-center gap-1 mt-2">افتح مخطط الحركة ←</button>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-md flex flex-col justify-between" id="cardQuick3">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 mb-4 font-bold">
+                📜
+              </div>
+              <h3 class="text-lg font-bold mb-2">موسوعة المصطلحات والـ IPs</h3>
+              <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                دليل شامل يشرح معاني NAT, APIPA, DHCP, DNS, Proxy وقيم الـ MTU والـ VPI/VCI الأساسية لخدمات الإنترنت بمصر.
+              </p>
+            </div>
+            <button onclick="switchTab('glossary')" class="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1 mt-2">عرض القاموس الفني ←</button>
+          </div>
+
+        </div>
+
+        <!-- High Level Quick Training Tips -->
+        <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 text-yellow-800 text-xs leading-relaxed flex items-start gap-3">
+          <span class="text-lg mt-0.5">💡</span>
+          <div>
+            <strong class="block mb-1 text-sm text-yellow-900">ملاحظة دراسية هامة:</strong>
+            إذا كان لديك عميل يشتكي من سقوط الخدمة بمجرد رفع سماعة التليفون الأرضي، فهذا يعني فوراً أن المشكلة **فيزيائية** بالدرجة الأولى ناتجة عن عدم تركيب الـ Splitter أو عكس الكوابل، توجه إلى <span class="font-bold underline cursor-pointer" onclick="switchTab('physical-lab')">معمل المحاكاة الفيزيائية</span> لتكتشف الأثر هندسياً!
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: PHYSICAL LAB (WIRING SIMULATOR) ================= -->
+      <div id="tab-physical-lab" class="tab-content hidden space-y-6">
+        <div>
+          <h2 class="text-2xl font-black text-gray-800">معمل المحاكاة والتمديدات الفيزيائية</h2>
+          <p class="text-xs text-gray-500">اختر سيناريو التوصيل المناسب لتختبر سلامة الإشارات والأصوات، وتراقب استجابة لمبات الراوتر (CPE) فوراً</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Controller Panel -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <h3 class="text-sm font-bold text-gray-400 uppercase">اختر سيناريو التمديد للخط</h3>
+            
+            <div class="space-y-2">
+              <button onclick="applyWiringScenario('idle')" id="btn-wire-idle" class="w-full p-4 rounded-xl text-right text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all">
+                🌟 التوصيل المثالي (Idle/Main Wire Connection)
+                <span class="block font-normal text-[10px] text-gray-500 mt-1">تمرير الصوت نقي والإنترنت يعمل بكفاءة قصوى</span>
+              </button>
+              
+              <button onclick="applyWiringScenario('no-splitter')" id="btn-wire-no-splitter" class="w-full p-4 rounded-xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                ⚠️ التوصيل بدون سبليتر (No Splitter Joint)
+                <span class="block font-normal text-[10px] text-gray-500 mt-1">يحدث سقوط للإنترنت بمجرد إجراء أي مكالمة صوتية!</span>
+              </button>
+
+              <button onclick="applyWiringScenario('direct')" id="btn-wire-direct" class="w-full p-4 rounded-xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                🔌 توصيل الراوتر مباشرة بالخط
+                <span class="block font-normal text-[10px] text-gray-500 mt-1">الإنترنت يعمل بشكل ممتاز لكن لا توجد حرارة بالهاتف</span>
+              </button>
+
+              <button onclick="applyWiringScenario('reversed')" id="btn-wire-reversed" class="w-full p-4 rounded-xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                ❌ عكس كوابل المخارج بالسبليتر
+                <span class="block font-normal text-[10px] text-gray-500 mt-1">ربط التليفون بفتحة Modem والراوتر بفتحة Phone</span>
+              </button>
+            </div>
+
+            <!-- Audio Feedback Simulation -->
+            <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
+              <h4 class="text-xs font-bold text-gray-600 mb-2">جودة إشارة الصوت بالتليفون (Voice Diagnostics):</h4>
+              <div class="flex items-center gap-3">
+                <div id="audioWave" class="flex gap-1 items-end h-6 w-12">
+                  <span class="wave-bar w-1.5 h-3 bg-wePurple-700 rounded-full"></span>
+                  <span class="wave-bar w-1.5 h-6 bg-wePurple-700 rounded-full"></span>
+                  <span class="wave-bar w-1.5 h-4 bg-wePurple-700 rounded-full"></span>
+                  <span class="wave-bar w-1.5 h-2 bg-wePurple-700 rounded-full"></span>
+                </div>
+                <span id="voiceStatusText" class="text-xs font-extrabold text-emerald-600">حرارة ممتازة وصوت نقي</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Visualization Panel -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 lg:col-span-2 space-y-6 flex flex-col justify-between">
+            <h3 class="text-sm font-bold text-gray-400">مخطط التمديدات التفاعلي (Interactive Wiring Map):</h3>
+            
+            <!-- Dynamic Diagram Area -->
+            <div class="bg-slate-900 rounded-2xl p-6 min-h-[250px] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+              
+              <!-- Left side: Source box -->
+              <div class="flex flex-col items-center space-y-2 z-10">
+                <div class="w-16 h-16 rounded-xl bg-purple-900 border border-purple-500 flex items-center justify-center text-white text-xs text-center font-bold">
+                  Box<br>العلبة الخارجية
+                </div>
+                <span class="text-[10px] text-gray-300">السلك الرئيسي</span>
+              </div>
+
+              <!-- Center Connection Block -->
+              <div class="flex flex-col items-center justify-center flex-grow py-4 w-full md:w-auto relative" id="wiringCentral">
+                <!-- Lines drawn via SVG -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="wiringSVG">
+                  <path id="svgLine1" d="M 50 100 Q 150 100 250 100" stroke="#10B981" stroke-width="4" stroke-dasharray="6" class="animate-[dash_2s_linear_infinite]" fill="none" />
+                </svg>
+
+                <div id="splitterDevice" class="w-24 h-32 rounded-2xl bg-white border-2 border-wePurple-700 p-3 flex flex-col justify-between text-center shadow-lg z-10">
+                  <span class="text-[9px] font-bold text-wePurple-700 border-b pb-1">Line (الخط)</span>
+                  <span class="text-xs font-black text-gray-800">Splitter<br>سبليتر</span>
+                  <div class="flex justify-between text-[8px] font-bold text-gray-400 border-t pt-1">
+                    <span>Phone<br>هاتف</span>
+                    <span>Modem<br>راوتر</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right side: Destination items -->
+              <div class="flex flex-col space-y-6 z-10">
+                <!-- Router -->
+                <div class="flex items-center gap-2">
+                  <div class="w-24 h-16 rounded-xl bg-slate-800 border-2 border-teal-500 p-2 text-white flex flex-col justify-between">
+                    <span class="text-[9px] font-bold text-teal-400">راوتر CPE</span>
+                    <div class="flex gap-1 justify-center">
+                      <span id="led-pwr" class="w-2 h-2 rounded-full bg-green-500 shadow-lg shadow-green-500" title="لمبة الباور"></span>
+                      <span id="led-dsl" class="w-2 h-2 rounded-full bg-green-500 shadow-lg shadow-green-500" title="لمبة الـ DSL"></span>
+                      <span id="led-int" class="w-2 h-2 rounded-full bg-green-500 shadow-lg shadow-green-500" title="لمبة الإنترنت"></span>
+                    </div>
+                  </div>
+                  <span class="text-[10px] text-gray-300">جهاز الراوتر</span>
+                </div>
+
+                <!-- Telephone -->
+                <div class="flex items-center gap-2">
+                  <div class="w-24 h-12 rounded-xl bg-slate-800 border-2 border-emerald-500 p-2 text-white flex items-center justify-center text-xs font-bold text-center">
+                    📞 الهاتف الأرضي
+                  </div>
+                  <span class="text-[10px] text-gray-300">عدة التليفون</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Explanatory Diagnostic Text -->
+            <div id="wireDetailText" class="p-4 bg-wePurple-50 rounded-xl border border-wePurple-100 text-xs text-wePurple-900 leading-relaxed">
+              <strong>التوصيل المثالي (Idle Connection):</strong> يمر السلك الرئيسي أولاً بالسبليتر لتصفية الموجات. إشارة الـ Voice النقية تذهب لعدة التليفون الأرضي بشكل معزول، مما يمنع انقطاع خدمة الـ DSL والـ Internet ويحافظ على استمرارية الإنترنت تماماً.
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= TAB: LOGICAL LAB ================= -->
+      <div id="tab-logical-lab" class="tab-content hidden space-y-6">
+        <div>
+          <h2 class="text-2xl font-black text-gray-800">مخطط رحلة الـ WAN IP التفاعلي</h2>
+          <p class="text-xs text-gray-500">انقر على زر "بدء المحاكاة المنطقية" لمشاهدة حركة البيانات وتأكيد الخط الميداني عبر خوادم السنترال بالترتيب</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-6">
+          <div class="flex justify-between items-center">
+            <button onclick="startLogicalSimulation()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow flex items-center gap-1.5">
+              🚀 ابدأ المحاكاة المنطقية للبيانات
+            </button>
+            <span id="simStatus" class="text-xs font-extrabold text-teal-600">جاهز للمحاكاة</span>
+          </div>
+
+          <!-- Flowchart with Glow effects -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+            
+            <div id="logStep1" class="log-node p-5 rounded-2xl border-2 border-gray-200 bg-white text-center transition-all duration-300">
+              <span class="bg-gray-100 text-gray-600 font-bold text-[10px] px-2.5 py-0.5 rounded-full block w-fit mx-auto mb-2">1. إرسال طلب PPPoE</span>
+              <h4 class="font-extrabold text-xs text-gray-800">راوتر العميل (CPE)</h4>
+              <p class="text-[10px] text-gray-500 mt-2">يرسل الراوتر طلباً يحمل الـ Username والـ Password الخاص بصفحة الراوتر للحصول على الـ WAN IP.</p>
+            </div>
+
+            <div id="logStep2" class="log-node p-5 rounded-2xl border-2 border-gray-200 bg-white text-center transition-all duration-300">
+              <span class="bg-gray-100 text-gray-600 font-bold text-[10px] px-2.5 py-0.5 rounded-full block w-fit mx-auto mb-2">2. التحقق من الهوية</span>
+              <h4 class="font-extrabold text-xs text-gray-800">خادم RADIUS & NAS</h4>
+              <p class="text-[10px] text-gray-500 mt-2">يراجع RADIUS كلمة السر ويفحص الـ NAS port ID للتأكد من مطابقة الـ Card والـ Port المسجلين على النظام لضمان الأمان.</p>
+            </div>
+
+            <div id="logStep3" class="log-node p-5 rounded-2xl border-2 border-gray-200 bg-white text-center transition-all duration-300">
+              <span class="bg-gray-100 text-gray-600 font-bold text-[10px] px-2.5 py-0.5 rounded-full block w-fit mx-auto mb-2">3. تحديد السرعة والبروفايل</span>
+              <h4 class="font-extrabold text-xs text-gray-800">قاعدة Broad-Hop</h4>
+              <p class="text-[10px] text-gray-500 mt-2">يقوم بفتح قاعدة بيانات حسابات العملاء ومطابقتها، ليربط الخط بالسرعة الصحيحة والـ Profile المفعل له.</p>
+            </div>
+
+            <div id="logStep4" class="log-node p-5 rounded-2xl border-2 border-gray-200 bg-white text-center transition-all duration-300">
+              <span class="bg-gray-100 text-gray-600 font-bold text-[10px] px-2.5 py-0.5 rounded-full block w-fit mx-auto mb-2">4. إصدار الـ WAN IP</span>
+              <h4 class="font-extrabold text-xs text-gray-800">بوابة BRAS السنترال</h4>
+              <p class="text-[10px] text-gray-500 mt-2">بمجرد التحقق، يمنح BRAS راوتر العميل عنوان الـ WAN IP لتبدأ رحلة تصفح الويب المباشرة.</p>
+            </div>
+
+          </div>
+
+          <!-- Simulation Explainer Console -->
+          <div class="p-5 bg-slate-900 text-teal-400 rounded-2xl font-mono text-xs space-y-2">
+            <span class="text-white font-bold block mb-2 border-b border-teal-800 pb-1">CONSOLE DIAGNOSTICS:</span>
+            <div id="consoleLine1">&gt; الراوتر جاهز لاستقبال بيانات الربط...</div>
+            <div id="consoleLine2" class="opacity-40">&gt; اضغط على 'ابدأ المحاكاة المنطقية' لتتبع تدفق البيانات التقنية...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: GLOSSARY ================= -->
+      <div id="tab-glossary" class="tab-content hidden space-y-6">
+        <div>
+          <h2 class="text-2xl font-black text-gray-800">دليل المصطلحات والبروتوكولات الشامل</h2>
+          <p class="text-xs text-gray-500">المرجع الهندسي المعتمد للشبكات وقيم تهيئة وإعدادات الراوتر</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Section 1: Protocols -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🌐 البروتوكولات والعناوين (Network Protocols)</h3>
+            
+            <div class="space-y-4">
+              <div class="p-3 bg-gray-50 rounded-xl">
+                <span class="font-extrabold text-xs text-gray-800 block">Gateway IP (بوابة العبور):</span>
+                <p class="text-[11px] text-gray-500 mt-1">هو الـ IP الخاص بالدخول لصفحة إعدادات الراوتر، ويكتب في ملصق ضهر الراوتر ويأتي بقيمة افتراضية (غالباً 192.168.1.1).</p>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-xl">
+                <span class="font-extrabold text-xs text-gray-800 block">APIPA (نطاق الطوارئ):</span>
+                <p class="text-[11px] text-gray-500 mt-1">عنوان (يبدأ من 169.254.0.1 لـ 169.254.255.254) يحصل عليه الحاسوب تلقائياً في حالة تعطل أو فقدان الاتصال بخادم DHCP بالراوتر.</p>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-xl">
+                <span class="font-extrabold text-xs text-gray-800 block">NAT (ترجمة العناوين):</span>
+                <p class="text-[11px] text-gray-500 mt-1">المسؤول عن تحويل الـ Private IPs للأجهزة المحلية إلى عنوان Public IP خارجي لتتمكن من التصفح بشكل آمن.</p>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-xl">
+                <span class="font-extrabold text-xs text-gray-800 block">DHCP & DNS:</span>
+                <p class="text-[11px] text-gray-500 mt-1"><strong>DHCP:</strong> يوزع IPs داخلية للأجهزة بشكل تلقائي. <br><strong>DNS:</strong> المترجم الذكي الذي يحول الكلمات النصية (مثل google.com) لـ IP يفهمه السنترال.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Configuration Values -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ قيم ومعاملات تهيئة الراوتر (CPE Parameters)</h3>
+            
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
+                <h4 class="font-extrabold text-xs text-teal-800 mb-2">إعدادات الـ ADSL الأساسية:</h4>
+                <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
+                  <li><strong>VPI/VCI:</strong> بقيم <span class="font-bold text-teal-700">0/35</span> المعتمدة بمصر.</li>
+                  <li><strong>Mode:</strong> Routing (نظام التوجيه التلقائي).</li>
+                  <li><strong>Encapsulation:</strong> PPPOE.</li>
+                  <li><strong>Multiplex:</strong> LLC.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
+                <h4 class="font-extrabold text-xs text-teal-800 mb-2">إعدادات الـ VDSL فائقة السرعة:</h4>
+                <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
+                  <li><strong>XDSL Transfer Mode:</strong> PTM.</li>
+                  <li><strong>Link Type:</strong> PPP.</li>
+                  <li><strong>PPP Transfer Type:</strong> PPPOE.</li>
+                </ul>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-xl">
+                <span class="font-extrabold text-xs text-gray-800 block">الـ MTU وقيم التحكم في حجم البيانات:</span>
+                <p class="text-[11px] text-gray-500 mt-1">يمثل الحجم الأقصى لنقل حزمة البيانات، وقيمته الافتراضية بمصر هي <strong class="text-wePurple-700">1492</strong>، ويمكن خفضها لـ <code class="bg-white border px-1 rounded text-gray-800">1460</code> أو <code class="bg-white border px-1 rounded text-gray-800">1420</code> في حالات البطء وتشويش الخطوط.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= TAB: QUIZ ================= -->
+      <div id="tab-quiz" class="tab-content hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          
+          <!-- Intro Screen -->
+          <div id="quiz-intro" class="text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
+            <h2 class="text-2xl font-black text-gray-800">الاختبار التقييمي ومولد الشهادات</h2>
+            <p class="text-sm text-gray-500 max-w-lg mx-auto">
+              أجب عن الأسئلة بدقة، وإذا حصلت على نسبة **80% فأكثر**، سيقوم النظام تلقائياً بإصدار شهادة تدريب مخصصة ومطبوعة باسمك لتوثيق إتمامك الدورة!
+            </p>
+            <div class="max-w-xs mx-auto space-y-3">
+              <input type="text" id="traineeName" placeholder="اكتب اسمك الثلاثي لطباعته بالشهادة..." class="w-full px-4 py-3 text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-wePurple-500 focus:outline-none text-center font-bold" />
+              <button onclick="startQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold w-full py-3 rounded-xl shadow transition-all block text-sm">
+                ابدأ الاختبار الآن
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Quiz Screen -->
+          <div id="quiz-active" class="hidden space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+              <div>
+                <span class="text-xs font-bold text-gray-400 uppercase">السؤال الحالي</span>
+                <h3 class="text-lg font-black text-gray-800" id="quizQuestionNum">1 من 10</h3>
+              </div>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-100" id="quizLivePoints">النقاط: 0</span>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="text-base font-extrabold text-gray-800 leading-relaxed" id="quizQuestionText">جاري تحميل السؤال...</h4>
+              <div class="grid grid-cols-1 gap-3" id="quizOptionsContainer">
+                <!-- populate buttons dynamically -->
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t pt-4">
+              <button onclick="revealQuizHint()" class="text-xs font-bold text-wePurple-700 hover:underline flex items-center gap-1.5" id="btn-quizHint">
+                💡 عرض تلميحة مساعدة للسؤال
+              </button>
+              <button onclick="nextQuizQuestion()" id="btn-quizNext" class="hidden bg-wePurple-700 hover:bg-wePurple-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition-all">
+                السؤال التالي ←
+              </button>
+            </div>
+
+            <div id="quizFeedbackBox" class="hidden p-4 rounded-xl text-xs leading-relaxed transition-all"></div>
+          </div>
+
+          <!-- Score / Results Screen -->
+          <div id="quiz-results" class="hidden text-center py-8 space-y-6">
+            <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl font-bold shadow-sm" id="resultIcon">🏆</div>
+            <div>
+              <h3 class="text-2xl font-black text-gray-800" id="quizResultTitle">عمل رائع ومتميز!</h3>
+              <p class="text-sm text-gray-500 mt-1">لقد أتممت الاختبار التقييمي لأساسيات الشبكات بنجاح</p>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-2xl max-w-xs mx-auto border border-gray-100">
+              <span class="text-xs font-bold text-gray-400 block mb-1">النتيجة النهائية</span>
+              <span class="text-4xl font-black text-wePurple-700" id="quizFinalScore">0%</span>
+              <p class="text-xs text-gray-500 mt-2" id="quizResultSummary">أجبت بشكل صحيح على 0 من 10 أسئلة.</p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 justify-center">
+              <button onclick="startQuiz()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                إعادة المحاولة
+              </button>
+              <button onclick="printCertificate()" id="btnPrintCertificate" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                🖨️ طباعة شهادة الإتمام الرسمية
+              </button>
+            </div>
+          </div>
+
+          <!-- Certificate Visual Area (hidden by default, printArea wrapper) -->
+          <div id="printArea" class="hidden mt-8 max-w-2xl mx-auto border-8 border-double border-wePurple-700 p-8 bg-white text-center rounded-3xl relative overflow-hidden">
+            <div class="absolute inset-0 bg-slate-50/10 pointer-events-none"></div>
+            <!-- Certificate Seals -->
+            <div class="flex justify-between items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-wePurple-700 flex items-center justify-center text-white font-black text-xl">we</div>
+              <span class="text-xs text-gray-400 font-mono">ID: WE-NET-2026</span>
+            </div>
+            
+            <h2 class="text-2xl font-black text-wePurple-700 mb-2">شهادة إتمام دورة تدريبية</h2>
+            <p class="text-xs text-gray-400">تمنح أكاديمية الدعم الفني هذه الشهادة لـ</p>
+            
+            <h3 class="text-3xl font-black text-gray-900 my-4 decoration-wePurple-500 underline" id="certName">اسم المتدرب</h3>
+            
+            <p class="text-xs text-gray-600 max-w-md mx-auto leading-relaxed">
+              تقديراً لاجتيازه بنجاح الدورة المكثفة والعملية في **أساسيات الشبكات وهندسة السنترالات والربط الفني**، واجتياز الاختبار التقييمي بنجاح بمعدل:
+            </p>
+            
+            <div class="my-4 text-2xl font-black text-emerald-600" id="certScore">0%</div>
+
+            <div class="border-t border-gray-100 pt-6 mt-6 flex justify-between text-[10px] text-gray-400">
+              <div>تاريخ الإصدار: 18 يوليو 2026</div>
+              <div>إدارة التدريب والدعم الفني والميداني</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-6 transition-colors duration-300" id="footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400 space-y-2">
+      <p>تم تطوير هذه المنصة الإلكترونية كبوابة ويب وموقع تدريبي تفاعلي لتسهيل الفهم والمحاكاة الفنية الميدانية.</p>
+      <p class="font-bold text-wePurple-700">مجموعة تيليكوم مصر © 2026 - جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <!-- Logic Engine -->
+  <script>
+    // System State
+    let isDarkMode = false;
+    let progress = {
+      explRead: { physical: false, logical: false },
+      visualExplored: { physical: false, logical: false },
+      cardsFlipped: new Set(),
+      quizMaxScore: 0
+    };
+
+    // Wiring Simulator State
+    const wiringScenarios = {
+      idle: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
+        lineColor: '#10B981', // green
+        voice: "حرارة ممتازة وصوت نقي",
+        voiceColor: "text-emerald-600",
+        desc: "<strong>التوصيل المثالي (Idle Connection):</strong> يمر السلك الرئيسي أولاً بالسبليتر لتصفية الموجات. إشارة الـ Voice النقية تذهب لعدة التليفون الأرضي بشكل معزول، مما يمنع انقطاع خدمة الـ DSL والـ Internet ويحافظ على استمرارية الإنترنت تماماً."
+      },
+      'no-splitter': {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-red-500 shadow-red-500 animate-pulse', int: 'bg-gray-400 shadow-none' },
+        lineColor: '#F59E0B', // amber
+        voice: "صوت تشويش شديد (Noise)",
+        voiceColor: "text-amber-600",
+        desc: "<strong>التوصيل بدون سبليتر (No Splitter Joint):</strong> يتم ربط كلا السلكين مباشرة ببعضهما، مما يتسبب في تداخل ترددات الصوت مع ترددات الإنترنت عالية السرعة. بمجرد رفع سماعة التليفون تنهار خدمة الإنترنت فوراً وتطفأ لمبة الـ Internet."
+      },
+      direct: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
+        lineColor: '#3B82F6', // blue
+        voice: "لا توجد حرارة (خط مقطوع)",
+        voiceColor: "text-red-500",
+        desc: "<strong>التوصيل المباشر للراوتر:</strong> السلك الرئيسي متصل مباشرة بجهاز الراوتر (CPE) دون المرور بالسبليتر لتغذية التليفون. الإنترنت يعمل بشكل ممتاز جداً وبدون تشويش، ولكن التليفون معطل تماماً ولا توجد به أي حرارة."
+      },
+      reversed: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-gray-400 shadow-none', int: 'bg-gray-400 shadow-none' },
+        lineColor: '#EF4444', // red
+        voice: "حرارة ضعيفة مع تداخل تشويش",
+        voiceColor: "text-red-500",
+        desc: "<strong>عكس الكوابل:</strong> قمت بربط مخرج التليفون بفتحة الراوتر والعكس. السبليتر يمنع مرور إشارات التردد العالي للإنترنت لفتحة التليفون، وبالتالي لن تتمكن لمبة الـ DSL من الوميض أو الثبات أبداً (No Synchronism)."
+      }
+    };
+
+    // Quiz Database (10 original premium questions)
+    const quizQuestions = [
+      {
+        question: "ما هو الترتيب التنازلي الصحيح والمنظم للمسار الفيزيائي لخط التليفون الأرضي من السنترال حتى بيت العميل؟",
+        options: [
+          "Zero Room -> MSAN Cabin -> Cabins -> Box -> CPE",
+          "MSAN Cabin -> Zero Room -> Cabins -> Box -> CPE",
+          "Box -> Cabins -> MSAN Cabin -> Zero Room -> CPE",
+          "Zero Room -> Cabins -> Box -> MSAN Cabin -> CPE"
+        ],
+        correctIndex: 0,
+        hint: "الحرارة تبدأ أولاً في غرفة الصفر (Zero Room) ثم تدمج مع إنترنت كابينة الفايبر MSAN.",
+        rationale: "المسار يبدأ من المنبع الرئيسي للصوت (Zero room)، ثم يدخل كابينة الفايبر للإنترنت (MSAN Cabin)، ثم الكابينات الفرعية، فالـ Box المعلق بالشارع، وصولاً للراوتر (CPE)."
+      },
+      {
+        question: "ما هو الفارق الجوهري الفني والفيزيائي بين كابلات الـ RJ11 والـ RJ45؟",
+        options: [
+          "RJ11 مخصص للتليفون الأرضي والسبليتر، بينما RJ45 مخصص لتوصيل الكمبيوتر بالراوتر (إيثرنت).",
+          "RJ45 مخصص للتليفون الأرضي، بينما RJ11 مخصص للتوصيلات فائقة السرعة للكمبيوتر.",
+          "كلاهما متطابق تماماً ويمكن استخدامهما في نفس المنافذ دون أي تعديل فني.",
+          "RJ11 يستخدم لنقل الكهرباء فقط، بينما RJ45 يستخدم لنقل الصوت فقط."
+        ],
+        correctIndex: 0,
+        hint: "كابل التليفون يضم دبابيس أقل (عادة 4 دبابيس)، بينما كابل الإيثرنت أعرض ويضم 8 دبابيس.",
+        rationale: "RJ11 هو الواجهة القياسية لتوصيلات التليفون النحاسية، بينما RJ45 هو المقبس المعتمد لشبكات الإيثرنت السلكية لربط الأجهزة بالراوتر."
+      },
+      {
+        question: "إذا كان لدى العميل أكثر من عدة تليفون في المنزل ويشتكي من انقطاع الإنترنت عند إجراء مكالمات، ما هو الحل الأمثل؟",
+        options: [
+          "توصيل DSL Filter قبل كل جهاز تليفون مستخدم بالمنزل.",
+          "إلغاء التوصيل المباشر وإلغاء تفعيل الـ DHCP بالراوتر.",
+          "تغيير كابل الـ RJ11 بكابل RJ45 للحاسوب.",
+          "زيادة حجم الـ MTU في صفحة إعدادات الراوتر لقيمة أعلى."
+        ],
+        correctIndex: 0,
+        hint: "نحتاج لأداة تعزل إشارة الترددات العالية للإنترنت عن الترددات المنخفضة للتليفون لتنقية الصوت.",
+        rationale: "الـ DSL Filter يعزل الترددات العالية لإشارة الإنترنت عن الصوت، فيمنع حدوث تشويش أو انقطاع للإنترنت عند استخدام التليفون الأرضي."
+      },
+      {
+        question: "أين يجب ربط سنترال الشركات الداخلي (PBX) هندسياً لضمان عدم حدوث تداخل أو تلف للخدمة؟",
+        options: [
+          "يجب توصيله دائماً بعد الـ Splitter.",
+          "يوصل مباشرة قبل الـ Splitter على السلك الرئيسي.",
+          "يجب تركيبه بشكل متوازي مع كابل الـ RJ45 الأساسي.",
+          "يوصل بمدخل الـ Line بالسبليتر مباشرة."
+        ],
+        correctIndex: 0,
+        hint: "الـ PBX يجب أن يحصل على خط صوتي نقي ومعزول عن موجات تصفح الإنترنت لضمان الاستقرار.",
+        rationale: "الـ PBX يمثل جهاز توزيع خطوط صوتية داخلية، ولضمان جودة الإرسال وعدم قطع الإنترنت، يجب أن يوصل على مخرج الصوت بالسبليتر (بعد عملية الفصل)."
+      },
+      {
+        question: "إذا لاحظت أن جهاز الكمبيوتر لدى العميل سحب IP يبدأ بـ 169.254.X.X، فما هو التوصيف الفني المناسب للمشكلة والحل؟",
+        options: [
+          "المشكلة هي تفعيل بروتوكول APIPA لخلل بالـ DHCP، وحله عمل Reset و Configuration للراوتر.",
+          "المشكلة هي نجاح الـ BRAS في التحقق، وحله هو زيادة الـ MTU لـ 1492.",
+          "هذا يعني أن العميل حصل على Public IP ممتاز وجاهز للتصفح فوراً بدون مشاكل.",
+          "المشكلة تعود للـ DNS الخارجي، وحلها تركيب Rosetta جديدة بالسلك."
+        ],
+        correctIndex: 0,
+        hint: "هذا النطاق يسمى Automatic Private IP Addressing ويظهر كدفاع تلقائي من الويندوز عند فقدان الاتصال بالراوتر.",
+        rationale: "الـ APIPA ينشأ تلقائياً عند غياب الاستجابة من الراوتر لتوزيع الـ Private IP، وحل المشكلة يتطلب تفريغ الإعدادات المجمّدة وإعادة تهيئة الراوتر."
+      },
+      {
+        question: "ما هي القيمة الافتراضية الصحيحة هندسياً لـ MTU عند إعداد راوتر يعمل ببروتوكول PPPoE؟",
+        options: [
+          "1492",
+          "1500",
+          "1420",
+          "1460"
+        ],
+        correctIndex: 0,
+        hint: "القيمة الافتراضية تترك بعض البايتات الإضافية لتضمين معلومات التغليف والتحقق لخدمة الـ PPPoE.",
+        rationale: "القيمة القياسية لـ MTU في اتصال الـ PPPoE هي 1492 لمنع تجزئة الحزم وتفادي حدوث بطء تصفح لبعض المواقع."
+      },
+      {
+        question: "من هو الخادم (Server) المسؤول بالسنترال عن إصدار وإرسال الـ WAN IP لأجهزة الراوتر وتسهيل خروجها للإنترنت؟",
+        options: [
+          "خادم BRAS",
+          "خادم RADIUS",
+          "بوابة الـ DNS",
+          "قاعدة Broad-Hop"
+        ],
+        correctIndex: 0,
+        hint: "الاسم اختصار لـ Broadband Remote Access Server.",
+        rationale: "الـ BRAS هو بوابة العبور ومنظم توزيع العناوين الديناميكية (WAN IP) لجميع المشتركين بعد تخطي خطوة مراجعة الحساب."
+      },
+      {
+        question: "ما هو دور بروتوكول RADIUS الفعلي في المسار المنطقي للشبكة؟",
+        options: [
+          "مراجعة اسم المستخدم وباسورد الخدمة والتحقق من المنفذ والـ Card الفيزيائي (NAS port ID).",
+          "ترجمة الـ Private IP إلى Public IP للعملاء.",
+          "توزيع سرعات الخطوط والـ Profiles المختلفة تلقائياً للراوتر.",
+          "حل مشاكل تشويش كوابل التليفون الأرضي والنحاس."
+        ],
+        correctIndex: 0,
+        hint: "أداة المصادقة الأساسية (Authentication) التي تراجع بيانات الدخول التي كتبها المشترك بالـ Configuration.",
+        rationale: "RADIUS هو خادم المصادقة والأمان الذي يطابق صحة بيانات دخول الخدمة الموثقة بالراوتر مع البيانات الجغرافية والفيزيائية للخط."
+      },
+      {
+        question: "ما هي المعاملات والبيانات الصحيحة هندسياً لربط الراوتر بالإنترنت باستخدام خدمة الـ ADSL؟",
+        options: [
+          "VPI/VCI: 0/35 و Encapsulation: PPPOE و Mode: Routing",
+          "VPI/VCI: 8/35 و Encapsulation: Bridging و Mode: PTM",
+          "PTM: Mode و Encapsulation: LLC و Link: PPP",
+          "VPI/VCI: 0/35 و Mode: PTM و PPP Transfer Type: LLC"
+        ],
+        correctIndex: 0,
+        hint: "الـ VPI/VCI الافتراضي بمصر هو صفر و 35 والبروتوكول السلكي المعتمد هو Point-to-Point Protocol over Ethernet.",
+        rationale: "معاملات الـ ADSL الأساسية لتشغيل الخدمة في مصر تتطلب إدخال القيمة 0/35 لمسار البيانات والترخيص بنظام التوجيه التلقائي (Routing)."
+      },
+      {
+        question: "ما هي الوظيفة والهدف الأساسي من بروتوكول NAT (Network Address Translation) بالراوتر؟",
+        options: [
+          "تحويل وتخريج الأجهزة من الشبكة الداخلية (Private IP) إلى الشبكة الخارجية (Public IP).",
+          "توزيع الـ Private IPs ديناميكياً للأجهزة المتصلة لاسلكياً.",
+          "تخفيض حجم الحزم (Packet Size) لزيادة سرعة التحميل.",
+          "إخفاء شبكة الواي فاي وحمايتها من القرصنة."
+        ],
+        correctIndex: 0,
+        hint: "يسمح لجميع أجهزة المنزل بتصفح الإنترنت باستعمال عنوان اشتراك عام واحد فقط صادر من مزود الخدمة.",
+        rationale: "الـ NAT يقوم بدور الوسيط والمترجم الذي يتيح لعدة أجهزة محلية تشارك واستخدام عنوان WAN IP خارجي موحد وآمن."
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let quizScore = 0;
+    let selectedAnswerIndex = null;
+
+    // Initialization
+    window.onload = function() {
+      loadProgress();
+      updateProgressUI();
+      applyWiringScenario('idle');
+    };
+
+    // Tab switcher logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+        tab.classList.remove('block');
+      });
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.getElementById('tab-' + tabId).classList.add('block');
+
+      // Update navbar button styles
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-wePurple-700', 'bg-wePurple-50', 'font-bold');
+        btn.classList.add('text-gray-600', 'font-medium');
+      });
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('text-wePurple-700', 'bg-wePurple-50', 'font-bold');
+        activeBtn.classList.remove('text-gray-600', 'font-medium');
+      }
+
+      // Progress Tracker updates
+      if (tabId === 'physical-lab') progress.visualExplored.physical = true;
+      if (tabId === 'logical-lab') progress.visualExplored.logical = true;
+      if (tabId === 'glossary') {
+        progress.explRead.physical = true;
+        progress.explRead.logical = true;
+      }
+      saveProgress();
+      updateProgressUI();
+    }
+
+    // Physical Lab Scenario Applier
+    function applyWiringScenario(key) {
+      const scenario = wiringScenarios[key];
+      if (!scenario) return;
+
+      // Color nodes and lines
+      document.getElementById('svgLine1').setAttribute('stroke', scenario.lineColor);
+      
+      // Update LEDs
+      const pwr = document.getElementById('led-pwr');
+      const dsl = document.getElementById('led-dsl');
+      const int = document.getElementById('led-int');
+
+      pwr.className = `w-2 h-2 rounded-full ${scenario.leds.pwr}`;
+      dsl.className = `w-2 h-2 rounded-full ${scenario.leds.dsl}`;
+      int.className = `w-2 h-2 rounded-full ${scenario.leds.int}`;
+
+      // Update Audio Wave
+      const wave = document.getElementById('audioWave');
+      const voiceText = document.getElementById('voiceStatusText');
+
+      voiceText.innerText = scenario.voice;
+      voiceText.className = `text-xs font-extrabold ${scenario.voiceColor}`;
+
+      if (key === 'no-splitter' || key === 'reversed') {
+        wave.classList.remove('opacity-20');
+        // make wave-bars orange or red
+        document.querySelectorAll('.wave-bar').forEach(b => {
+          b.style.backgroundColor = scenario.lineColor;
+          b.style.animationPlayState = 'running';
+        });
+      } else if (key === 'direct') {
+        wave.classList.add('opacity-20');
+        document.querySelectorAll('.wave-bar').forEach(b => {
+          b.style.animationPlayState = 'paused';
+        });
+      } else {
+        wave.classList.remove('opacity-20');
+        document.querySelectorAll('.wave-bar').forEach(b => {
+          b.style.backgroundColor = '#10B981';
+          b.style.animationPlayState = 'running';
+        });
+      }
+
+      // Update Expl Detail Box
+      document.getElementById('wireDetailText').innerHTML = scenario.desc;
+
+      // Update Button Styles
+      document.querySelectorAll('[id^="btn-wire-"]').forEach(btn => {
+        btn.className = "w-full p-4 rounded-xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all";
+      });
+      document.getElementById('btn-wire-' + key).className = "w-full p-4 rounded-xl text-right text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all";
+    }
+
+    // Logical Flow Simulation
+    function startLogicalSimulation() {
+      let step = 1;
+      const statusText = document.getElementById('simStatus');
+      const consoleLine1 = document.getElementById('consoleLine1');
+      const consoleLine2 = document.getElementById('consoleLine2');
+
+      statusText.innerText = "جاري تتبع حزم البيانات...";
+      statusText.className = "text-xs font-extrabold text-amber-500 animate-pulse";
+
+      // Reset step colors
+      document.querySelectorAll('.log-node').forEach(node => {
+        node.className = "log-node p-5 rounded-2xl border-2 border-gray-200 bg-white text-center transition-all duration-300";
+      });
+
+      const interval = setInterval(() => {
+        if (step > 4) {
+          clearInterval(interval);
+          statusText.innerText = "اكتمل الاتصال بنجاح! الـ IP نشط";
+          statusText.className = "text-xs font-extrabold text-emerald-600";
+          consoleLine1.innerText = "> [SUCCESS] WAN IP assigned: 197.34.112.89";
+          consoleLine2.innerText = "> تم ربط البروفايل بنجاح. تصفح الإنترنت مفعل الآن للعميل.";
+          consoleLine2.style.opacity = "1";
+          return;
+        }
+
+        // Highlight active step
+        const activeNode = document.getElementById('logStep' + step);
+        activeNode.className = "log-node p-5 rounded-2xl border-2 border-teal-500 bg-teal-50/50 text-center transition-all duration-300 shadow-md shadow-teal-100 scale-102";
+
+        switch(step) {
+          case 1:
+            consoleLine1.innerText = "> [CPE] Sending PPPoE login packets...";
+            consoleLine2.innerText = "> Username/Password checking initialized...";
+            break;
+          case 2:
+            consoleLine1.innerText = "> [RADIUS] Validating DSL Credentials...";
+            consoleLine2.innerText = `> Verifying NAS port ID and mapping virtual port coordinates...`;
+            break;
+          case 3:
+            consoleLine1.innerText = "> [Broad-Hop] Fetching client profile speeds...";
+            consoleLine2.innerText = "> Profile resolved to 30 Mbps Super speed tier.";
+            break;
+          case 4:
+            consoleLine1.innerText = "> [BRAS] Generating Dynamic Wan IP addressing parameters...";
+            consoleLine2.innerText = "> Sending acknowledgement block sequence...";
+            break;
+        }
+        step++;
+      }, 1500);
+    }
+
+    // Open sub explanation logic helper
+    function openExplanationSub(sub) {
+      switchTab('glossary');
+    }
+
+    // Quiz Engines
+    function startQuiz() {
+      const name = document.getElementById('traineeName').value.trim();
+      if (!name) {
+        alert("من فضلك اكتب اسمك الثلاثي لتوثيق الشهادة بشكل صحيح!");
+        return;
+      }
+
+      currentQuestionIndex = 0;
+      quizScore = 0;
+      selectedAnswerIndex = null;
+
+      document.getElementById('quiz-intro').classList.add('hidden');
+      document.getElementById('quiz-results').classList.add('hidden');
+      document.getElementById('quiz-active').classList.remove('hidden');
+
+      loadQuizQuestion();
+    }
+
+    function loadQuizQuestion() {
+      const q = quizQuestions[currentQuestionIndex];
+      selectedAnswerIndex = null;
+
+      document.getElementById('quizQuestionNum').innerText = `سؤال ${currentQuestionIndex + 1} من ${quizQuestions.length}`;
+      document.getElementById('quizQuestionText').innerText = q.question;
+      document.getElementById('quizLivePoints').innerText = `النقاط: ${quizScore}`;
+      document.getElementById('btn-quizNext').classList.add('hidden');
+      document.getElementById('quizFeedbackBox').className = "hidden p-4 rounded-xl text-xs leading-relaxed transition-all";
+      document.getElementById('btn-quizHint').innerText = "💡 عرض تلميحة مساعدة للسؤال";
+      document.getElementById('btn-quizHint').disabled = false;
+
+      // Populate options
+      const container = document.getElementById('quizOptionsContainer');
+      container.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border border-gray-200 bg-white text-right text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-between";
+        btn.innerHTML = `
+          <span>${opt}</span>
+          <span class="w-5 h-5 rounded-full border border-gray-300 flex-shrink-0"></span>
+        `;
+        btn.onclick = () => selectQuizAnswer(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectQuizAnswer(index) {
+      if (selectedAnswerIndex !== null) return;
+      selectedAnswerIndex = index;
+
+      const q = quizQuestions[currentQuestionIndex];
+      const buttons = document.querySelectorAll('.quiz-opt-btn');
+      
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      feedbackBox.classList.remove('hidden');
+
+      if (index === q.correctIndex) {
+        quizScore += 10;
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-right text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[index].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[index].querySelector('span:last-child').innerHTML = "✓";
+        
+        feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-emerald-50 border border-emerald-100 text-emerald-800 block mt-4";
+        feedbackBox.innerHTML = `<strong>إجابة صحيحة!</strong> ${q.rationale}`;
+      } else {
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-right text-xs font-bold text-rose-800 transition-all flex items-center justify-between";
+        buttons[index].querySelector('span:last-child').className = "w-2 h-5 rounded-full bg-rose-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[index].querySelector('span:last-child').innerHTML = "✕";
+
+        buttons[q.correctIndex].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-right text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[q.correctIndex].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[q.correctIndex].querySelector('span:last-child').innerHTML = "✓";
+
+        feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-rose-50 border border-rose-100 text-rose-800 block mt-4";
+        feedbackBox.innerHTML = `<strong>إجابة غير دقيقة.</strong> الإجابة الصحيحة هي: "${q.options[q.correctIndex]}". <br><br><strong>السبب العلمي:</strong> ${q.rationale}`;
+      }
+
+      document.getElementById('quizLivePoints').innerText = `النقاط: ${quizScore}`;
+      document.getElementById('btn-quizNext').classList.remove('hidden');
+      document.getElementById('btn-quizHint').disabled = true;
+    }
+
+    function revealQuizHint() {
+      const q = quizQuestions[currentQuestionIndex];
+      document.getElementById('btn-quizHint').innerText = "💡 تلميحة: " + q.hint;
+    }
+
+    function nextQuizQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizQuestions.length) {
+        loadQuizQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quiz-active').classList.add('hidden');
+      document.getElementById('quiz-results').classList.remove('hidden');
+
+      const percent = (quizScore / (quizQuestions.length * 10)) * 100;
+      document.getElementById('quizFinalScore').innerText = `${percent}%`;
+      document.getElementById('quizResultSummary').innerText = `أجبت بشكل صحيح على ${quizScore / 10} من ${quizQuestions.length} أسئلة.`;
+
+      const icon = document.getElementById('resultIcon');
+      const title = document.getElementById('quizResultTitle');
+      const btnPrint = document.getElementById('btnPrintCertificate');
+
+      if (percent >= 80) {
+        icon.innerText = "🏆";
+        title.innerText = "مبروك! نجاح باهر وأداء متميز جداً! 🎉";
+        btnPrint.classList.remove('hidden');
+        
+        // Prepare Certificate Details
+        const name = document.getElementById('traineeName').value;
+        document.getElementById('certName').innerText = name;
+        document.getElementById('certScore').innerText = `${percent}%`;
+      } else {
+        icon.innerText = "📚";
+        title.innerText = "فرصة جيدة لمراجعة الشروحات وإعادة المحاولة!";
+        btnPrint.classList.add('hidden');
+      }
+
+      if (percent > progress.quizMaxScore) {
+        progress.quizMaxScore = percent;
+      }
+      saveProgress();
+      updateProgressUI();
+    }
+
+    // Print certificate handler
+    function printCertificate() {
+      const printArea = document.getElementById('printArea');
+      printArea.classList.remove('hidden');
+      window.print();
+    }
+
+    // Storage utility
+    function saveProgress() {
+      const payload = {
+        explRead: progress.explRead,
+        visualExplored: progress.visualExplored,
+        cardsFlipped: Array.from(progress.cardsFlipped),
+        quizMaxScore: progress.quizMaxScore
+      };
+      localStorage.setItem('we_network_fundamentals_progress', JSON.stringify(payload));
+    }
+
+    function loadProgress() {
+      const dataStr = localStorage.getItem('we_network_fundamentals_progress');
+      if (dataStr) {
+        try {
+          const loaded = JSON.parse(dataStr);
+          progress.explRead = loaded.explRead || { physical: false, logical: false };
+          progress.visualExplored = loaded.visualExplored || { physical: false, logical: false };
+          progress.cardsFlipped = new Set(loaded.cardsFlipped || []);
+          progress.quizMaxScore = loaded.quizMaxScore || 0;
+        } catch (e) {
+          console.error("Failed to parse progress data", e);
+        }
+      }
+    }
+
+    function resetProgress() {
+      progress = {
+        explRead: { physical: false, logical: false },
+        visualExplored: { physical: false, logical: false },
+        cardsFlipped: new Set(),
+        quizMaxScore: 0
+      };
+      saveProgress();
+      updateProgressUI();
+      switchTab('dashboard');
+    }
+
+    function updateProgressUI() {
+      let explReadCount = 0;
+      if (progress.explRead.physical) explReadCount++;
+      if (progress.explRead.logical) explReadCount++;
+      const explPercent = Math.round((explReadCount / 2) * 100);
+      document.getElementById('explProgressText').innerText = explPercent + "%";
+      document.getElementById('explProgressBar').style.width = explPercent + "%";
+
+      let visualCount = 0;
+      if (progress.visualExplored.physical) visualCount++;
+      if (progress.visualExplored.logical) visualCount++;
+      const visualPercent = Math.round((visualCount / 2) * 100);
+      document.getElementById('visualProgressText').innerText = visualPercent + "%";
+      document.getElementById('visualProgressBar').style.width = visualPercent + "%";
+
+      if (progress.quizMaxScore > 0) {
+        document.getElementById('quizScoreText').innerText = progress.quizMaxScore + "%";
+        document.getElementById('quizProgressBar').style.width = progress.quizMaxScore + "%";
+      } else {
+        document.getElementById('quizScoreText').innerText = "لم يُختبر";
+        document.getElementById('quizProgressBar').style.width = "0%";
+      }
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      const body = document.getElementById('body');
+      const header = document.getElementById('header');
+      const footer = document.getElementById('footer');
+      const progressCard = document.getElementById('progressCard');
+      const navCard = document.getElementById('navCard');
+      const themeIcon = document.getElementById('themeIcon');
+
+      if (isDarkMode) {
+        body.classList.replace('bg-gray-50', 'bg-slate-900');
+        body.classList.replace('text-gray-800', 'text-slate-100');
+        header.className = "bg-slate-800 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        footer.className = "bg-slate-800 border-t border-slate-700 py-6 transition-colors duration-300";
+        progressCard.className = "bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-700 transition-all duration-300 hover:shadow-md text-slate-100";
+        navCard.className = "bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-700 flex flex-col gap-1.5 transition-colors duration-300";
+        
+        document.getElementById('progressTitle').classList.replace('text-gray-800', 'text-slate-100');
+        themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
+      } else {
+        body.classList.replace('bg-slate-900', 'bg-gray-50');
+        body.classList.replace('text-slate-100', 'text-gray-800');
+        header.className = "bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        footer.className = "bg-white border-t border-gray-200 py-6 transition-colors duration-300";
+        progressCard.className = "bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md text-gray-800";
+        navCard.className = "bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300";
+        
+        document.getElementById('progressTitle').classList.replace('text-slate-100', 'text-gray-800');
+        themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+      }
+    }
+  </script>
+</body>
+</html>
