@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بوابة التدريب التفاعلية لأساسيات الشبكات | WE Network Fundamentals Academy</title>
+  <title>بوابة التدريب ااساسيات الشبكات | WE Network Fundamentals Academy</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Tailwind Config to match WE brand Purple -->
@@ -83,8 +83,8 @@
         <!-- WE Logo Simulation -->
         <div class="w-12 h-12 rounded-full bg-wePurple-700 flex items-center justify-center text-white font-black text-2xl shadow-md transition-transform hover:rotate-12 cursor-pointer">we</div>
         <div>
-          <h1 class="text-xl font-black text-wePurple-700">بوابة أساسيات الشبكات والتدريب الميداني</h1>
-          <p class="text-xs text-gray-500">منصة المحاكاة والاختبارات التفاعلية المعتمدة لموظفي الدعم الفني</p>
+          <h1 class="text-xl font-black text-wePurple-700">بوابة أساسيات الشبكات </h1>
+          <p class="text-xs text-gray-500">منصة لمدتربين موظفي الدعم الفني</p>
         </div>
       </div>
       <!-- Mode Toggle and Controls -->
@@ -94,7 +94,7 @@
         </button>
         <div class="bg-wePurple-50 text-wePurple-700 px-4 py-2 rounded-xl text-xs font-bold border border-wePurple-100 flex items-center gap-2">
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-          المحاكاة نشطة
+         Online
         </div>
       </div>
     </div>
@@ -110,13 +110,13 @@
       <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md" id="progressCard">
         <h3 class="text-lg font-bold mb-3 flex items-center gap-2 text-gray-800" id="progressTitle">
           <svg class="w-5 h-5 text-wePurple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-          مؤشر التقدم الدراسي
+          مستواك الدراسي
         </h3>
         <!-- Progress Bars -->
         <div class="space-y-4">
           <div>
             <div class="flex justify-between text-xs mb-1">
-              <span class="text-gray-500">دراسة المنهج والمصطلحات</span>
+              <span class="text-gray-500">دراسة الواد والمصطلحات</span>
               <span class="font-bold text-wePurple-700" id="explProgressText">0%</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-2">
@@ -125,7 +125,7 @@
           </div>
           <div>
             <div class="flex justify-between text-xs mb-1">
-              <span class="text-gray-500">تجارب معامل المحاكاة</span>
+              <span class="text-gray-500">تجارب </span>
               <span class="font-bold text-teal-600" id="visualProgressText">0%</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-2">
@@ -150,23 +150,23 @@
 
       <!-- Main Sidebar Navigation -->
       <nav class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300" id="navCard">
-        <span class="text-xs font-bold text-gray-400 px-3 uppercase tracking-wider mb-2 block">الخرائط التدريبية والمحاكاة</span>
+        <span class="text-xs font-bold text-gray-400 px-3 uppercase tracking-wider mb-2 block">الخرائط التدريبية</span>
         
         <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all">
           <span class="flex items-center gap-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
-            لوحة الاستكشاف والمناهج
+            لوحة الاستكشاف والمواد
           </span>
         </button>
 
         <button onclick="switchTab('physical-lab')" id="btn-physical-lab" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-          معمل المحاكاة الفيزيائية (السبليتر)
+          التوصيلات الفيزيائية
         </button>
 
         <button onclick="switchTab('logical-lab')" id="btn-logical-lab" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          مخطط رحلة الـ WAN IP المتحرك
+          مخطط رحلة الـ WAN IP 
         </button>
 
         <button onclick="switchTab('glossary')" id="btn-glossary" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
@@ -176,7 +176,7 @@
 
         <button onclick="switchTab('quiz')" id="btn-quiz" class="nav-btn w-full px-4 py-3 rounded-xl text-right flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-          الاختبار ومولد الشهادات الذكية
+          الاختبار 
         </button>
       </nav>
     </aside>
@@ -191,7 +191,7 @@
             <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
           </div>
           <span class="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold mb-3 inline-block">أكاديمية الدعم الفني لشركة WE</span>
-          <h2 class="text-3xl font-black mb-3">مرحباً بك في معمل هندسة الشبكات والاتصالات! 🚀</h2>
+          <h2 class="text-3xl font-black mb-3">مرحباً بك! 🚀</h2>
           <p class="text-white/80 max-w-2xl text-sm leading-relaxed mb-6">
             ستكتشف هنا رحلة إشارة التليفون الأرضي (الصوت والحرارة) ومسارات الإنترنت بالكامل، مدعومة بمعامل فيزيائية ومنطقية تفاعلية لتأهيلك للعمل والتميز الميداني الفوري.
           </p>
@@ -201,7 +201,7 @@
               <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </button>
             <button onclick="switchTab('quiz')" class="bg-wePurple-900/30 border border-white/20 hover:bg-wePurple-900/50 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all">
-              بدء الاختبار والشهادة الرسمية
+              بدء الاختبار
             </button>
           </div>
         </div>
@@ -227,7 +227,7 @@
               <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-700 mb-4 font-bold">
                 ⚙️
               </div>
-              <h3 class="text-lg font-bold mb-2">رحلة البيانات المنطقية (Logical)</h3>
+              <h3 class="text-lg font-bold mb-2">رحلة البيانات (Logical)</h3>
               <p class="text-gray-500 text-xs leading-relaxed mb-4">
                 تتبع مسار طلب PPPoE من راوتر العميل عبر DSLAM لطلب التحقق من RADIUS و Broad-Hop للحصول على الـ WAN IP من BRAS.
               </p>
@@ -263,7 +263,7 @@
       <!-- ================= TAB: PHYSICAL LAB (WIRING SIMULATOR) ================= -->
       <div id="tab-physical-lab" class="tab-content hidden space-y-6">
         <div>
-          <h2 class="text-2xl font-black text-gray-800">معمل المحاكاة والتمديدات الفيزيائية</h2>
+          <h2 class="text-2xl font-black text-gray-800">التمديدات الفيزيائية</h2>
           <p class="text-xs text-gray-500">اختر سيناريو التوصيل المناسب لتختبر سلامة الإشارات والأصوات، وتراقب استجابة لمبات الراوتر (CPE) فوراً</p>
         </div>
 
@@ -290,7 +290,7 @@
               </button>
 
               <button onclick="applyWiringScenario('reversed')" id="btn-wire-reversed" class="w-full p-4 rounded-xl text-right text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
-                ❌ عكس كوابل المخارج بالسبليتر
+                ❌ عكس كبل المخارج بالسبليتر
                 <span class="block font-normal text-[10px] text-gray-500 mt-1">ربط التليفون بفتحة Modem والراوتر بفتحة Phone</span>
               </button>
             </div>
