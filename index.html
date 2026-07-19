@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WE Network Academy | Interactive Training Portal</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wePurple: {
+              50: '#f5f0fa',
+              100: '#ebdbf5',
+              200: '#d7b7eb',
+              500: '#9b51e0',
+              600: '#8c3cc2',
+              700: '#5F259F', // Official WE Brand Purple
+              800: '#4c1d80',
+              900: '#3a1661',
+            },
+            weCyan: {
+              50: '#ecfbfc',
+              500: '#00B4D8',
+              600: '#0096B4',
+              700: '#007791'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif;
+    }
+    .perspective {
+      perspective: 1200px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    .pulse-glow {
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+    @keyframes signal-flow {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    .signal-line {
+      stroke-dasharray: 8, 4;
+      animation: signal-flow 2s linear infinite;
+    }
+    
+    /* Play wave visualizer animation */
+    @keyframes wavePlay {
+      0%, 100% { height: 4px; }
+      50% { height: 24px; }
+    }
+    .audio-wave-bar {
+      width: 3px;
+      height: 6px;
+      background-color: #00B4D8;
+      border-radius: 9999px;
+      transition: all 0.2s;
+    }
+    .playing .audio-wave-bar {
+      animation: wavePlay 1s infinite ease-in-out;
+    }
+    .playing .audio-wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .playing .audio-wave-bar:nth-child(3) { animation-delay: 0.25s; }
+    .playing .audio-wave-bar:nth-child(4) { animation-delay: 0.4s; }
+    .playing .audio-wave-bar:nth-child(5) { animation-delay: 0.15s; }
+    .playing .audio-wave-bar:nth-child(6) { animation-delay: 0.3s; }
+
+    /* Printable Certificate Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 297mm;
+        height: 210mm;
+        border: 12px double #5F259F !important;
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#F8F9FC] text-gray-800 min-h-screen flex flex-col transition-colors duration-300" id="body">
+
+  <!-- ================= PORTAL LOGIN GATEWAY ================= -->
+  <div id="loginPortalScreen" class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-wePurple-900 via-wePurple-800 to-slate-900 p-4 transition-all duration-300 relative">
+    
+    <div id="loginMainBox" class="bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border border-white/20 text-center relative overflow-hidden transition-all duration-300">
+      <div class="absolute -top-10 -right-10 w-32 h-32 bg-weCyan-500/20 rounded-full blur-2xl"></div>
+      
+      <!-- Logo -->
+      <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-4xl shadow-xl mx-auto mb-4 transform hover:rotate-6 transition-all">we</div>
+      
+      <h2 class="text-2xl font-black text-wePurple-700 dark:text-wePurple-200 mb-1">Academy Portal Login</h2>
+      <p class="text-xs text-gray-400 dark:text-gray-300 mb-8">Authorized Digital Training Portal for WE Network Fundamentals</p>
+
+      <!-- Google Sign-In Library Initialization -->
+      <div id="g_id_onload"
+           data-client_id="349174813789-464u4t7pceqp7qkkj0iv6g5tgjb3fvu1.apps.googleusercontent.com"
+           data-context="signin"
+           data-ux_mode="popup"
+           data-callback="handleGoogleLoginResponse"
+           data-auto_prompt="false">
+      </div>
+
+      <!-- Real Google Sign-In Button Container -->
+      <div class="flex justify-center mb-6">
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="outline"
+             data-text="signin_with"
+             data-size="large"
+             data-logo_alignment="center"
+             data-width="280">
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="flex items-center my-6">
+        <div class="flex-grow border-t border-gray-200 dark:border-slate-700"></div>
+        <span class="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">OR</span>
+        <div class="flex-grow border-t border-gray-200 dark:border-slate-700"></div>
+      </div>
+
+      <!-- Admin Login Box -->
+      <div class="text-left space-y-3">
+        <label class="text-xs font-bold text-gray-500 dark:text-gray-300 block mb-1">Admin Access</label>
+        <div class="flex gap-2">
+          <input type="password" id="adminPassword" placeholder="Enter Admin Password" class="w-full px-4 py-3 text-sm border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white font-bold" onkeypress="if(event.key === 'Enter') handleAdminLogin();" />
+          <button onclick="handleAdminLogin()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md text-sm">Login</button>
+        </div>
+        <div id="loginErrorBox" class="hidden mt-2 p-2.5 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold text-center leading-relaxed">
+          ❌ Authorization Error! Invalid credentials or unauthorized Google Account.
+        </div>
+      </div>
+      
+      <div class="mt-8 text-[10px] text-gray-400 dark:text-gray-500 border-t border-gray-100 dark:border-slate-700 pt-3 text-center">
+        Field Support Portal - Telecom Egypt
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DAY SELECTION SCREEN ================= -->
+  <div id="daySelectionScreen" class="hidden min-h-screen flex-col transition-colors duration-300 relative">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-xl shadow-lg">we</div>
+          <h1 class="text-xl font-black text-wePurple-700 dark:text-wePurple-200">Training Modules</h1>
+        </div>
+        <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 dark:bg-slate-800 dark:border-rose-900/50 dark:hover:bg-rose-900/30 transition-all shadow-sm text-xs font-bold flex items-center gap-1.5">
+          <span>Log Out</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-12">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-black text-gray-800 dark:text-white mb-2">Select Your Training Day</h2>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Welcome <span id="daySelectionName" class="font-bold text-wePurple-700 dark:text-wePurple-400"></span>, choose the module you want to access today.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <button onclick="selectDay(1)" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border-2 border-wePurple-500 hover:shadow-md hover:-translate-y-1 transition-all text-left group">
+          <div class="w-12 h-12 rounded-full bg-wePurple-100 text-wePurple-700 flex items-center justify-center font-black text-xl mb-4 group-hover:bg-wePurple-700 group-hover:text-white transition-colors">1</div>
+          <h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">Day 1: Network Fundamentals</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Cabling, Physical & Logical Structures, and WAN IP routing sequences.</p>
+        </button>
+        <button disabled class="bg-gray-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-gray-200 dark:border-slate-700 opacity-60 cursor-not-allowed text-left">
+          <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center font-black text-xl mb-4">2</div>
+          <h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">Day 2: Advanced Routing</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Locked. Complete Day 1 to unlock this technical module.</p>
+        </button>
+        <button disabled class="bg-gray-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-gray-200 dark:border-slate-700 opacity-60 cursor-not-allowed text-left">
+          <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center font-black text-xl mb-4">3</div>
+          <h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">Day 3: Troubleshooting</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Locked. Complete Day 2 to unlock this technical module.</p>
+        </button>
+      </div>
+    </main>
+  </div>
+
+
+  <!-- ================= PORTAL MAIN APP CONTENT ================= -->
+  <div id="mainPortalContent" class="hidden flex flex-col min-h-screen">
+    
+    <!-- Main Portal Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm" id="headerMain">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-3xl shadow-lg border border-wePurple-500/20 transform hover:scale-105 transition-all cursor-pointer">we</div>
+          <div>
+            <h1 class="text-xl font-black text-wePurple-700 flex items-center gap-2">
+              Network Engineering Digital Training Portal 
+              <span class="text-[10px] bg-wePurple-100 text-wePurple-700 px-2 py-0.5 rounded-md font-bold">LMS Portal</span>
+            </h1>
+            <p class="text-xs text-gray-500">Authorized Simulation, Laboratory and Field Assessment Platform for Support Specialists</p>
+          </div>
+        </div>
+        <!-- Controls -->
+        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+          <button onclick="showDaySelection()" class="p-2.5 rounded-xl border border-wePurple-200 bg-wePurple-50 hover:bg-wePurple-100 text-wePurple-700 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="Training Days">
+            <span>📅 Days</span>
+          </button>
+          <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 focus:outline-none transition-all shadow-sm" title="Toggle Theme">
+            <svg id="themeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          
+          <!-- LOGOUT BUTTON -->
+          <button onclick="handlePortalLogout()" class="p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" title="Log Out">
+            <span>Log Out</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          </button>
+
+          <div class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-xs font-black border border-emerald-100 flex items-center gap-1.5 shadow-sm">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+            Cloud Secure Active
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notification Banner inside layout -->
+    <div id="topNotification" class="bg-amber-50 border-b border-amber-100 text-amber-900 text-xs py-2 px-4 text-center hidden">
+      <span class="font-bold" id="notificationText">Please log in with verified credentials to save your progress and obtain your certificate!</span>
+    </div>
+
+    <!-- Main Layout -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+      
+      <!-- Sidebar Workspace Manager -->
+      <aside class="w-full lg:w-72 flex-shrink-0 flex flex-col gap-6">
+        
+        <!-- Trainee Profile & Progress Hub -->
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md" id="profileCard">
+          <div class="text-center pb-4 border-b border-gray-100 mb-4 flex flex-col items-center">
+            <!-- Google Profile Photo -->
+            <img id="traineePhoto" src="" class="w-16 h-16 rounded-full border-2 border-wePurple-700 shadow-md mb-2 object-cover" alt="User Photo" />
+            
+            <div class="font-black text-sm text-gray-800" id="traineeNameDisplay">User Full Name</div>
+            <div class="text-[10px] text-gray-400 font-medium mt-0.5" id="traineeEmailDisplay">user.email@gmail.com</div>
+            <span class="text-[10px] text-gray-400 mt-2 block">Oracle ID: <span class="font-mono font-bold text-wePurple-700" id="traineeID">WE-400100</span></span>
+          </div>
+
+          <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">Performance Indicators</h3>
+          <div class="space-y-3.5">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-gray-500">Theory & Fundamentals</span>
+                <span class="font-black text-wePurple-700" id="theoryProgText">0%</span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-2">
+                <div id="theoryProgressBar" class="bg-wePurple-700 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-gray-500">Labs & Simulations</span>
+                <span class="font-black text-teal-600" id="labProgText">0%</span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-2">
+                <div id="labProgressBar" class="bg-teal-50 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-gray-500">Authorized Field Exam</span>
+                <span class="font-black text-emerald-600" id="quizProgText">Not Tested</span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-2">
+                <div id="quizProgressBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="resetTrainingProgress()" class="mt-5 w-full py-2 border border-gray-200 text-gray-400 hover:text-rose-600 hover:bg-rose-50 hover:border-rose-100 rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 font-bold">
+            🔄 Reset Training Progress
+          </button>
+        </div>
+
+        <!-- Navigation Tree -->
+        <nav class="bg-white rounded-3xl p-4.5 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300" id="navCard">
+          <span class="text-xs font-black text-gray-400 px-3 uppercase tracking-wider mb-2.5 block">Academy Modules</span>
+          
+          <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all">
+            <span class="flex items-center gap-3">
+              <span>🏠</span>
+              General Dashboard
+            </span>
+          </button>
+
+          <button onclick="switchTab('theory-course')" id="btn-theory-course" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>📚</span>
+            Training Course & Basics
+          </button>
+
+          <button onclick="switchTab('physical-lab')" id="btn-physical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>🛠️</span>
+            Physical Line Diagnostics Lab
+          </button>
+
+          <button onclick="switchTab('logical-lab')" id="btn-logical-lab" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>⚡</span>
+            Central Office WAN IP Simulator
+          </button>
+
+          <button onclick="switchTab('mindmap')" id="btn-mindmap" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>🗺️</span>
+            Interactive Mind Map
+          </button>
+
+          <button onclick="switchTab('glossary')" id="btn-glossary" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>📖</span>
+            Terms & Abbreviations Directory
+          </button>
+
+          <button onclick="switchTab('quiz')" id="btn-quiz" class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all">
+            <span>🏆</span>
+            Final Exam & Certificate
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main Workspace Frame -->
+      <section class="flex-grow flex flex-col gap-6">
+
+        <!-- ================= TAB: DASHBOARD ================= -->
+        <div id="tab-dashboard" class="tab-content block space-y-6">
+          
+          <!-- Welcome Hero Banner -->
+          <div class="bg-gradient-to-r from-wePurple-900 via-wePurple-800 to-wePurple-700 rounded-[2rem] p-8 text-white shadow-xl relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 opacity-10">
+              <svg class="w-72 h-72" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <span class="bg-white/10 text-white/90 border border-white/20 px-3.5 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 inline-block">TELECOM EGYPT - DEVELOPMENT ACADEMY</span>
+            <h2 class="text-3xl font-black mb-3">Welcome, <span id="helloName" class="underline decoration-weCyan-500 underline-offset-4">Trainee</span>! 👋</h2>
+            <p class="text-white/80 max-w-2xl text-xs leading-relaxed mb-6">
+              Welcome to your revamped portal for solidifying network engineering and technical linking fundamentals. This platform delivers advanced interactive wiring simulations and central office routing sequences, mirroring 100% of real-world support workflows.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="switchTab('physical-lab')" class="bg-white text-wePurple-900 hover:bg-wePurple-50 px-6 py-3 rounded-2xl font-black text-xs shadow-md transition-all flex items-center gap-1.5">
+                🚀 Launch Physical Lab
+              </button>
+              <button onclick="switchTab('theory-course')" class="bg-wePurple-950/40 hover:bg-wePurple-950/60 border border-white/10 text-white px-6 py-3 rounded-2xl font-black text-xs transition-all">
+                Browse Basics
+              </button>
+            </div>
+          </div>
+
+          <!-- Dedicated Premium Audio Lesson Hub -->
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h3 class="text-base font-black text-wePurple-700 flex items-center gap-2">
+                  <span>🎧</span> Daily Audio Summary
+                </h3>
+                <p class="text-xs text-gray-500">Listen to a structured technical review covering the daily core concepts and operations of the course.</p>
+              </div>
+              <!-- Custom HTML5 Audio Integration -->
+              <audio id="lessonAudio" preload="metadata" ontimeupdate="updateAudioProgress()">
+                <source src="aud.mp3" type="audio/mpeg">
+                <source src="aud.mpeg" type="audio/mpeg">
+                <source src="WhatsApp Audio 2026-07-15 at 2.34.18 PM.mpeg" type="video/mpeg">
+                <source src="WhatsApp Audio 2026-07-15 at 2.34.18 PM.mpeg" type="audio/mpeg">
+              </audio>
+              
+              <div id="audioPlayerContainer" class="flex items-center gap-3 bg-gray-50 border border-gray-200/80 rounded-2xl p-3 w-full sm:w-auto">
+                <button id="playPauseBtn" onclick="toggleAudioPlayback()" class="w-10 h-10 rounded-xl bg-wePurple-700 text-white flex items-center justify-center hover:bg-wePurple-800 transition-all shadow-sm">
+                  <svg id="playIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <svg id="pauseIcon" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+                
+                <div class="flex flex-col flex-grow sm:w-48">
+                  <div class="flex justify-between text-[10px] text-gray-400 mb-1">
+                    <span id="currentTime">0:00</span>
+                    <span id="durationTime">0:00</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-1.5 cursor-pointer relative" onclick="seekAudio(event)">
+                    <div id="audioProgressBar" class="bg-weCyan-500 h-1.5 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div id="soundWave" class="flex items-end gap-0.5 h-6">
+                  <span class="audio-wave-bar"></span>
+                  <span class="audio-wave-bar"></span>
+                  <span class="audio-wave-bar"></span>
+                  <span class="audio-wave-bar"></span>
+                  <span class="audio-wave-bar"></span>
+                  <span class="audio-wave-bar"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Access Training Modules -->
+          <h3 class="text-sm font-black text-gray-400 uppercase tracking-wider mb-2">Simulation & Training Sections</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-150 flex flex-col justify-between hover:shadow-md transition-all">
+              <div>
+                <span class="text-2xl mb-3 block">🛠️</span>
+                <h4 class="font-black text-sm text-gray-800 mb-1">Line Diagnostics (Physical)</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">Test splitter attachments, monitor live SNR Margin, evaluate CRC errors, and notice instant effects on router sync.</p>
+              </div>
+              <button onclick="switchTab('physical-lab')" class="text-xs font-black text-wePurple-700 hover:underline text-left flex items-center gap-1 mt-2">Enter Field Lab ←</button>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
+              <div>
+                <span class="text-2xl mb-3 block">⚡</span>
+                <h4 class="font-black text-sm text-gray-800 mb-1">WAN IP Packet Journey (Logical)</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">Run the central office packet sequence validator to observe credentials verification over RADIUS and sychronization.</p>
+              </div>
+              <button onclick="switchTab('logical-lab')" class="text-xs font-black text-teal-700 hover:underline text-left flex items-center gap-1 mt-2">Enter Logic Simulator ←</button>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
+              <div>
+                <span class="text-2xl mb-3 block">📖</span>
+                <h4 class="font-black text-sm text-gray-800 mb-1">WE Technical Dictionary</h4>
+                <p class="text-gray-500 text-[11px] leading-relaxed mb-4">A complete lookup directory explaining all call-center, operational and network abbreviations of the WE system.</p>
+              </div>
+              <button onclick="switchTab('glossary')" class="text-xs font-black text-weCyan-600 hover:underline text-left flex items-center gap-1 mt-2">Open Technical Dictionary ←</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= TAB: THEORY COURSE ================= -->
+        <div id="tab-theory-course" class="tab-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-gray-800">Technical Explanations & Theory Course</h2>
+            <p class="text-xs text-gray-500">This technical training courseware is compiled directly from the authorized Telecom Egypt syllabus.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Physical Section -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🛠️ Physical Structure & Connections</h3>
+              <div class="space-y-4 text-xs text-gray-600 leading-relaxed">
+                <p>
+                  <strong>Physical Line Routing Sequence:</strong> The analog telephone signal is routed from the central office (CO) through the following downline segments:
+                </p>
+                <ul class="space-y-2 pl-4 list-decimal list-inside">
+                  <li><strong class="text-gray-800">Zero Room:</strong> The origin and power generator of the analog telephone voice signal inside the central exchange.</li>
+                  <li><strong class="text-gray-800">MSAN Cabin:</strong> The Multi-Service Access Node fiber cabinet that injects high-speed broadband internet into the voice line.</li>
+                  <li><strong class="text-gray-800">Cabins:</strong> Secondary copper junction cabinets distributing cables over sectors and streets.</li>
+                  <li><strong class="text-gray-800">Box:</strong> The final street-level junction distribution box mounted on building facades.</li>
+                  <li><strong class="text-gray-800">CPE (Router):</strong> Customer Premises Equipment receiving the unified signal inside the household.</li>
+                </ul>
+                <p class="mt-2">
+                  <strong>Customer Premises Wiring Tools:</strong>
+                </p>
+                <ul class="space-y-1.5 list-disc list-inside">
+                  <li><strong>Splitter:</strong> Device separating broadband internet from voice signals, containing three ports: Line (main outdoor cable), Modem (routed to router DSL port), and Phone (to landline phone).</li>
+                  <li><strong>Built-in Splitter:</strong> Integrated wall outlet ports; not recommended for primary troubleshooting.</li>
+                  <li><strong>Blank Splitter:</strong> Unmarked splitters; recommended to be replaced to avoid incorrect customer installations.</li>
+                  <li><strong>Rosetta:</strong> A terminal blocks adapter fixing cable joints to reduce resistance, termination noise, and attenuation, outputting an RJ11 port.</li>
+                  <li><strong>DSL Filter:</strong> Removes internet frequency noise before telephone units in parallel wall configurations.</li>
+                  <li><strong>PBX:</strong> Corporate private telephone branch exchange; must always be connected downline of the primary Splitter.</li>
+                </ul>
+                <div class="p-3.5 bg-amber-50 rounded-2xl border border-amber-100 text-amber-900 text-[11px]">
+                  📌 <strong>Technical Warning:</strong> Oxidized copper, loose splices, or overusing RJ11 Joints dramatically elevates <strong>Attenuation</strong>, leading to massive <strong>CRC</strong> errors and intermittent drops.
+                </div>
+              </div>
+            </div>
+
+            <!-- Logical Section -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ Logical Structure & IP Addressing</h3>
+              <div class="space-y-4 text-xs text-gray-600 leading-relaxed">
+                <p>
+                  <strong>Acquiring a WAN IP on CPE:</strong> For internet services to activate, physical synchronism is insufficient. The router must complete a logical authentication sequence:
+                </p>
+                <ul class="space-y-2 list-disc list-inside">
+                  <li><strong class="text-gray-800">Gateway IP:</strong> The local interface IP to enter settings page (commonly 192.168.1.1).</li>
+                  <li><strong class="text-gray-800">Private IP / LAN IP:</strong> Local address allocated to intranet nodes within the customer's household.</li>
+                  <li><strong class="text-gray-800">Public IP / WAN IP:</strong> Public internet address granted by the ISP, enabling global routing.</li>
+                  <li><strong class="text-gray-800">DNS (Domain Name System):</strong> Resolves readable domain names (e.g., google.com) into machine IP addresses.</li>
+                  <li><strong class="text-gray-800">DHCP:</strong> Automates allocation of local IP ranges inside LAN.</li>
+                  <li><strong class="text-gray-800">NAT (Network Address Translation):</strong> Translates local Private IPs into a single external Public IP for routing over WAN.</li>
+                  <li><strong class="text-gray-800">APIPA (Automatic Private IP Addressing):</strong> Emergency fallback range (169.254.0.1 to 169.254.255.254) when DHCP lease fails. Requires a CPE reset/configuration.</li>
+                </ul>
+                <p class="mt-2">
+                  <strong>Configuration Parameters (CPE):</strong>
+                </p>
+                <ul class="space-y-1 list-none">
+                  <li>🔹 <strong>ADSL Parameters:</strong> VPI/VCI: 0/35 | Mode: Routing | Encapsulation: PPPOE | Multiplex: LLC</li>
+                  <li>🔹 <strong>VDSL Parameters:</strong> XDSL Transfer Mode: PTM | Link Type: PPP | PPP Transfer Type: PPPOE</li>
+                  <li>🔹 <strong>MTU (Maximum Transmission Unit):</strong> Default is 1492 for PPPoE. Fallbacks of 1460 or 1420 are applied under poor lines sync.</li>
+                  <li>🔹 <strong>Proxy:</strong> An intermediary server operating between LAN and WAN interfaces to bypass routing/restrictions.</li>
+                </ul>
+                <div class="p-3.5 bg-teal-50 rounded-2xl border border-teal-100 text-teal-900 text-[11px]">
+                  🔑 <strong>Verification & Linking:</strong> The <strong>BRAS</strong> issues the WAN IP to the customer's router after the <strong>RADIUS</strong> server validates credentials, matches the physical port coordinates (Card & Port on the DSLAM via <strong>NAS port ID</strong>), and assigns the designated speed <strong>Profile</strong> managed on the <strong>Broad-Hop</strong> database.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB: PHYSICAL LAB ================= -->
+        <div id="tab-physical-lab" class="tab-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-gray-800">Physical Line Parameters Lab</h2>
+            <p class="text-xs text-gray-500">Select a physical wiring layout scenario to observe the immediate effect on margins, CRC error rates, and CPE synchronization indicators.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Connections Controllers -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-150 space-y-4">
+              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">Customer Premises Cabling Panel</h3>
+              
+              <div class="space-y-2">
+                <button onclick="changeLabWiring('ideal')" id="wireBtn-ideal" class="w-full p-4 rounded-2xl text-left text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all">
+                  🟢 Ideal Setup (Splitter Connected)
+                </button>
+                
+                <button onclick="changeLabWiring('nosplitter')" id="wireBtn-nosplitter" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🟡 No Splitter Joint (Parallel splice)
+                </button>
+
+                <button onclick="changeLabWiring('direct')" id="wireBtn-direct" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🔵 Direct CPE Connection (No Phone)
+                </button>
+
+                <button onclick="changeLabWiring('reversed')" id="wireBtn-reversed" class="w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all">
+                  🔴 Reversed Splitter Ports
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Metrics Displays -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 lg:col-span-2 space-y-6">
+              <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider">DSL Diagnostics & Live Telemetry</h3>
+              
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <span class="text-[10px] text-gray-400 block mb-1">Line Attenuation</span>
+                  <span id="metricAtt" class="text-xl font-black text-emerald-600">12 dB</span>
+                  <span id="metricAttLabel" class="text-[9px] text-gray-400 block mt-1">Excellent (Near Cabinet)</span>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <span class="text-[10px] text-gray-400 block mb-1">SNR Margin</span>
+                  <span id="metricSnr" class="text-xl font-black text-emerald-600">28 dB</span>
+                  <span id="metricSnrLabel" class="text-[9px] text-gray-400 block mt-1">Extremely Stable</span>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <span class="text-[10px] text-gray-400 block mb-1">CRC Errors</span>
+                  <span id="metricCrc" class="text-xl font-black text-emerald-600">0 / Sec</span>
+                  <span id="metricCrcLabel" class="text-[9px] text-gray-400 block mt-1">Clean Transmission</span>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <span class="text-[10px] text-gray-400 block mb-1">Sync Bit Rate</span>
+                  <span id="metricRate" class="text-xl font-black text-emerald-600">30 Mbps</span>
+                  <span id="metricRateLabel" class="text-[9px] text-gray-400 block mt-1">Full Speed Profile</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 rounded-2xl p-6 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 min-h-[180px]">
+                <div class="text-center z-10">
+                  <div class="w-14 h-14 bg-purple-950 border border-purple-500 rounded-xl flex items-center justify-center text-white text-[11px] font-black mx-auto">Box</div>
+                  <span class="text-[9px] text-gray-400 mt-1 block">Street Junction</span>
+                </div>
+
+                <div class="flex-grow w-full md:w-auto relative py-2">
+                  <svg class="w-full h-8" viewBox="0 0 200 40" preserveAspectRatio="none">
+                    <path d="M 0,20 Q 100,20 200,20" id="labSignalLine" stroke="#10B981" stroke-width="4" fill="none" class="signal-line" />
+                  </svg>
+                </div>
+
+                <div class="text-center z-10">
+                  <div class="w-24 h-16 rounded-xl bg-slate-800 border border-gray-700 p-2 mx-auto flex flex-col justify-between">
+                    <span class="text-[8px] text-gray-400 font-bold">CPE Router</span>
+                    <div class="flex justify-center gap-1.5">
+                      <span id="ledPwr" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
+                      <span id="ledDsl" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
+                      <span id="ledInt" class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-lg shadow-green-500"></span>
+                    </div>
+                  </div>
+                  <span class="text-[9px] text-gray-400 mt-1 block">Status LEDs (PWR | DSL | INT)</span>
+                </div>
+              </div>
+
+              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200">
+                <h4 class="text-xs font-bold text-gray-600 mb-2">Voice Frequency Attenuation (Noise Audit):</h4>
+                <div class="flex items-center gap-3">
+                  <div id="audioWave" class="flex gap-1 items-end h-6 w-12">
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                    <span class="audio-wave-bar"></span>
+                  </div>
+                  <span id="voiceStatusText" class="text-xs font-extrabold text-emerald-600">Excellent sync and clear voice</span>
+                </div>
+              </div>
+
+              <div id="wiringDiagText" class="p-4 bg-wePurple-50 rounded-2xl border border-wePurple-100 text-xs text-wePurple-950 leading-relaxed">
+                <strong>Ideal Setup (Splitter Connected):</strong> routes high-frequency data signals to the modem and low-frequency analog voice signals to the phone isolatedly. This eliminates crosstalk and prevents the DSL link from dropping during calls.
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================= TAB: LOGICAL LAB ================= -->
+        <div id="tab-logical-lab" class="tab-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-gray-800">Central Office WAN IP Simulator</h2>
+            <p class="text-xs text-gray-500">Observe dynamic DHCP/PPPoE verification packets transmitting across central office elements to acquire WAN IP leases.</p>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+            <div class="flex justify-between items-center">
+              <button onclick="runLogicalSequence()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow flex items-center gap-1.5">
+                🚀 Initiate Packet Trace
+              </button>
+              <span id="logSimStatus" class="text-xs font-black text-gray-400">Ready to simulate...</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+              <div id="nodeStep1" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">1. CPE Configuration</span>
+                <h4 class="font-extrabold text-xs text-gray-800">CPE Router</h4>
+                <p class="text-[10px] text-gray-400 mt-1">Modem broadcasts PPPoE login requests (VPI/VCI: 0/35) to the network node.</p>
+              </div>
+
+              <div id="nodeStep2" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">2. Authentication</span>
+                <h4 class="font-extrabold text-xs text-gray-800">RADIUS & NAS Port</h4>
+                <p class="text-[10px] text-gray-400 mt-1">RADIUS validates DSL credentials and maps the physical DSLAM card/port location coordinates.</p>
+              </div>
+
+              <div id="nodeStep3" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">3. Policy Management</span>
+                <h4 class="font-extrabold text-xs text-gray-800">Broad-Hop</h4>
+                <p class="text-[10px] text-gray-400 mt-1">Assigns the authorized speed profile and traffic limits on the account database.</p>
+              </div>
+
+              <div id="nodeStep4" class="node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white">
+                <span class="text-xs font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-md inline-block mb-2">4. Lease Release</span>
+                <h4 class="font-extrabold text-xs text-gray-800">BRAS Server</h4>
+                <p class="text-[10px] text-gray-400 mt-1">Releases a valid Public WAN IP to the CPE, making the internet indicator light green.</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-2xl p-5 text-teal-400 font-mono text-xs space-y-1 border border-slate-800">
+              <div class="text-white font-bold border-b border-slate-800 pb-1 mb-2">&gt;_ CONSOLE OUTPUT DIAGNOSTICS:</div>
+              <div id="consoleLine1">&gt; CPE interface initialized. Standing by for logical packet sequence trigger...</div>
+              <div id="consoleLine2" class="opacity-40">&gt; Click 'Initiate Packet Trace' above to trace real-time packet transmissions...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB: MINDMAP ================= -->
+        <div id="tab-mindmap" class="tab-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-gray-800">Interactive Network Mind Map</h2>
+            <p class="text-xs text-gray-500">Expand and collapse structural nodes to explore the complete framework topology.</p>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
+            <div class="min-w-[650px] p-4 flex flex-col items-center">
+              
+              <div class="bg-wePurple-700 text-white px-6 py-3.5 rounded-2xl font-extrabold text-sm shadow-md mb-8 relative">
+                Network Fundamentals
+                <div class="absolute bottom-[-32px] right-1/2 translate-x-1/2 w-0.5 h-8 bg-wePurple-200"></div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-12 w-full max-w-4xl relative">
+                
+                <div class="absolute -top-8 left-1/4 right-1/4 h-0.5 bg-wePurple-200"></div>
+                <div class="absolute -top-8 left-1/4 w-0.5 h-8 bg-wePurple-200"></div>
+                <div class="absolute -top-8 right-1/4 w-0.5 h-8 bg-wePurple-200"></div>
+
+                <div class="flex flex-col items-center">
+                  <button onclick="toggleMindNode('physicalNode')" class="bg-wePurple-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow hover:bg-wePurple-600 transition-all flex items-center gap-1.5">
+                    📁 Physical Structure
+                  </button>
+                  <div id="physicalNode" class="mt-4 flex flex-col items-center space-y-2 transition-all duration-300">
+                    <div class="w-0.5 h-4 bg-wePurple-200"></div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Path (Zero Room -> MSAN -> Cabin -> Box -> CPE)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Isolator Assemblies (Splitter & DSL Filter)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Terminal Junctions (Rosetta, RJ11, RJ45)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Business PBX Integrations downline of Splitter</div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                  <button onclick="toggleMindNode('logicalNode')" class="bg-teal-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow hover:bg-teal-600 transition-all flex items-center gap-1.5">
+                    📁 Logical Structure
+                  </button>
+                  <div id="logicalNode" class="mt-4 flex flex-col items-center space-y-2 transition-all duration-300">
+                    <div class="w-0.5 h-4 bg-teal-200"></div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">IP Classes & Default Gateway (192.168.1.1)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Subnetting Maps (LAN IP vs WAN IP / NAT / DHCP)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">APIPA Address Ranges & Loop Errors (169.254.X.X)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">CPE Parameters (VPI/VCI: 0/35, PTM, MTU)</div>
+                    <div class="bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl text-[11px] text-gray-600 font-medium">Authentications (BRAS, RADIUS, Broad-Hop)</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB: GLOSSARY ================= -->
+        <div id="tab-glossary" class="tab-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-gray-800">WE Terms & Abbreviations Technical Directory</h2>
+            <p class="text-xs text-gray-500">Live search engine matching all 17 operational, networking, and call-center abbreviations precisely mapped to database sheets.</p>
+          </div>
+
+          <!-- Dedicated Abbreviations Interactive Search & Directory Section -->
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-3">
+              <div>
+                <h3 class="text-lg font-black text-wePurple-700">📖 WE Technical Abbreviations Directory</h3>
+                <p class="text-[11px] text-gray-400">Troubleshoot, find definitions, and read full functional explanations of telecom metrics instantly.</p>
+              </div>
+              <div class="w-full sm:w-80">
+                <input type="text" id="abbrevSearchInput" onkeyup="searchAbbreviation()" placeholder="🔍 Search abbreviation, e.g., CRC, VLAN..." class="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50" />
+              </div>
+            </div>
+
+            <div id="abbrevCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[480px] overflow-y-auto pr-2">
+              
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="acw after call work">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ACW</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">After Call Work</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The time spent by an agent executing wrap-up tasks like ticket creation, remarks entry, and system updates immediately after terminating a call.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="adsl asymmetric digital subscriber line">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ADSL</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Asymmetric Digital Subscriber Line</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Classic copper broadband technology delivering asymmetric bandwidth where download rates significantly exceed upload speeds.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="aht average handling time">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">AHT</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Average Handling Time</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The average duration spent handling a client transaction, calculated as total talk time plus hold time plus wrap-up work time.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="att average talk time">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ATT</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Average Talk Time</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The average time an agent spends talking directly to clients, excluding hold time and after-call work (ACW).</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all" data-keyword="att / lat line attenuation attenuation">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">ATT / LAT</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Line Attenuation / Attenuation</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The physical degradation of power strength in copper cable segments. Primarily caused by distance from the MSAN cabinet and poor cable splices.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="bss business support system">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">BSS</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Business Support System</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Core business software suites managing customer orders, billings, and commercial client relationships.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="cca customer care agent call center agent">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CCA</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Customer Care Agent / Call Center Agent</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Technical support representative or helpdesk specialist resolving user complaints over call-center channels.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="cpe customer premises equipment">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CPE</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Customer Premises Equipment</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Terminal networking hardware (such as routers and modems) deployed on the subscriber side to process signals.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="crc cyclic redundancy check errors">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">CRC</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Cyclic Redundancy Check Errors</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">A measurement of completely damaged data packets. Generated by line noise, moisture, or poor insulation, directly causing packet loss and drops.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vci virtual channel identifier">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VCI</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Virtual Channel Identifier</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">In ADSL, the numeric path value paired with VPI to route sessions (the standard value in Egypt is 35).</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vdsl very high speed digital subscriber line">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VDSL</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Very High Speed Digital Subscriber Line</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The modern high-speed copper broadband standard. Connected via MSAN fiber nodes to deliver speeds reaching 100 Mbps.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vlan id virtual local area network identifier">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VLAN ID</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Virtual Local Area Network Identifier</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">A virtual channel number segregating various service traffic classes (e.g., IPTV, Voice VoIP, internet) for VDSL/FTTH links.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="voip voice over internet protocol">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VOIP</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Voice over Internet Protocol</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Digital telephone signal transmission over active IP routers and WAN networks, replacing traditional analog CO landline circuits.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vpi virtual path identifier">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VPI</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Virtual Path Identifier</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">ADSL routing path parameter. The standard value utilized in Egypt is 0.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="vpn virtual private network">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">VPN</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Virtual Private Network</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">Creates an encrypted, secure virtual tunnel across public networks, changing the node IP and securing communication data.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="wan wide area network">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">WAN</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Wide Area Network</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The external interface of the CPE, designated to pull a valid IP address lease and route the local intranet to global nodes.</p>
+                </div>
+              </div>
+
+              <div class="abbrev-item p-4 bg-gray-50 hover:bg-wePurple-50/50 rounded-2xl border border-gray-200/60 transition-all flex flex-col justify-between" data-keyword="wlan wireless local area network">
+                <div>
+                  <span class="font-extrabold text-sm text-wePurple-700 bg-wePurple-100/60 px-2.5 py-0.5 rounded-lg inline-block mb-1">WLAN</span>
+                  <span class="text-[10px] text-gray-400 font-mono block">Wireless Local Area Network</span>
+                  <p class="text-[11px] text-gray-600 mt-2 leading-relaxed">The local area wireless interface (Wi-Fi), facilitating wireless client node linkage with the local CPE.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            
+            <!-- Section 1: Protocols -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+              <h3 class="text-base font-black text-wePurple-700 border-b pb-2">🌐 Protocols & Addressing</h3>
+              
+              <div class="space-y-4">
+                <div class="p-3 bg-gray-50 rounded-xl">
+                  <span class="font-extrabold text-xs text-gray-800 block">Gateway IP:</span>
+                  <p class="text-[11px] text-gray-500 mt-1">The local interface IP to enter settings page, printed on the CPE label (commonly 192.168.1.1).</p>
+                </div>
+
+                <div class="p-3 bg-gray-50 rounded-xl">
+                  <span class="font-extrabold text-xs text-gray-800 block">APIPA (Fallback Range):</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Auto-assigned IP range (169.254.0.1 to 169.254.255.254) obtained when client nodes fail to grab a local DHCP lease from the CPE.</p>
+                </div>
+
+                <div class="p-3 bg-gray-50 rounded-xl">
+                  <span class="font-extrabold text-xs text-gray-800 block">NAT (Network Address Translation):</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Translates local Private LAN IPs to a single Public WAN IP to route client frames securely over the internet.</p>
+                </div>
+
+                <div class="p-3 bg-gray-50 rounded-xl">
+                  <span class="font-extrabold text-xs text-gray-800 block">DHCP & DNS:</span>
+                  <p class="text-[11px] text-gray-500 mt-1"><strong>DHCP:</strong> Automates allocation of local IP ranges inside LAN. <br><strong>DNS:</strong> Translates readable URL texts (e.g., google.com) into routing IP addresses.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Configuration Values -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+              <h3 class="text-base font-black text-teal-700 border-b pb-2">⚙️ CPE Configuration Parameters</h3>
+              
+              <div class="space-y-4">
+                <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
+                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">Primary ADSL values (Egypt):</h4>
+                  <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
+                    <li><strong>VPI/VCI:</strong> Set to <span class="font-bold text-teal-700">0/35</span>.</li>
+                    <li><strong>Mode:</strong> Routing.</li>
+                    <li><strong>Encapsulation:</strong> PPPoE.</li>
+                    <li><strong>Multiplex:</strong> LLC.</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/20">
+                  <h4 class="font-extrabold text-xs text-teal-800 mb-2">Primary VDSL values (Egypt):</h4>
+                  <ul class="text-[11px] text-gray-600 space-y-1.5 list-disc list-inside">
+                    <li><strong>XDSL Transfer Mode:</strong> PTM.</li>
+                    <li><strong>Link Type:</strong> PPP.</li>
+                    <li><strong>PPP Transfer Type:</strong> PPPoE.</li>
+                  </ul>
+                </div>
+
+                <div class="p-3 bg-gray-50 rounded-xl">
+                  <span class="font-extrabold text-xs text-gray-800 block">MTU Size:</span>
+                  <p class="text-[11px] text-gray-500 mt-1">Maximum packet size. Standard value is <strong class="text-wePurple-700">1492</strong>. Fallback sizes are <code class="bg-white border px-1 rounded text-gray-800">1460</code> or <code class="bg-white border px-1 rounded text-gray-800">1420</code> to fix sync loss or latency issues.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================= TAB: QUIZ ================= -->
+        <div id="tab-quiz" class="tab-content hidden space-y-6">
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            
+            <!-- Intro Screen -->
+            <div id="quiz-intro" class="text-center py-8 space-y-4">
+              <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
+              <h2 class="text-2xl font-black text-gray-800">Authorized Field Exam</h2>
+              <p class="text-xs text-gray-500 max-w-lg mx-auto">
+                Pass this comprehensive assessment with a score of **80% or higher** to dynamically generate and print your official training completion certificate.
+              </p>
+              <div class="max-w-xs mx-auto space-y-3">
+                <button onclick="checkAndStartQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black w-full py-3.5 rounded-2xl shadow-md transition-all block text-sm">
+                  Start Field Exam
+                </button>
+              </div>
+            </div>
+
+            <!-- Active Quiz Screen -->
+            <div id="quiz-active" class="hidden space-y-6">
+              <div class="flex justify-between items-center border-b pb-4">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Current Question</span>
+                  <h3 class="text-lg font-black text-gray-800" id="quizQuestionNum">1 of 10</h3>
+                </div>
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-3 py-1.5 rounded-full border border-emerald-100" id="quizLivePoints">Score: 0</span>
+              </div>
+
+              <div class="space-y-4">
+                <h4 class="text-base font-extrabold text-gray-800 leading-relaxed" id="quizQuestionText">Loading question...</h4>
+                <div class="grid grid-cols-1 gap-3" id="quizOptionsContainer">
+                  <!-- populate buttons dynamically -->
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center border-t pt-4">
+                <button onclick="revealQuizHint()" class="text-xs font-bold text-wePurple-700 hover:underline flex items-center gap-1.5" id="btn-quizHint">
+                  💡 Reveal Hint
+                </button>
+                <button onclick="nextQuizQuestion()" id="btn-quizNext" class="hidden bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow">
+                  Next Question →
+                </button>
+              </div>
+
+              <div id="quizFeedbackBox" class="hidden p-4 rounded-xl text-xs leading-relaxed transition-all"></div>
+            </div>
+
+            <!-- Score / Results Screen -->
+            <div id="quiz-results" class="hidden text-center py-8 space-y-6">
+              <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl font-bold shadow-sm" id="resultIcon">🏆</div>
+              <div>
+                <h3 class="text-2xl font-black text-gray-800" id="quizResultTitle">Outstanding Performance!</h3>
+                <p class="text-sm text-gray-500 mt-1">You have successfully completed the Network Fundamentals Exam.</p>
+              </div>
+
+              <div class="bg-gray-50 p-6 rounded-2xl max-w-xs mx-auto border border-gray-100">
+                <span class="text-xs font-bold text-gray-400 block mb-1">Final Score</span>
+                <span class="text-4xl font-black text-wePurple-700" id="quizFinalScore">0%</span>
+                <p class="text-xs text-gray-500 mt-2" id="quizResultSummary">You answered 0 out of 10 questions correctly.</p>
+              </div>
+
+              <div class="flex flex-wrap gap-3 justify-center">
+                <button onclick="startQuizDirect()" class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                  Retake Exam
+                </button>
+                <button onclick="printCertificate()" id="btnPrintCertificate" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                  🖨️ Print Completion Certificate
+                </button>
+              </div>
+            </div>
+
+            <!-- Certificate Visual Area -->
+            <div id="printArea" class="hidden mt-8 max-w-2xl mx-auto border-8 border-double border-wePurple-700 p-8 bg-white text-center rounded-3xl relative overflow-hidden">
+              <div class="absolute inset-0 bg-slate-50/10 pointer-events-none"></div>
+              <div class="flex justify-between items-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-wePurple-700 flex items-center justify-center text-white font-black text-xl">we</div>
+                <span class="text-xs text-gray-400 font-mono">ID: <span id="certOracleID">WE-NET-2026</span></span>
+              </div>
+              
+              <h2 class="text-2xl font-black text-wePurple-700 mb-2">Certificate of Training Completion</h2>
+              <p class="text-xs text-gray-400">This is to certify that</p>
+              
+              <h3 class="text-3xl font-black text-gray-900 my-4 decoration-wePurple-500 underline" id="certName">Trainee Name</h3>
+              
+              <p class="text-xs text-gray-600 max-w-md mx-auto leading-relaxed">
+                has successfully passed the technical examination and completed the professional coursework in **Network Fundamentals, Central Office Operations & Support Engineering** with a final score of:
+              </p>
+              
+              <div class="my-4 text-2xl font-black text-emerald-600" id="certScore">0%</div>
+
+              <div class="border-t border-gray-100 pt-6 mt-6 flex justify-between text-[10px] text-gray-400">
+                <div>Issue Date: July 18, 2026</div>
+                <div>Technical Training & Talent Management - WE</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-6 transition-colors duration-300" id="footer">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400 space-y-2">
+        <p>This web portal is designed for training and educational simulations.</p>
+        <p class="font-bold text-wePurple-700">Telecom Egypt Group © 2026 - All Rights Reserved</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Javascript Logic -->
+  <script>
+    // System State
+    let isDarkMode = false;
+    let traineeName = "";
+    let traineeOracleId = "";
+    
+    let progress = {
+      explRead: { physical: false, logical: false },
+      visualExplored: { physical: false, logical: false },
+      cardsFlipped: new Set(),
+      quizMaxScore: 0
+    };
+
+    // Scanned Authorized Users Database from gmail.xlsx
+    const authorizedUsers = [
+      { email: "losyan3@gmail.com", name: "Ahmed Yusuf", oracleId: "400100" },
+      { email: "ahmedsamir31295@gmail.com", name: "Ahmed samir", oracleId: "400200" }
+    ];
+
+    // Safely add/remove classes to avoid null errors
+    function safeAddClass(id, className) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add(className);
+    }
+
+    function safeRemoveClass(id, className) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove(className);
+    }
+
+    // Define all functions on window so they are globally accessible from inline HTML event handlers
+    window.handleGoogleLoginResponse = function(response) {
+      try {
+        safeAddClass('loginErrorBox', 'hidden');
+        
+        // Decode JWT token directly 
+        const base64Url = response.credential.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const payload = JSON.parse(jsonPayload);
+
+        const incomingEmail = payload.email ? payload.email.toLowerCase() : "";
+        
+        // Validation check against CSV Database
+        const matchedUser = authorizedUsers.find(u => u.email.toLowerCase() === incomingEmail);
+
+        if (matchedUser) {
+            sessionStorage.setItem('we_logged_in', 'true');
+            localStorage.setItem('we_trainee_name', matchedUser.name);
+            localStorage.setItem('we_oracle_id', matchedUser.oracleId);
+            localStorage.setItem('we_trainee_email', incomingEmail);
+            localStorage.setItem('we_trainee_photo', payload.picture || "https://ui-avatars.com/api/?name=" + encodeURIComponent(matchedUser.name));
+            
+            window.showDaySelection();
+        } else {
+            // Unauthorized Account
+            const errBox = document.getElementById('loginErrorBox');
+            if(errBox) {
+                errBox.innerText = "❌ This Gmail account is not authorized. Please use your registered company email.";
+                safeRemoveClass('loginErrorBox', 'hidden');
+            }
+        }
+      } catch (err) {
+        console.error("Token decoding failed", err);
+        const errBox = document.getElementById('loginErrorBox');
+        if(errBox) {
+            errBox.innerText = "❌ Authentication failed! Token could not be parsed.";
+            safeRemoveClass('loginErrorBox', 'hidden');
+        }
+      }
+    };
+
+    window.handleAdminLogin = function() {
+      const passEl = document.getElementById('adminPassword');
+      if(!passEl) return;
+      const pass = passEl.value.trim();
+      
+      if (pass === 'Admin' || pass === 'admin') {
+        sessionStorage.setItem('we_logged_in', 'true');
+        localStorage.setItem('we_trainee_name', "System Administrator");
+        localStorage.setItem('we_oracle_id', "ADMIN-001");
+        localStorage.setItem('we_trainee_email', "admin@te.eg");
+        localStorage.setItem('we_trainee_photo', "https://ui-avatars.com/api/?name=Admin&background=5F259F&color=fff");
+        
+        safeAddClass('loginErrorBox', 'hidden');
+        window.showDaySelection();
+      } else {
+        const errBox = document.getElementById('loginErrorBox');
+        if(errBox) {
+            errBox.innerText = "❌ Invalid Admin Password!";
+            safeRemoveClass('loginErrorBox', 'hidden');
+        }
+      }
+    };
+
+    window.handlePortalLogout = function() {
+      sessionStorage.removeItem('we_logged_in');
+      localStorage.removeItem('we_trainee_name');
+      localStorage.removeItem('we_oracle_id');
+      localStorage.removeItem('we_trainee_email');
+      localStorage.removeItem('we_trainee_photo');
+      traineeName = "";
+      traineeOracleId = "";
+      window.showLoginPortal();
+    };
+
+    window.showDaySelection = function() {
+      safeAddClass('loginPortalScreen', 'hidden');
+      safeAddClass('mainPortalContent', 'hidden');
+      safeRemoveClass('daySelectionScreen', 'hidden');
+
+      traineeName = localStorage.getItem('we_trainee_name') || "";
+      const dName = document.getElementById('daySelectionName');
+      if(dName) dName.innerText = traineeName;
+    };
+
+    window.selectDay = function(dayNumber) {
+      if (dayNumber === 1) {
+        window.showMainPortal();
+      }
+    };
+
+    window.showMainPortal = function() {
+      safeAddClass('loginPortalScreen', 'hidden');
+      safeAddClass('daySelectionScreen', 'hidden');
+      safeRemoveClass('mainPortalContent', 'hidden');
+      
+      // Load from storage or session state
+      traineeName = localStorage.getItem('we_trainee_name') || "";
+      traineeOracleId = localStorage.getItem('we_oracle_id') || "";
+      const email = localStorage.getItem('we_trainee_email') || "";
+      const photo = localStorage.getItem('we_trainee_photo') || "";
+
+      if (traineeName) {
+        const tNameDisplay = document.getElementById('traineeNameDisplay');
+        if(tNameDisplay) tNameDisplay.innerText = traineeName;
+        const hName = document.getElementById('helloName');
+        if(hName) hName.innerText = traineeName;
+        const tId = document.getElementById('traineeID');
+        if(tId) tId.innerText = "WE-" + traineeOracleId;
+        const tEmail = document.getElementById('traineeEmailDisplay');
+        if(tEmail) tEmail.innerText = email;
+        const tPhoto = document.getElementById('traineePhoto');
+        if(tPhoto) tPhoto.src = photo;
+      } else {
+        safeRemoveClass('topNotification', 'hidden');
+      }
+      
+      loadProgress();
+      updateProgressUI();
+      window.changeLabWiring('ideal');
+    };
+
+    window.showLoginPortal = function() {
+      safeRemoveClass('loginPortalScreen', 'hidden');
+      safeAddClass('mainPortalContent', 'hidden');
+      safeAddClass('daySelectionScreen', 'hidden');
+      
+      // Clear inputs
+      const adminPass = document.getElementById('adminPassword');
+      if(adminPass) adminPass.value = "";
+      safeAddClass('loginErrorBox', 'hidden');
+      
+      // Stop audio playback if it was active
+      const audio = document.getElementById('lessonAudio');
+      if (audio && !audio.paused) {
+        audio.pause();
+        safeRemoveClass('playIcon', 'hidden');
+        safeAddClass('pauseIcon', 'hidden');
+        safeRemoveClass('soundWave', 'playing');
+      }
+    };
+
+    // Audio Playback Handler
+    window.toggleAudioPlayback = function() {
+      const audio = document.getElementById('lessonAudio');
+      if(!audio) return;
+      
+      const playIcon = document.getElementById('playIcon');
+      const pauseIcon = document.getElementById('pauseIcon');
+      const soundWave = document.getElementById('soundWave');
+
+      if (audio.paused) {
+        audio.play().then(() => {
+          if(playIcon) playIcon.classList.add('hidden');
+          if(pauseIcon) pauseIcon.classList.remove('hidden');
+          if(soundWave) soundWave.classList.add('playing');
+        }).catch(err => {
+          console.error("Audio playback error: ", err);
+        });
+      } else {
+        audio.pause();
+        if(playIcon) playIcon.classList.remove('hidden');
+        if(pauseIcon) pauseIcon.classList.add('hidden');
+        if(soundWave) soundWave.classList.remove('playing');
+      }
+    };
+
+    window.updateAudioProgress = function() {
+      const audio = document.getElementById('lessonAudio');
+      if(!audio) return;
+      const progressBar = document.getElementById('audioProgressBar');
+      const currentTimeText = document.getElementById('currentTime');
+      const durationTimeText = document.getElementById('durationTime');
+
+      if (!isNaN(audio.duration)) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        if(progressBar) progressBar.style.width = percent + '%';
+        if(currentTimeText) currentTimeText.innerText = formatTime(audio.currentTime);
+        if(durationTimeText) durationTimeText.innerText = formatTime(audio.duration);
+      }
+    };
+
+    window.seekAudio = function(event) {
+      const audio = document.getElementById('lessonAudio');
+      if(!audio) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const width = rect.width;
+      const percentage = clickX / width;
+      
+      if (!isNaN(audio.duration)) {
+        audio.currentTime = percentage * audio.duration;
+      }
+    };
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    // Wiring Simulator Scenarios
+    const wiringScenarios = {
+      ideal: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
+        lineColor: '#10B981', // green
+        voice: "Excellent sync and clear voice",
+        voiceColor: "text-emerald-600",
+        metrics: { att: '12 dB', snr: '28 dB', crc: '0 / Sec', rate: '30 Mbps' },
+        labels: { att: 'Excellent (Near Cabinet)', snr: 'Extremely Stable', crc: 'Clean Transmission', rate: 'Full Speed Profile' },
+        desc: "<strong>Ideal Setup (Splitter Connected):</strong> routes high-frequency data signals to the modem and low-frequency analog voice signals to the phone isolatedly. This eliminates crosstalk and prevents the DSL link from dropping during telephone call activity."
+      },
+      nosplitter: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-red-500 shadow-red-500 animate-pulse', int: 'bg-gray-400 shadow-none' },
+        lineColor: '#F59E0B', // amber
+        voice: "High noise and interference (Noise)",
+        voiceColor: "text-amber-600",
+        metrics: { att: '22 dB', snr: '8 dB', crc: '4500 / Sec', rate: '12 Mbps' },
+        labels: { att: 'Increased Loop Resistance', snr: 'Severely High Crosstalk', crc: 'Data Packet Degradation', rate: 'Highly Unstable Sync' },
+        desc: "<strong>No Splitter Joint (Parallel splice):</strong> Telephone and modem lines are shared directly over a single pair without isolation. High-frequency ADSL carriers bleed into the voice spectrum, dropping the line sync as soon as the phone receiver is picked up."
+      },
+      direct: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-green-500 shadow-green-500', int: 'bg-green-500 shadow-green-500' },
+        lineColor: '#3B82F6', // blue
+        voice: "No tone (Telephone offline)",
+        voiceColor: "text-red-500",
+        metrics: { att: '11 dB', snr: '30 dB', crc: '0 / Sec', rate: '30 Mbps' },
+        labels: { att: 'Optimal Attenuation', snr: 'Maximum Stability Margin', crc: 'Zero Fault Packets', rate: 'Solid Bitrate Sync' },
+        desc: "<strong>Direct CPE Connection (No Phone):</strong> The incoming street line hooks straight into the CPE DSL port without a splitter. Internet sync achieves optimal values, but the phone receiver is completely dead with no dial tone."
+      },
+      reversed: {
+        leds: { pwr: 'bg-green-500 shadow-green-500', dsl: 'bg-gray-400 shadow-none', int: 'bg-gray-400 shadow-none' },
+        lineColor: '#EF4444', // red
+        voice: "Faint tone with heavy noise",
+        voiceColor: "text-red-500",
+        metrics: { att: '-- dB', snr: '0 dB', crc: '0 / Sec', rate: '0 Mbps' },
+        labels: { att: 'Synchronization Failure', snr: 'No Carrier Sync', crc: 'Inactive Session', rate: 'Routing Blocked' },
+        desc: "<strong>Reversed Splitter Ports:</strong> The phone cable is mistakenly plugged into the Splitter's Modem port, and the modem is plugged into the Phone port. High-frequency ADSL carriers are filtered out from the router, resulting in total sync loss."
+      }
+    };
+
+    window.switchTab = function(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+        tab.classList.remove('block');
+      });
+      safeRemoveClass('tab-' + tabId, 'hidden');
+      safeAddClass('tab-' + tabId, 'block');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all";
+      });
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = "nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between text-sm font-bold text-wePurple-700 bg-wePurple-50 transition-all";
+      }
+
+      // Track progress
+      if (tabId === 'theory-course') progress.explRead.physical = true;
+      if (tabId === 'physical-lab') progress.visualExplored.physical = true;
+      if (tabId === 'logical-lab') progress.visualExplored.logical = true;
+      if (tabId === 'glossary') progress.explRead.logical = true;
+      
+      saveProgress();
+      updateProgressUI();
+    };
+
+    window.changeLabWiring = function(key) {
+      const scenario = wiringScenarios[key];
+      if (!scenario) return;
+
+      const labSignalLine = document.getElementById('labSignalLine');
+      if(labSignalLine) labSignalLine.setAttribute('stroke', scenario.lineColor);
+
+      const mAtt = document.getElementById('metricAtt'); if(mAtt) mAtt.innerText = scenario.metrics.att;
+      const mAttL = document.getElementById('metricAttLabel'); if(mAttL) mAttL.innerText = scenario.labels.att;
+
+      const mSnr = document.getElementById('metricSnr'); if(mSnr) mSnr.innerText = scenario.metrics.snr;
+      const mSnrL = document.getElementById('metricSnrLabel'); if(mSnrL) mSnrL.innerText = scenario.labels.snr;
+
+      const mCrc = document.getElementById('metricCrc'); if(mCrc) mCrc.innerText = scenario.metrics.crc;
+      const mCrcL = document.getElementById('metricCrcLabel'); if(mCrcL) mCrcL.innerText = scenario.labels.crc;
+
+      const mRate = document.getElementById('metricRate'); if(mRate) mRate.innerText = scenario.metrics.rate;
+      const mRateL = document.getElementById('metricRateLabel'); if(mRateL) mRateL.innerText = scenario.labels.rate;
+
+      const pwr = document.getElementById('ledPwr');
+      const dsl = document.getElementById('ledDsl');
+      const int = document.getElementById('ledInt');
+
+      if(pwr) pwr.className = `w-2.5 h-2.5 rounded-full ${scenario.leds.pwr}`;
+      if(dsl) dsl.className = `w-2.5 h-2.5 rounded-full ${scenario.leds.dsl}`;
+      if(int) int.className = `w-2.5 h-2.5 rounded-full ${scenario.leds.int}`;
+
+      const voiceText = document.getElementById('voiceStatusText');
+      if(voiceText) {
+          voiceText.innerText = scenario.voice;
+          voiceText.className = `text-xs font-extrabold ${scenario.voiceColor}`;
+      }
+
+      const wave = document.getElementById('audioWave');
+      if(wave) {
+          if (key === 'nosplitter' || key === 'reversed') {
+            wave.classList.remove('opacity-20');
+            document.querySelectorAll('.wave-bar').forEach(bar => {
+              bar.style.backgroundColor = scenario.lineColor;
+              bar.style.animationPlayState = 'running';
+            });
+          } else if (key === 'direct') {
+            wave.classList.add('opacity-20');
+            document.querySelectorAll('.wave-bar').forEach(bar => {
+              bar.style.animationPlayState = 'paused';
+            });
+          } else {
+            wave.classList.remove('opacity-20');
+            document.querySelectorAll('.wave-bar').forEach(bar => {
+              bar.style.backgroundColor = '#10B981';
+              bar.style.animationPlayState = 'running';
+            });
+          }
+      }
+
+      const diag = document.getElementById('wiringDiagText');
+      if(diag) diag.innerHTML = scenario.desc;
+
+      document.querySelectorAll('[id^="wireBtn-"]').forEach(btn => {
+        btn.className = "w-full p-4 rounded-2xl text-left text-xs font-bold border border-gray-200 hover:bg-gray-50 block transition-all";
+      });
+      const btn = document.getElementById('wireBtn-' + key);
+      if(btn) btn.className = "w-full p-4 rounded-2xl text-left text-xs font-bold border-2 border-wePurple-700 bg-wePurple-50 text-wePurple-900 block transition-all";
+    };
+
+    window.runLogicalSequence = function() {
+      let step = 1;
+      const statusText = document.getElementById('logSimStatus');
+      const consoleLine1 = document.getElementById('consoleLine1');
+      const consoleLine2 = document.getElementById('consoleLine2');
+
+      if(statusText) {
+          statusText.innerText = "Transmitting authentication packets...";
+          statusText.className = "text-xs font-black text-amber-500 animate-pulse";
+      }
+
+      document.querySelectorAll('.node-step').forEach(node => {
+        node.className = "node-step p-4 rounded-2xl border-2 border-gray-200 text-center transition-all bg-white";
+      });
+
+      const interval = setInterval(() => {
+        if (step > 4) {
+          clearInterval(interval);
+          if(statusText) {
+              statusText.innerText = "Connection Active! WAN IP Leased";
+              statusText.className = "text-xs font-black text-emerald-600";
+          }
+          if(consoleLine1) consoleLine1.innerText = "> [SUCCESS] Dynamic IP lease obtained: 197.38.12.24";
+          if(consoleLine2) {
+              consoleLine2.innerText = "> Physical port mapped, authentication 100% completed. Internet online.";
+              consoleLine2.style.opacity = "1";
+          }
+          return;
+        }
+
+        const activeNode = document.getElementById('nodeStep' + step);
+        if(activeNode) activeNode.className = "node-step p-4 rounded-2xl border-2 border-teal-500 text-center transition-all bg-teal-50/50 shadow-md shadow-teal-100 scale-102";
+
+        switch(step) {
+          case 1:
+            if(consoleLine1) consoleLine1.innerText = "> [CPE] Sending PPPoE Discovery Packets (PADI)...";
+            if(consoleLine2) consoleLine2.innerText = "> [DSLAM] Forwarding frame request on active NAS port ID...";
+            break;
+          case 2:
+            if(consoleLine1) consoleLine1.innerText = "> [RADIUS] Validating DSL service credentials...";
+            if(consoleLine2) consoleLine2.innerText = "> [NAS ID] Confirming geographical exchange coordinates (Card/Port)...";
+            break;
+          case 3:
+            if(consoleLine1) consoleLine1.innerText = "> [Broad-Hop] Querying billing account profiles database...";
+            if(consoleLine2) consoleLine2.innerText = "> Profile resolved: 30Mbps VDSL high-speed tier confirmed.";
+            break;
+          case 4:
+            if(consoleLine1) consoleLine1.innerText = "> [BRAS] Packaging DHCP gateway and WAN IP lease sequence...";
+            if(consoleLine2) consoleLine2.innerText = "> [CPE] Solid Green Internet LED active.";
+            break;
+        }
+        step++;
+      }, 1500);
+    };
+
+    window.toggleMindNode = function(nodeId) {
+      const node = document.getElementById(nodeId);
+      if(node) node.classList.toggle('hidden');
+    };
+
+    window.searchAbbreviation = function() {
+      const inputEl = document.getElementById('abbrevSearchInput');
+      if(!inputEl) return;
+      const input = inputEl.value.toLowerCase();
+      const items = document.querySelectorAll('.abbrev-item');
+
+      items.forEach(item => {
+        const keyword = item.getAttribute('data-keyword');
+        if (keyword.includes(input)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    };
+
+    window.checkAndStartQuiz = function() {
+      if (!traineeName) {
+        safeRemoveClass('topNotification', 'hidden');
+        const notif = document.getElementById('notificationText');
+        if(notif) notif.innerText = "Please log in with valid credentials to begin the exam!";
+        return;
+      }
+      startQuizDirect();
+    };
+
+    window.startQuizDirect = function() {
+      currentQuestionIndex = 0;
+      quizScore = 0;
+      selectedAnswerIndex = null;
+
+      safeAddClass('quiz-intro', 'hidden');
+      safeAddClass('quiz-results', 'hidden');
+      safeRemoveClass('quiz-active', 'hidden');
+
+      loadQuizQuestion();
+    };
+
+    const quizQuestions = [
+      {
+        question: "Which of the following describes the correct descending order of the telephone line's physical path from the central exchange to the customer premises?",
+        options: [
+          "Zero Room -> MSAN Cabin -> Cabins -> Box -> CPE",
+          "MSAN Cabin -> Zero Room -> Cabins -> Box -> CPE",
+          "Box -> Cabins -> MSAN Cabin -> Zero Room -> CPE",
+          "Zero Room -> Cabins -> Box -> MSAN Cabin -> CPE"
+        ],
+        correctIndex: 0,
+        hint: "The voice signal originates in the Zero Room, and is later joined by internet at the MSAN cabinet.",
+        rationale: "The physical path begins at the Zero Room, routes through the Multi-Service Access Node (MSAN), splits via street copper cabinets, terminates at building facade boxes, and is received by the customer's CPE."
+      },
+      {
+        question: "What is the physical and technical distinction between RJ11 and RJ45 cable standards?",
+        options: [
+          "RJ11 is designed for analog telephone lines/splitters, while RJ45 is designed for Ethernet LAN connections.",
+          "RJ45 is designed for analog telephone lines, while RJ11 is designed for high-speed Ethernet LAN connections.",
+          "Both interfaces are identical and can be plugged interchangeably into the same ports.",
+          "RJ11 only transfers electricity, whereas RJ45 only carries voice signals."
+        ],
+        correctIndex: 0,
+        hint: "A telephone connector is narrower (normally 4 pins) while an Ethernet connector is wider (8 pins).",
+        rationale: "RJ11 is the standard standard for analog telephone connections, whereas RJ45 is the standard registered jack for Ethernet network links."
+      },
+      {
+        question: "If a subscriber has multiple telephone sets in a household and complains that the internet sync drops whenever a call is initiated or received, what is the best remedy?",
+        options: [
+          "Install a DSL Filter directly inline before every telephone set in the house.",
+          "Bypass the Splitter assembly and turn off the CPE's DHCP service.",
+          "Replace the RJ11 cable with an RJ45 computer patch cable.",
+          "Adjust the MTU size parameter inside the CPE settings to a higher value."
+        ],
+        correctIndex: 0,
+        hint: "We must isolate high-frequency internet carriers from the low-frequency analog voice range.",
+        rationale: "A DSL Filter suppresses high-frequency ADSL noise on telephone receivers, preventing telephone voltage changes from knocking down the internet synchronism."
+      },
+      {
+        question: "Where should a corporate Private Branch Exchange (PBX) be connected inline to prevent interference with DSL internet?",
+        options: [
+          "It must always be connected downline of the primary Splitter.",
+          "It must be wired directly inline before the Splitter on the main drop line.",
+          "It must be wired in parallel directly with the main RJ45 computer patch cable.",
+          "It must be connected straight to the Line port of the Splitter."
+        ],
+        correctIndex: 0,
+        hint: "A corporate PBX routes internal telephone lines, needing a clean, isolated voice line feed.",
+        rationale: "A PBX routes voice channels. To safeguard against packet corruption or DSL drops, it must receive its analog feed from the isolated Phone port downline of the Splitter."
+      },
+      {
+        question: "If a customer's computer receives an IP address starting with 169.254.X.X, what does this indicate technically, and what is the fix?",
+        options: [
+          "This indicates an APIPA address due to a local DHCP failure. Fix by resetting and reconfiguring the CPE.",
+          "This indicates RADIUS authentication succeeded. Fix by adjusting MTU to 1492.",
+          "This indicates the client obtained a clean Public WAN IP and is ready to browse.",
+          "This is caused by external DNS corruption. Fix by splicing a new Rosetta block."
+        ],
+        correctIndex: 0,
+        hint: "APIPA (Automatic Private IP Addressing) is a local fallback assigned by the OS when the CPE fails to respond to lease requests.",
+        rationale: "An APIPA address indicates the client node cannot reach a local DHCP pool. Reconfiguring the CPE or correcting local connections resolves the lease block."
+      },
+      {
+        question: "What is the standard Maximum Transmission Unit (MTU) size for a PPPoE broadband connection in Egypt?",
+        options: [
+          "1492",
+          "1500",
+          "1420",
+          "1460"
+        ],
+        correctIndex: 0,
+        hint: "The PPPoE framing format introduces an overhead, leaving less room than standard 1500-byte frames.",
+        rationale: "The standard MTU for PPPoE connections is 1492 bytes. This accommodates the protocol's 8-byte packaging overhead within the standard 1500-byte frame limit."
+      },
+      {
+        question: "Which central office server is dedicated to assigning and leasing dynamic WAN IP addresses to CPEs?",
+        options: [
+          "BRAS Server",
+          "RADIUS Server",
+          "DNS Gateway",
+          "Broad-Hop database"
+        ],
+        correctIndex: 0,
+        hint: "This stands for Broadband Remote Access Server.",
+        rationale: "The BRAS acts as the primary access gateway, managing user routing sessions and leasing dynamic Public IPs (WAN IP) upon validation."
+      },
+      {
+        question: "What is the technical function of the RADIUS server during the logical session startup?",
+        options: [
+          "To validate PPPoE service credentials and correlate the physical NAS Port ID (Card/Port).",
+          "To translate local Private IP addresses to Public IP addresses.",
+          "To enforce maximum rate limiting and database profile speeds.",
+          "To resolve line attenuation noise on copper junctions."
+        ],
+        correctIndex: 0,
+        hint: "It manages Authentication, Authorization, and Accounting (AAA).",
+        rationale: "The RADIUS server validates the DSL username and password configured on the CPE, ensuring it correlates with the physical port (NAS port ID) on the DSLAM."
+      },
+      {
+        question: "What are the correct parameters required to establish an ADSL connection in Egypt?",
+        options: [
+          "VPI/VCI: 0/35 | Mode: Routing | Encapsulation: PPPOE | Multiplex: LLC",
+          "VPI/VCI: 8/35 | Mode: PTM | Encapsulation: Bridging | Multiplex: LLC",
+          "PTM: Mode | Link Type: PPP | PPP Transfer Type: PPPOE",
+          "VPI/VCI: 0/35 | Mode: PTM | PPP Transfer Type: LLC"
+        ],
+        correctIndex: 0,
+        hint: "The standard path IDs are VPI 0 and VCI 35, operating over PPPoE routing mode.",
+        rationale: "ADSL links in Egypt require VPI/VCI values of 0/35, utilizing LLC encapsulation under PPPoE routing mode to negotiate sessions."
+      },
+      {
+        question: "What is the primary technical purpose of NAT (Network Address Translation) inside a home CPE?",
+        options: [
+          "Translating local Private IP addresses into a single Public WAN IP for routing.",
+          "Managing dynamic IP leases to local Wi-Fi client nodes.",
+          "Squeezing MTU sizes to increase download speeds.",
+          "Masking SSID broadcasts to secure wireless channels."
+        ],
+        correctIndex: 0,
+        hint: "It allows multiple home devices to browse the global web using a single paid subscription address.",
+        rationale: "NAT acts as a translator, mapping multiple private LAN addresses behind a single Public WAN IP assigned by the ISP, conserving the IP space."
+      }
+    ];
+
+    function loadQuizQuestion() {
+      const q = quizQuestions[currentQuestionIndex];
+      selectedAnswerIndex = null;
+
+      const qNum = document.getElementById('quizQuestionNum');
+      if(qNum) qNum.innerText = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+      
+      const qText = document.getElementById('quizQuestionText');
+      if(qText) qText.innerText = q.question;
+      
+      const pts = document.getElementById('quizLivePoints');
+      if(pts) pts.innerText = `Score: ${quizScore}`;
+      
+      safeAddClass('btn-quizNext', 'hidden');
+      safeAddClass('quizFeedbackBox', 'hidden');
+      
+      const hintBtn = document.getElementById('btn-quizHint');
+      if(hintBtn) {
+          hintBtn.innerText = "💡 Reveal Hint";
+          hintBtn.disabled = false;
+      }
+
+      const container = document.getElementById('quizOptionsContainer');
+      if(!container) return;
+      container.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border border-gray-200 bg-white text-left text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-between";
+        btn.innerHTML = `
+          <span>${opt}</span>
+          <span class="w-5 h-5 rounded-full border border-gray-300 flex-shrink-0"></span>
+        `;
+        btn.onclick = () => window.selectQuizAnswer(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    window.selectQuizAnswer = function(index) {
+      if (selectedAnswerIndex !== null) return;
+      selectedAnswerIndex = index;
+
+      const q = quizQuestions[currentQuestionIndex];
+      const buttons = document.querySelectorAll('.quiz-opt-btn');
+      
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      if(feedbackBox) feedbackBox.classList.remove('hidden');
+
+      if (index === q.correctIndex) {
+        quizScore += 10;
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[index].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[index].querySelector('span:last-child').innerHTML = "✓";
+        
+        if(feedbackBox) {
+            feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-emerald-50 border border-emerald-100 text-emerald-800 block mt-4";
+            feedbackBox.innerHTML = `<strong>Correct!</strong> ${q.rationale}`;
+        }
+      } else {
+        buttons[index].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-left text-xs font-bold text-rose-800 transition-all flex items-center justify-between";
+        buttons[index].querySelector('span:last-child').className = "w-2 h-5 rounded-full bg-rose-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[index].querySelector('span:last-child').innerHTML = "✕";
+
+        buttons[q.correctIndex].className = "quiz-opt-btn w-full px-5 py-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs font-bold text-emerald-800 transition-all flex items-center justify-between";
+        buttons[q.correctIndex].querySelector('span:last-child').className = "w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold";
+        buttons[q.correctIndex].querySelector('span:last-child').innerHTML = "✓";
+
+        if(feedbackBox) {
+            feedbackBox.className = "p-4 rounded-xl text-xs leading-relaxed bg-rose-50 border border-rose-100 text-rose-800 block mt-4";
+            feedbackBox.innerHTML = `<strong>Incorrect.</strong> Correct answer is: "${q.options[q.correctIndex]}". <br><br><strong>Technical Reason:</strong> ${q.rationale}`;
+        }
+      }
+
+      const pts = document.getElementById('quizLivePoints');
+      if(pts) pts.innerText = `Score: ${quizScore}`;
+      safeRemoveClass('btn-quizNext', 'hidden');
+      
+      const hintBtn = document.getElementById('btn-quizHint');
+      if(hintBtn) hintBtn.disabled = true;
+    };
+
+    window.revealQuizHint = function() {
+      const q = quizQuestions[currentQuestionIndex];
+      const hintBtn = document.getElementById('btn-quizHint');
+      if(hintBtn) hintBtn.innerText = "💡 Hint: " + q.hint;
+    };
+
+    window.nextQuizQuestion = function() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizQuestions.length) {
+        loadQuizQuestion();
+      } else {
+        finishQuiz();
+      }
+    };
+
+    function finishQuiz() {
+      safeAddClass('quiz-active', 'hidden');
+      safeRemoveClass('quiz-results', 'hidden');
+
+      const percent = (quizScore / (quizQuestions.length * 10)) * 100;
+      
+      const finalScore = document.getElementById('quizFinalScore');
+      if(finalScore) finalScore.innerText = `${percent}%`;
+      
+      const resultSum = document.getElementById('quizResultSummary');
+      if(resultSum) resultSum.innerText = `You answered ${quizScore / 10} out of ${quizQuestions.length} questions correctly.`;
+
+      const icon = document.getElementById('resultIcon');
+      const title = document.getElementById('quizResultTitle');
+      const btnPrint = document.getElementById('btnPrintCertificate');
+
+      if (percent >= 80) {
+        if(icon) icon.innerText = "🏆";
+        if(title) title.innerText = "Congratulations! Excellent Performance! 🎉";
+        if(btnPrint) btnPrint.classList.remove('hidden');
+        
+        const cName = document.getElementById('certName');
+        if(cName) cName.innerText = traineeName;
+        const cScore = document.getElementById('certScore');
+        if(cScore) cScore.innerText = `${percent}%`;
+        const cID = document.getElementById('certOracleID');
+        if(cID) cID.innerText = traineeOracleId;
+      } else {
+        if(icon) icon.innerText = "📚";
+        if(title) title.innerText = "Nice attempt. Review the material and try again!";
+        if(btnPrint) btnPrint.classList.add('hidden');
+      }
+
+      if (percent > progress.quizMaxScore) {
+        progress.quizMaxScore = percent;
+      }
+      saveProgress();
+      updateProgressUI();
+    }
+
+    window.printCertificate = function() {
+      safeRemoveClass('printArea', 'hidden');
+      window.print();
+    };
+
+    function saveProgress() {
+      const payload = {
+        explRead: progress.explRead,
+        visualExplored: progress.visualExplored,
+        cardsFlipped: Array.from(progress.cardsFlipped),
+        quizMaxScore: progress.quizMaxScore
+      };
+      localStorage.setItem('we_network_fundamentals_progress', JSON.stringify(payload));
+    }
+
+    function loadProgress() {
+      const dataStr = localStorage.getItem('we_network_fundamentals_progress');
+      if (dataStr) {
+        try {
+          const loaded = JSON.parse(dataStr);
+          progress.explRead = loaded.explRead || { physical: false, logical: false };
+          progress.visualExplored = loaded.visualExplored || { physical: false, logical: false };
+          progress.cardsFlipped = new Set(loaded.cardsFlipped || []);
+          progress.quizMaxScore = loaded.quizMaxScore || 0;
+        } catch (e) {
+          console.error("Failed to parse progress data", e);
+        }
+      }
+    }
+
+    window.resetTrainingProgress = function() {
+      progress = {
+        explRead: { physical: false, logical: false },
+        visualExplored: { physical: false, logical: false },
+        cardsFlipped: new Set(),
+        quizMaxScore: 0
+      };
+      saveProgress();
+      updateProgressUI();
+      switchTab('dashboard');
+    };
+
+    function updateProgressUI() {
+      let theoryProgressValue = 0;
+      if (progress.explRead.physical) theoryProgressValue += 50;
+      if (progress.explRead.logical) theoryProgressValue += 50;
+      
+      const theoryText = document.getElementById('theoryProgText');
+      if(theoryText) theoryText.innerText = theoryProgressValue + "%";
+      const theoryBar = document.getElementById('theoryProgressBar');
+      if(theoryBar) theoryBar.style.width = theoryProgressValue + "%";
+
+      let labProgressValue = 0;
+      if (progress.visualExplored.physical) labProgressValue += 50;
+      if (progress.visualExplored.logical) labProgressValue += 50;
+      
+      const labText = document.getElementById('labProgText');
+      if(labText) labText.innerText = labProgressValue + "%";
+      const labBar = document.getElementById('labProgressBar');
+      if(labBar) labBar.style.width = labProgressValue + "%";
+
+      const quizText = document.getElementById('quizProgText');
+      const quizBar = document.getElementById('quizProgressBar');
+
+      if (progress.quizMaxScore > 0) {
+        if(quizText) quizText.innerText = progress.quizMaxScore + "%";
+        if(quizBar) quizBar.style.width = progress.quizMaxScore + "%";
+      } else {
+        if(quizText) quizText.innerText = "Not Tested";
+        if(quizBar) quizBar.style.width = "0%";
+      }
+    }
+
+    window.toggleDarkMode = function() {
+      if (isDarkMode) {
+        isDarkMode = false;
+        document.getElementById('body').className = "bg-[#F8F9FC] text-gray-800 min-h-screen flex flex-col transition-colors duration-300";
+        document.getElementById('header').className = "bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        const hMain = document.getElementById('headerMain'); if(hMain) hMain.className = "bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        document.getElementById('footer').className = "bg-white border-t border-gray-200 py-6 transition-colors duration-300";
+        document.getElementById('profileCard').className = "bg-white rounded-3xl p-6 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md text-gray-800";
+        document.getElementById('navCard').className = "bg-white rounded-3xl p-4.5 shadow-sm border border-gray-100 flex flex-col gap-1.5 transition-colors duration-300";
+        const tIcon = document.getElementById('themeIcon'); if(tIcon) tIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+      } else {
+        isDarkMode = true;
+        document.getElementById('body').className = "bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-colors duration-300";
+        document.getElementById('header').className = "bg-slate-800 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        const hMain = document.getElementById('headerMain'); if(hMain) hMain.className = "bg-slate-800 border-b border-slate-700 sticky top-0 z-50 transition-colors duration-300 shadow-sm";
+        document.getElementById('footer').className = "bg-slate-800 border-t border-slate-700 py-6 transition-colors duration-300";
+        document.getElementById('profileCard').className = "bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-700 transition-all duration-300 hover:shadow-md text-slate-100";
+        document.getElementById('navCard').className = "bg-slate-800 rounded-2xl p-4.5 shadow-sm border border-slate-700 flex flex-col gap-1.5 transition-colors duration-300";
+        const tIcon = document.getElementById('themeIcon'); if(tIcon) tIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
+      }
+    };
+
+    window.onload = function() {
+      const isLoggedIn = sessionStorage.getItem('we_logged_in');
+      if (isLoggedIn === 'true') {
+        window.showDaySelection();
+      } else {
+        window.showLoginPortal();
+      }
+    };
+  </script>
+</body>
+</html>
