@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>WE Network Academy | بوابة التدريب التفاعلية</title>
+<title>Training |  التدريب</title>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -119,8 +119,8 @@
 <div class="absolute -top-10 -right-10 w-32 h-32 bg-weCyan-500/20 rounded-full blur-2xl"></div>
 <!-- Logo -->
 <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-4xl shadow-xl mx-auto mb-4 transform hover:rotate-6 transition-all">we</div>
-<h2 class="text-2xl font-black text-wePurple-700 dark:text-wePurple-200 mb-1">تسجيل الدخول لبوابة الأكاديمية</h2>
-<p class="text-xs text-gray-400 dark:text-gray-300 mb-8">بوابة تدريب رقمية معتمدة لأساسيات شبكات WE</p>
+<h2 class="text-2xl font-black text-wePurple-700 dark:text-wePurple-200 mb-1">تسجيل الدخول</h2>
+<p class="text-xs text-gray-400 dark:text-gray-300 mb-8">سجل الدخول عن طريق جوجل بنفس ميل نموذج الموارد البشرية HR </p>
 <!-- Google Sign-In Library Initialization -->
 <div data-auto_prompt="false" data-callback="handleGoogleLoginResponse" data-client_id="349174813789-464u4t7pceqp7qkkj0iv6g5tgjb3fvu1.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" id="g_id_onload">
 </div>
@@ -137,9 +137,9 @@
 </div>
  Admin تسجيل الدخول Box 
 <div class="text-left space-y-3">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-300 block mb-1">دخول المشرف</label>
+<label class="text-xs font-bold text-gray-500 dark:text-gray-300 block mb-1">دخول المسؤل</label>
 <div class="flex gap-2">
-<input class="w-full px-4 py-3 text-sm border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white font-bold" id="adminPassword" onkeypress="if(event.key === 'Enter') window.handleAdminLogin();" placeholder="اكتب كلمة مرور المشرف" type="password"/>
+<input class="w-full px-4 py-3 text-sm border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-wePurple-700 focus:outline-none bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-white font-bold" id="adminPassword" onkeypress="if(event.key === 'Enter') window.handleAdminLogin();" placeholder="اكتب كلمة المرور " type="password"/>
 <button class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md text-sm" onclick="window.handleAdminLogin()">تسجيل الدخول</button>
 </div>
 <div class="hidden mt-2 p-2.5 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold text-center leading-relaxed" id="loginErrorBox">
@@ -167,7 +167,7 @@
 <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-12">
 <div class="text-center mb-10">
 <h2 class="text-3xl font-black text-gray-800 dark:text-white mb-2">اختار يوم التدريب</h2>
-<p class="text-gray-500 dark:text-gray-400 text-sm">Welcome <span class="font-bold text-wePurple-700 dark:text-wePurple-400" id="daySelectionName"></span>, اختار الوحدة اللي عايز تفتحها النهارده.</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Welcome <span class="font-bold text-wePurple-700 dark:text-wePurple-400" id="daySelectionName"></span>, اختار اليوم.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <button class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border-2 border-wePurple-200 hover:shadow-md hover:-translate-y-1 transition-all text-left group" onclick="window.selectDay(1)">
@@ -178,11 +178,11 @@
 <button class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border-2 border-wePurple-500 hover:shadow-md hover:-translate-y-1 transition-all text-left group" onclick="window.selectDay(2)">
 <div class="w-12 h-12 rounded-full bg-wePurple-100 text-wePurple-700 flex items-center justify-center font-black text-xl mb-4 group-hover:bg-wePurple-700 group-hover:text-white transition-colors">2</div>
 <h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">اليوم الثاني: أساسيات الشبكات</h3>
-<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">الكابلات، الهيكل الفيزيائي والـ Logical، وتسلسل توجيه WAN IP.</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Physical & Logical Structure</p>
 </button>
 <button class="bg-gray-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-gray-200 dark:border-slate-700 opacity-60 cursor-not-allowed text-left" disabled="">
 <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center font-black text-xl mb-4">3</div>
-<h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">اليوم الثالث: استكشاف الأعطال</h3>
+<h3 class="text-lg font-black text-gray-800 dark:text-white mb-2">اليوم الثالث: الخط الارضى الثابت ج1</h3>
 <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">مقفول. خلّص اليوم الثاني علشان تفتح الوحدة دي.</p>
 </button>
 </div>
@@ -197,7 +197,7 @@
 <h1 class="text-lg font-black text-wePurple-700 dark:text-wePurple-200">اليوم الأول: Induction</h1>
 </div>
 <button class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 text-gray-600 dark:bg-slate-700 dark:border-slate-600 dark:text-gray-200 focus:outline-none transition-all shadow-sm text-xs font-bold flex items-center gap-1.5" onclick="window.showDaySelection()">
-<span>الرجوع لخريطة التدريب</span>
+<span>الرجوع لأيام التدريب</span>
 </button>
 </div>
 </header>
@@ -292,7 +292,7 @@
 <ol class="space-y-2.5 text-sm text-amber-900 dark:text-amber-100 leading-relaxed list-decimal pr-5">
 <li>أول حاجة، غيّر الإنترنت لـ داتا الموبايل، وبعد ما تدخل ارجع للواي فاي تاني.</li>
 <li>لو مشتغلش، خد لينك السيشن كوبي وافتحه من متصفح كروم مباشرة، مش من داخل تطبيق تيمز.</li>
-<li>لو برضو مشتغلش، جرّب تدخل بنفس اللينك من تليفون تاني، اللينك شغال في كل الأحوال.</li>
+<li>لو برضو مشتغلش، جرّب تدخل بنفس اللينك من تليفون تاني، اللينك شغال في كل الأحوال ولو فيه مشكلة فعلا في اللينك المدرب بيتعت علي جروب واتس اب.</li>
 </ol>
 </div>
 
@@ -311,21 +311,21 @@
 <span class="text-xl shrink-0">⚙️</span>
 <div>
 <span class="font-black text-xs text-gray-800 dark:text-white block">Operation</span>
-<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة الريكورد ↗</span>
+<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة ريكورد ↗</span>
 </div>
 </a>
 <a class="p-4 rounded-2xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/40 hover:bg-wePurple-50 dark:hover:bg-wePurple-900/20 hover:border-wePurple-300 transition-all flex items-start gap-3" href="https://xceedcceg.sharepoint.com/:v:/s/G-608EsraaAtef/IQAPldhSd2ScSZZd7Njvn8RCAR1uJm5gxlu_beDLtH4mCSo?e=Qftmse" rel="noopener noreferrer" target="_blank">
 <span class="text-xl shrink-0">💰</span>
 <div>
 <span class="font-black text-xs text-gray-800 dark:text-white block">Comp & Ben / Medical-Perm Salary</span>
-<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة الريكورد ↗</span>
+<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة ريكورد ↗</span>
 </div>
 </a>
 <a class="p-4 rounded-2xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/40 hover:bg-wePurple-50 dark:hover:bg-wePurple-900/20 hover:border-wePurple-300 transition-all flex items-start gap-3" href="https://xceedcceg.sharepoint.com/:v:/s/G-608EsraaAtef/IQBj2nFS0Jv6QJ45vW7xRI3XAXLTPaqFPhiJ1SrE3F_PMnY?e=42aVkx" rel="noopener noreferrer" target="_blank">
 <span class="text-xl shrink-0">🧾</span>
 <div>
 <span class="font-black text-xs text-gray-800 dark:text-white block">Personnel</span>
-<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة الريكورد ↗</span>
+<span class="text-[10px] text-wePurple-600 dark:text-wePurple-300 font-bold mt-1 block">مشاهدة ريكورد ↗</span>
 </div>
 </a>
 </div>
@@ -333,7 +333,7 @@
 
 <div class="text-center pb-6">
 <button class="bg-wePurple-700 hover:bg-wePurple-800 text-white font-black px-8 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all text-sm" onclick="window.showDaySelection()">
-قرأت السياسة وفهمتها ✓ الرجوع لخريطة التدريب
+قرأت السياسة وفهمتها ✓ الرجوع لأيام التدريب
 </button>
 </div>
 </main>
@@ -347,10 +347,10 @@
 <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-wePurple-900 to-wePurple-700 flex items-center justify-center text-white font-black text-3xl shadow-lg border border-wePurple-500/20 transform hover:scale-105 transition-all cursor-pointer">we</div>
 <div>
 <h1 class="text-xl font-black text-wePurple-700 flex items-center gap-2">
-              بوابة التدريب الرقمي لهندسة الشبكات 
+            اساسيات الشبكات 
               <span class="text-[10px] bg-wePurple-100 text-wePurple-700 px-2 py-0.5 rounded-md font-bold">LMS Portal</span>
 </h1>
-<p class="text-xs text-gray-500">منصة محاكاة ومعامل وتقييم ميداني معتمدة لمتخصصي الدعم</p>
+<p class="text-xs text-gray-500">منصة محاكاة وشرح للتدريب</p>
 </div>
 </div>
 <!-- Controls -->
@@ -367,8 +367,7 @@
 </button>
 <div class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-xs font-black border border-emerald-100 flex items-center gap-1.5 shadow-sm">
 <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-            حماية سحابية
-          </div>
+            Online          </div>
 </div>
 </div>
 </header>
@@ -398,7 +397,7 @@
 </div>
 <div>
 <div class="flex justify-between text-xs mb-1">
-<span class="text-gray-500">المعامل والمحاكاة</span>
+<span class="text-gray-500">التدريب و لمحاكاة</span>
 <span class="font-black text-teal-600" id="labProgText">0%</span>
 </div>
 <div class="w-full bg-gray-100 rounded-full h-2">
@@ -407,7 +406,7 @@
 </div>
 <div>
 <div class="flex justify-between text-xs mb-1">
-<span class="text-gray-500">الاختبار الميداني المعتمد</span>
+<span class="text-gray-500">الاختبار</span>
 <span class="font-black text-emerald-600" id="quizProgText">لسه ما اتختبرش</span>
 </div>
 <div class="w-full bg-gray-100 rounded-full h-2">
@@ -430,11 +429,11 @@
 </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-theory-course" onclick="window.switchTab('theory-course')">
 <span>📚</span>
-            الكورس والأساسيات
+            الشرح والأساسيات
           </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-physical-lab" onclick="window.switchTab('physical-lab')">
 <span>🛠️</span>
-            معمل تشخيص الخط الفيزيائي
+            تجرب عملي!
           </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-logical-lab" onclick="window.switchTab('logical-lab')">
 <span>⚡</span>
@@ -442,7 +441,7 @@
           </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-mindmap" onclick="window.switchTab('mindmap')">
 <span>🗺️</span>
-            الخريطة الذهنية التفاعلية
+            الخريطة
           </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-glossary" onclick="window.switchTab('glossary')">
 <span>📖</span>
@@ -450,7 +449,7 @@
           </button>
 <button class="nav-btn w-full px-4 py-3 rounded-2xl text-left flex items-center gap-3 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all" id="btn-quiz" onclick="window.switchTab('quiz')">
 <span>🏆</span>
-            الاختبار النهائي والشهادة
+            الاختبار 
           </button>
 </nav>
 </aside>
@@ -470,7 +469,7 @@
             </p>
 <div class="flex flex-wrap gap-3">
 <button class="bg-white text-wePurple-900 hover:bg-wePurple-50 px-6 py-3 rounded-2xl font-black text-xs shadow-md transition-all flex items-center gap-1.5" onclick="window.switchTab('physical-lab')">
-                🚀 ابدأ المعمل الفيزيائي
+                🚀  تجرب عملي
               </button>
 <button class="bg-wePurple-950/40 hover:bg-wePurple-950/60 border border-white/10 text-white px-6 py-3 rounded-2xl font-black text-xs transition-all" onclick="window.switchTab('theory-course')">
                 تصفح الأساسيات
@@ -482,9 +481,9 @@
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
 <div>
 <h3 class="text-base font-black text-wePurple-700 flex items-center gap-2">
-<span>🎧</span> الملخص الصوتي اليومي
+<span>🎧</span> الملخص الصوتي لليوم
                 </h3>
-<p class="text-xs text-gray-500">اسمع مراجعة تقنية منظمة بتغطي أهم مفاهيم وعمليات الكورس اليومية.</p>
+<p class="text-xs text-gray-500">اسمع مراجعة تقنية منظمة بتغطي أهم مفاهيم وعمليات الشرح اليومية.</p>
 </div>
 <!-- Custom HTML5 Audio Integration -->
 <audio id="lessonAudio" ontimeupdate="window.updateAudioProgress()" preload="metadata">
@@ -529,7 +528,7 @@
 <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
 <div>
 <span class="text-2xl mb-3 block">⚡</span>
-<h4 class="font-black text-sm text-gray-800 mb-1">رحلة حزمة WAN IP (Logical)</h4>
+<h4 class="font-black text-sm text-gray-800 mb-1">رحلة  WAN IP (Logical)</h4>
 <p class="text-gray-500 text-[11px] leading-relaxed mb-4">Run the central office packet sequence validator to observe credentials verification over RADIUS and sychronization.</p>
 </div>
 <button class="text-xs font-black text-teal-700 hover:underline text-left flex items-center gap-1 mt-2" onclick="window.switchTab('logical-lab')">ادخل محاكي الـ Logical ←</button>
@@ -547,8 +546,8 @@
 <!-- ================= TAB: THEORY COURSE ================= -->
 <div class="tab-content hidden space-y-6" id="tab-theory-course" dir="rtl" lang="ar" style="font-family: 'Tajawal', sans-serif;">
 <div>
-<h2 class="text-2xl font-black text-gray-800">الشروحات التقنية والكورس النظري</h2>
-<p class="text-xs text-gray-500">هذا المحتوى التدريبي الفني معتمد مباشرة من منهج WE (Network Fundamentals: Physical - Logical).</p>
+<h2 class="text-2xl font-black text-gray-800">الشروحات التقنية الشرح النظري</h2>
+<p class="text-xs text-gray-500"> (Network Fundamentals: Physical - Logical).</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <!-- Physical Section -->
@@ -1001,7 +1000,7 @@
 <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
 <div class="text-center py-8 space-y-4" id="quiz-intro">
 <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
-<h2 class="text-2xl font-black text-gray-800">الاختبار الميداني المعتمد</h2>
+<h2 class="text-2xl font-black text-gray-800">الاختبار</h2>
 <p class="text-xs text-gray-500 max-w-lg mx-auto">
                 Pass this comprehensive assessment with a score of **80% or higher** to dynamically generate and print your official training completion certificate.
               </p>
